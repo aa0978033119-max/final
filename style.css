@@ -83,7 +83,7 @@ nav a:hover {
   background-color: white;
 }
 
-/* 左右按鈕 */
+/* left and right buttons */
 .prev, .next {
   position: absolute;
   top: 50%;
