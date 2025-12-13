@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const bannerDesc = document.getElementById("bannerDesc");
   const dotsContainer = document.getElementById("dotsContainer");
 
-  // 建立 dots
+  // dots
   banners.forEach((banner, index) => {
     const dot = document.createElement("span");
     dot.classList.add("dot");
@@ -47,9 +47,9 @@ document.addEventListener("DOMContentLoaded", () => {
     showBanner(currentIndex);
   }
 
-  // 初始化
+  // initial
   showBanner(currentIndex);
 
-  // 自動輪播
+  // automatic carousel
   setInterval(nextBanner, 4000);
 });
