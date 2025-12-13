@@ -12,6 +12,23 @@ document.addEventListener("DOMContentLoaded", () => {
   const bannerDesc = document.getElementById("bannerDesc");
   const dotsContainer = document.getElementById("dotsContainer");
 
+  function showBanner(index) {
+    bannerImage.src = banners[index].img;
+    bannerTitle.textContent = banners[index].title;
+    bannerDesc.textContent = banners[index].desc;
+    updateDots();
+  }
+
+  function nextBanner() {
+    currentIndex = (currentIndex + 1) % banners.length;
+    showBanner(currentIndex);
+  }
+
+  function prevBanner() {
+    currentIndex = (currentIndex - 1 + banners.length) % banners.length;
+    showBanner(currentIndex);
+  }
+
   // dots
   banners.forEach((banner, index) => {
     const dot = document.createElement("span");
@@ -30,26 +47,19 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  function showBanner(index) {
-    bannerImage.src = banners[index].img;
-    bannerTitle.textContent = banners[index].title;
-    bannerDesc.textContent = banners[index].desc;
-    updateDots();
-  }
+  // 暴露給 HTML onclick
+  window.nextBanner = nextBanner;
+  window.prevBanner = prevBanner;
 
-  function nextBanner() {
-    currentIndex = (currentIndex + 1) % banners.length;
-    showBanner(currentIndex);
-  }
+  // 鍵盤左右鍵
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowLeft") prevBanner();
+    else if (e.key === "ArrowRight") nextBanner();
+  });
 
-  function prevBanner() {
-    currentIndex = (currentIndex - 1 + banners.length) % banners.length;
-    showBanner(currentIndex);
-  }
-
-  // initial
+  // 初始化
   showBanner(currentIndex);
 
-  // automatic carousel
+  // 自動輪播
   setInterval(nextBanner, 4000);
 });
