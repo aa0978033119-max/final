@@ -1,1 +1,86 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
 
+/* Logo + Navbar */
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+  background-color: #222;
+}
+
+.logo {
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  margin-left: 20px;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+/* banner */
+.banner {
+  background-image: url("../images/banner.jpg");
+  background-size: cover;
+  background-position: center;
+  color: white;
+  text-align: center;
+  padding: 100px 20px;
+}
+
+.banner h1 {
+  font-size: 48px;
+}
+
+.banner button {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+/* product */
+
+.products {
+  padding: 40px;
+}
+
+.product-list {
+  display: flex;
+  gap: 20px;
+}
+
+.product-card {
+  border: 1px solid #ccc;
+  padding: 15px;
+  width: 200px;
+  text-align: center;
+}
+
+.product-card img {
+  width: 100%;
+}
+
+.product-card button {
+  margin-top: 10px;
+}
+
+/* footer */
+footer {
+  background-color: #222;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  margin-top: 40px;
+}
