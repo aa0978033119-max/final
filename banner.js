@@ -38,7 +38,7 @@ function prevBanner() {
   showBanner(currentIndex);
 }
 
-/* 自動輪播 */
+/* automatic carousel */
 setInterval(nextBanner, 4000);
 
 // dots
@@ -58,15 +58,11 @@ banners.forEach((banner, index) => {
 function updateDots() {
   const dots = document.querySelectorAll(".dot");
   dots.forEach((dot, index) => {
-    if (index === currentIndex) {
-      dot.classList.add("active");
-    } else {
-      dot.classList.remove("active");
-    }
+    dot.classList.toggle("active", index === currentIndex);
   });
 }
 
-// 修改 showBanner 函數，加上更新 dot
+// showBanner function
 function showBanner(index) {
   bannerImage.src = banners[index].img;
   bannerTitle.textContent = banners[index].title;
@@ -74,5 +70,5 @@ function showBanner(index) {
   updateDots();
 }
 
-// 初始化
+// initial
 showBanner(currentIndex);
