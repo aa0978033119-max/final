@@ -66,6 +66,7 @@ nav a:hover {
   bottom: 20px;
   width: 100%;
   text-align: center;
+  z-index: 10;
 }
 
 .dot {
@@ -81,7 +82,6 @@ nav a:hover {
 .dot.active {
   background-color: white;
 }
-
 
 /* 左右按鈕 */
 .prev, .next {
