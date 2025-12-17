@@ -1,4 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
+ 
+//banner  
   const banners = [
     { img: "images/banner1.jpg", title: "NEW ARRIVAL", desc: "秋冬新品 8 折起" },
     { img: "images/banner2.jpg", title: "SALE", desc: "限時優惠 20% OFF" },
