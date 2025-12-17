@@ -118,20 +118,10 @@ footer {
   margin-top: 40px;
 }
 /*produce*/
-.products {
-    padding: 20px;
-    background-color: #f9f9f9;
-  }
   
   .products h2 {
     margin-bottom: 15px;
   }
-  
-  .product-grid {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr); 
-          gap: 20px;
-        }
   
   .product {
     background-color: #fff;
