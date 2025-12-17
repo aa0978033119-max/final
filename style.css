@@ -101,22 +101,6 @@ nav a:hover {
 
 /* product */
 
-.products {
-  padding: 40px;
-}
-
-.product-list {
-  display: flex;
-  gap: 20px;
-}
-
-.product-card {
-  border: 1px solid #ccc;
-  padding: 15px;
-  width: 200px;
-  text-align: center;
-}
-
 .product-card img {
   width: 100%;
 }
