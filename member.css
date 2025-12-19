@@ -1,0 +1,172 @@
+.member-header{
+    padding-left:225px ;
+}
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+    background-color: #222;
+  }
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
+  
+  .member-container {
+    display: flex;
+    min-height: 200vh;
+  }
+  
+  .member-sidebar {
+    width: 200px;
+    background-color: #333;
+    color: white;
+  }
+  
+  .member-sidebar ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .member-sidebar li {
+    padding: 15px;
+    cursor: pointer;
+  }
+  
+  .member-sidebar li:hover {
+    background-color: #555;
+  }
+  
+  .member-content {
+    flex: 1;
+    padding: 30px;
+  }
+  
+  .content-section {
+    display: none;
+  }
+  
+  .content-section.active {
+    display: block;
+  }
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .form-group input {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+  }
+  
+  .save-btn {
+    padding: 10px 20px;
+    background-color: #333;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .save-btn:hover {
+    background-color: #555;
+  }
+  .logo {
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    text-decoration: none;
+  }
+  
+  nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+  }
+  
+  nav a:hover {
+    text-decoration: underline;
+  }
+  
+  /* ===== Header Icons Layout ===== */
+  
+  .nav-icons {
+    display: flex;
+    align-items: center;
+    gap: 20px;          /* icon 之間距離 */
+  }
+  
+  .nav-icons img {
+    width: 22px;
+    height: 22px;
+    cursor: pointer;
+    filter: invert(1);
+  }
+  
+  .nav-icons img:hover {
+    opacity: 0.8;
+  }
+  
+  /* 搜尋 / 商品瀏覽 wrapper */
+  .search-wrapper,
+  .menu-wrapper {
+    position: relative;
+  }
+  
+  /* 下拉盒子（預設隱藏） */
+  .search-box,
+  .menu-box {
+    position: absolute;
+    top: 35px;
+    right: 0;
+    background: white;
+    border: 1px solid #ddd;
+    padding: 10px;
+    display: none;
+    min-width: 160px;
+    z-index: 100;
+  }
+  
+  /* hover 顯示 */
+  .search-wrapper:hover .search-box,
+  .menu-wrapper:hover .menu-box {
+    display: block;
+  }
+  
+  /* 搜尋輸入 */
+  .search-input {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  .search-input input {
+    border: 1px solid #ccc;
+    padding: 5px;
+    width: 120px;
+  }
+  
+  /* 商品分類連結 */
+  .menu-box a {
+    display: block;
+    padding: 5px 0;
+    text-decoration: none;
+    color: #333;
+  }
+  
+  .menu-box a:hover {
+    color: #000;
+    font-weight: bold;
+  }
+  
+  
+  
+  
+  
+  
+  
