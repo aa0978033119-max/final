@@ -1,0 +1,98 @@
+/* about.css */
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
+  
+  .about-header {
+    background-color: #f2f2f2;
+    padding: 10px 60px;
+  }
+  
+  .about-header h1 {
+    margin: 0;
+    font-size: 28px;
+  }
+  
+  .about-container {
+    max-width: 1000px;
+    margin: 30px auto;
+    padding: 0 30px;
+  }
+  
+  .about-section {
+    margin-bottom: 40px;
+  }
+  
+  .about-section h2 {
+    font-size: 24px;
+    margin-bottom: 15px;
+  }
+  
+  .about-section p {
+    font-size: 16px;
+    line-height: 1.6;
+  }
+  .animated-title {
+    margin: 0;
+    font-size: 28px;
+    opacity: 0;                 /* 初始透明 */
+    transform: translateX(-50px); /* 從左邊偏移 50px */
+    animation: slideFadeIn 1s forwards; /* 動畫名稱 / 時間 / 保持結束狀態 */
+  }
+  
+  @keyframes slideFadeIn {
+    0% {
+      opacity: 0;
+      transform: translateX(-50px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  .team-section {
+    margin-top: 40px;
+  }
+  
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 四欄並排 */
+    gap: 20px;
+    margin-top: 20px;
+  }
+  
+  .team-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    text-align: center;
+    padding: 15px;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  
+  .team-card img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 10px;
+  }
+  
+  .team-card h3 {
+    font-size: 18px;
+    margin: 5px 0;
+  }
+  
+  .team-card p {
+    font-size: 14px;
+    color: #555;
+  }
+  
+  .team-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  }
+  
+    
