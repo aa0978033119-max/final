@@ -11,6 +11,8 @@ header {
   align-items: center;
   padding: 15px 40px;
   background-color: #222;
+  position: relative;
+  z-index: 1000;
 }
 
 .logo {
@@ -66,7 +68,8 @@ nav a:hover {
   padding: 10px;
   display: none;
   min-width: 160px;
-  z-index: 100;
+  z-index: 2000;
+  pointer-events: auto;
 }
 
 /* hover 顯示 */
