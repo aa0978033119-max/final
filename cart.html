@@ -1,1 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>購物車</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
+<main class="shop-container">
+    <section class="product-card">
+        <div class="product-image">
+            <img src="images/01.jpg" alt="質感牛仔夾克">
+        </div>
+        <div class="product-info">
+            <h1 class="product-title">質感牛仔夾克</h1>
+            <p class="product-desc"> 形容</p>
+            <p class="product-price" id="base-price">NT$ 1,100</p>
+
+            <div class="input-group">
+                <label>尺寸選擇</label>
+                <select id="size">
+                    <option value="S">S</option>
+                    <option value="M">M</option>
+                    <option value="L">L</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label>數量選擇</label>
+                <div class="qty-controller">
+                    <button type="button" onclick="changeProductQty(-1)">−</button>
+                    <input type="number" id="qty" value="1" min="1" readonly>
+                    <button type="button" onclick="changeProductQty(1)">+</button>
+                </div>
+            </div>
+
+            <button class="add-cart-btn" onclick="addToCart()">加入購物車</button>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <section class="cart-section">
+        <h2>購物車內容</h2>
+        <div id="cart-items">
+            </div>
+        <div class="cart-summary">
+            <div class="total-row">
+                <span>總計金額</span>
+                <span id="grand-total">NT$ 0</span>
+            </div>
+            <button class="checkout-btn">前往結帳</button>
+        </div>
+    </section>
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
