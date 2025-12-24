@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const dotsContainer = document.getElementById("dotsContainer");
 
   function showBanner(index) {
+    if (!bannerImage) return; // 安全檢查
     bannerImage.src = banners[index].img;
     bannerTitle.textContent = banners[index].title;
     bannerDesc.textContent = banners[index].desc;
@@ -30,15 +31,17 @@ document.addEventListener("DOMContentLoaded", () => {
     showBanner(currentIndex);
   }
 
-  banners.forEach((_, index) => {
-    const dot = document.createElement("span");
-    dot.classList.add("dot");
-    dot.addEventListener("click", () => {
-      currentIndex = index;
-      showBanner(currentIndex);
+  if (dotsContainer) {
+    banners.forEach((_, index) => {
+      const dot = document.createElement("span");
+      dot.classList.add("dot");
+      dot.addEventListener("click", () => {
+        currentIndex = index;
+        showBanner(currentIndex);
+      });
+      dotsContainer.appendChild(dot);
     });
-    dotsContainer.appendChild(dot);
-  });
+  }
 
   function updateDots() {
     document.querySelectorAll(".dot").forEach((dot, index) => {
@@ -46,13 +49,14 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // 將按鈕功能掛載到 window，讓 HTML 的 onclick 可以用到
   window.nextBanner = nextBanner;
   window.prevBanner = prevBanner;
 
   showBanner(currentIndex);
   setInterval(nextBanner, 4000);
 
-  /* ========= 收藏狀態 ========= */
+  /* ========= 收藏狀態初始化 ========= */
   const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
   document.querySelectorAll(".product").forEach(product => {
     const name = product.querySelector(".product-name")?.textContent;
@@ -61,36 +65,37 @@ document.addEventListener("DOMContentLoaded", () => {
       icon.src = "images/love.png";
     }
   });
+
   /* ========= Header：搜尋 & 商品分類 ========= */
   const searchIcon = document.getElementById("searchIcon");
   const searchBox = document.getElementById("searchBox");
   const menuIcon = document.getElementById("menuIcon");
   const menuBox = document.querySelector(".menu-box");
 
-  // 點擊搜尋圖示
+  // 搜尋圖示點擊
   if (searchIcon && searchBox) {
     searchIcon.addEventListener("click", (e) => {
       e.preventDefault();
-      e.stopPropagation(); // 阻止事件傳到 document
+      e.stopPropagation();
       searchBox.classList.toggle("active");
-      if (menuBox) menuBox.classList.remove("active"); // 關閉另一個
+      if (menuBox) menuBox.classList.remove("active");
 
       const input = searchBox.querySelector("input");
       if (input) input.focus();
     });
   }
 
-  // 點擊衣服圖示
+  // 衣服圖示點擊
   if (menuIcon && menuBox) {
     menuIcon.addEventListener("click", (e) => {
       e.preventDefault();
-      e.stopPropagation(); // 阻止事件傳到 document
+      e.stopPropagation();
       menuBox.classList.toggle("active");
-      if (searchBox) searchBox.classList.remove("active"); // 關閉另一個
+      if (searchBox) searchBox.classList.remove("active");
     });
   }
 
-  // 點擊選單內部時，不要觸發 document 的關閉事件
+  // 防止點擊選單內部時自動關閉
   [searchBox, menuBox].forEach(box => {
     if (box) {
       box.addEventListener("click", (e) => {
@@ -99,14 +104,20 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // 點擊頁面其他地方關閉選單
+  // 點擊頁面其他地方關閉所有選單
   document.addEventListener("click", () => {
     if (searchBox) searchBox.classList.remove("active");
     if (menuBox) menuBox.classList.remove("active");
   });
 
-  /* 收藏切換 */
+  /* 收藏切換函數 (全域) */
   window.toggleFavorite = function(el) {
-    el.src = el.src.includes("heart") ? "images/love.png" : "images/heart.png";
+    // 簡單檢查目前的圖片路徑來切換
+    if (el.src.includes("heart.png")) {
+      el.src = "images/love.png";
+    } else {
+      el.src = "images/heart.png";
+    }
   };
-});
+
+}); // 第一行 DOMContentLoaded 的閉合
