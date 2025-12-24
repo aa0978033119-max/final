@@ -191,6 +191,35 @@
     <!-- 3、商品詳細頁（Product Detail）：小雯 -->
     <!-- 4、收藏商品/購物車頁面（Cart）：幸宜 -->
     <!-- 5、 結帳頁（Checkout）：幸宜 -->
+    // Tabs 切換
+    const tabs = document.querySelectorAll('.tab');
+    const contents = document.querySelectorAll('.content');
+    
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('active'));
+        contents.forEach(c => c.classList.remove('active'));
+    
+        tab.classList.add('active');
+        document.getElementById(tab.dataset.tab).classList.add('active');
+      });
+    });
+    
+    // 回到頂部
+    document.getElementById('topBtn').addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+    
+    // 加入購物車（示意）
+    document.querySelector('.add-cart').addEventListener('click', () => {
+      const size = document.getElementById('size').value;
+      const qty = document.getElementById('qty').value;
+      alert(`已加入購物車\n尺寸：${size}\n數量：${qty}`);
+    });
+
     <!-- 6、註冊/登入：書瑋 -->
     <!-- 7、常見問題：小雯 -->
     <!-- 8、關於我們（頁面架設與品牌精神）：嘉葳 -->
