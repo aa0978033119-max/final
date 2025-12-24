@@ -1,6 +1,7 @@
 /* ===== Product ===== */
 .product-container {
   display: flex;
+  align-items:flex-start;
   padding: 40px;
   gap: 40px;
 }
