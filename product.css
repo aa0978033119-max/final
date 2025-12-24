@@ -7,10 +7,10 @@
 }
 
 .product-image img {
-  width: 90%;
-  hight:90%;
+  width: 100%;
+  hight:100%;
   object-fit:cover;
-  max-width: 500px;
+  max-width: 450px;
 }
 
 .product-info {
