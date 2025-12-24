@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
       icon.src = "images/love.png";
     }
   });
-/* ========= Header：搜尋 & 商品分類 ========= */
+  /* ========= Header：搜尋 & 商品分類 ========= */
   const searchIcon = document.getElementById("searchIcon");
   const searchBox = document.getElementById("searchBox");
   const menuIcon = document.getElementById("menuIcon");
@@ -105,7 +105,8 @@ document.addEventListener("DOMContentLoaded", () => {
     if (menuBox) menuBox.classList.remove("active");
   });
 
-/* 收藏切換 */
-window.toggleFavorite = function(el) {
-  el.src = el.src.includes("heart") ? "images/love.png" : "images/heart.png";
-};
+  /* 收藏切換 */
+  window.toggleFavorite = function(el) {
+    el.src = el.src.includes("heart") ? "images/love.png" : "images/heart.png";
+  };
+});
