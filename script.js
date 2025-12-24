@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
- 
-//banner  
+
+  /* ========= Banner ========= */
   const banners = [
     { img: "images/banner1.jpg", title: "NEW ARRIVAL", desc: "秋冬新品 8 折起" },
     { img: "images/banner2.jpg", title: "SALE", desc: "限時優惠 20% OFF" },
@@ -8,7 +8,6 @@ document.addEventListener("DOMContentLoaded", () => {
   ];
 
   let currentIndex = 0;
-
   const bannerImage = document.getElementById("bannerImage");
   const bannerTitle = document.getElementById("bannerTitle");
   const bannerDesc = document.getElementById("bannerDesc");
@@ -31,8 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
     showBanner(currentIndex);
   }
 
-  // dots
-  banners.forEach((banner, index) => {
+  banners.forEach((_, index) => {
     const dot = document.createElement("span");
     dot.classList.add("dot");
     dot.addEventListener("click", () => {
@@ -43,44 +41,46 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   function updateDots() {
-    const dots = document.querySelectorAll(".dot");
-    dots.forEach((dot, index) => {
+    document.querySelectorAll(".dot").forEach((dot, index) => {
       dot.classList.toggle("active", index === currentIndex);
     });
   }
 
-  // 暴露給 HTML onclick
   window.nextBanner = nextBanner;
   window.prevBanner = prevBanner;
 
-  // 鍵盤左右鍵
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "ArrowLeft") prevBanner();
-    else if (e.key === "ArrowRight") nextBanner();
-  });
-
-  // 初始化
   showBanner(currentIndex);
-
-  // 自動輪播
   setInterval(nextBanner, 4000);
+
+  /* ========= 收藏狀態 ========= */
+  const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+  document.querySelectorAll(".product").forEach(product => {
+    const name = product.querySelector(".product-name")?.textContent;
+    const icon = product.querySelector(".favorite-icon");
+    if (name && icon && favorites.includes(name)) {
+      icon.src = "images/love.png";
+    }
   });
-  // 頁面載入時讀取收藏狀態
-  window.onload = function() {
-    const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
-    document.querySelectorAll('.product').forEach(product => {
-      const name = product.querySelector('.product-name').textContent;
-      const icon = product.querySelector('.favorite-icon');
-      if (favorites.includes(name)) {
-        icon.src = 'images/love.png';
-      }
+
+  /* ========= Header 下拉選單 ========= */
+  const menuIcon = document.getElementById("menuIcon");
+  const menuBox = document.querySelector(".menu-box");
+
+  if (menuIcon && menuBox) {
+    menuIcon.addEventListener("click", (e) => {
+      e.stopPropagation();
+      menuBox.classList.toggle("active");
+    });
+
+    document.addEventListener("click", () => {
+      menuBox.classList.remove("active");
     });
   }
-  
-  function toggleFavorite(el) {
-    if (el.src.includes("heart")) {
-      el.src = "images/love.png"; // 換成填滿愛心
-    } else {
-      el.src = "images/heart.png"; // 換回空心愛心
-    }
+});
+
+/* 收藏切換 */
+function toggleFavorite(el) {
+  el.src = el.src.includes("heart")
+    ? "images/love.png"
+    : "images/heart.png";
 }
