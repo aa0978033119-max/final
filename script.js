@@ -87,7 +87,7 @@ document.addEventListener("DOMContentLoaded", () => {
       menuBox.classList.toggle("active");
       searchBox.classList.remove("active");
     });
-  }
+  });
 
   // 點其他地方關閉
   document.addEventListener("click", () => {
