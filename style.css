@@ -45,6 +45,7 @@ nav a:hover {
   height: 22px;
   cursor: pointer;
   filter: invert(1);
+  display: block;
 }
 
 .nav-icons img:hover {
