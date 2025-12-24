@@ -72,11 +72,16 @@ nav a:hover {
   pointer-events: auto;
 }
 
-/* hover 顯示 */
-.search-wrapper:hover .search-box,
-.menu-wrapper:hover .menu-box {
+.search-box,
+.menu-box {
+  display: none;
+}
+
+.search-box.active,
+.menu-box.active {
   display: block;
 }
+
 
 /* 搜尋輸入 */
 .search-input {
