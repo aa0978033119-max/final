@@ -38,9 +38,58 @@
     </div>
   </header>
 
-  <a href="index.html">Back</a>
-  <div class="product_shirt_detail>
-    <img scr="images/shirt.jpg" alt="質感牛仔夾克">
+  <main class="product-container">
+
+  <!-- 左：商品圖片 -->
+  <section class="product-image">
+    <img src="images/shirt.jpg" alt="質感牛仔夾克">
+  </section>
+
+  <!-- 右：商品資訊 -->
+  <section class="product-info">
+    <h1 class="product-title">質感牛仔夾克</h1>
+    <p class="product-desc">這裡放商品簡短描述</p>
+    <p class="product-price">NT$ 1,100</p>
+
+    <!-- 尺寸 -->
+    <label>尺寸選擇</label>
+    <select id="size">
+      <option>S</option>
+      <option>M</option>
+      <option>L</option>
+    </select>
+
+    <!-- 數量 -->
+    <label>數量選擇</label>
+    <input type="number" id="qty" value="1" min="1">
+
+    <button class="add-cart">加入購物車</button>
+  </section>
+
+</main>
+
+<!-- ===== Tabs ===== -->
+<section class="tabs">
+  <button class="tab active" data-tab="desc">商品描述</button>
+  <button class="tab" data-tab="shipping">送貨及付款方式</button>
+  <button class="tab" data-tab="review">顧客評價</button>
+</section>
+
+<section class="tab-content">
+
+  <div id="desc" class="content active">
+    <p>商品詳細介紹內容...</p>
+  </div>
+
+  <div id="shipping" class="content">
+    <p>配送方式、付款方式說明</p>
+  </div>
+
+  <div id="review" class="content">
+    <p>顧客評論區</p>
+  </div>
+
+</section>
   
   </div>
 </body>
