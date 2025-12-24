@@ -76,17 +76,3 @@
 .content.active {
   display: block;
 }
-
-/* ===== Footer ===== */
-.footer {
-  border-top: 2px solid #000;
-  padding: 30px;
-  position: relative;
-  text-align: center;
-}
-
-#topBtn {
-  position: absolute;
-  right: 20px;
-  bottom: 20px;
-}
