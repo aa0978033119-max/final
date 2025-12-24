@@ -64,23 +64,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // 自動輪播
   setInterval(nextBanner, 4000);
-});
-// 頁面載入時讀取收藏狀態
-window.onload = function() {
-  const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
-  document.querySelectorAll('.product').forEach(product => {
-    const name = product.querySelector('.product-name').textContent;
-    const icon = product.querySelector('.favorite-icon');
-    if (favorites.includes(name)) {
-      icon.src = 'images/love.png';
-    }
   });
-}
-
-function toggleFavorite(el) {
-  if (el.src.includes("heart")) {
-    el.src = "images/love.png"; // 換成填滿愛心
-  } else {
-    el.src = "images/heart.png"; // 換回空心愛心
+  // 頁面載入時讀取收藏狀態
+  window.onload = function() {
+    const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+    document.querySelectorAll('.product').forEach(product => {
+      const name = product.querySelector('.product-name').textContent;
+      const icon = product.querySelector('.favorite-icon');
+      if (favorites.includes(name)) {
+        icon.src = 'images/love.png';
+      }
+    });
   }
+  
+  function toggleFavorite(el) {
+    if (el.src.includes("heart")) {
+      el.src = "images/love.png"; // 換成填滿愛心
+    } else {
+      el.src = "images/heart.png"; // 換回空心愛心
+    }
 }
