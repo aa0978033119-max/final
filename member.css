@@ -132,12 +132,6 @@ body {
     z-index: 100;
   }
   
-  /* hover 顯示 */
-  .search-wrapper:hover .search-box,
-  .menu-wrapper:hover .menu-box {
-    display: block;
-  }
-  
   /* 搜尋輸入 */
   .search-input {
     display: flex;
@@ -169,4 +163,5 @@ body {
   
   
   
+
   
