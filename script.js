@@ -62,21 +62,39 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  /* ========= Header 下拉選單 ========= */
+    /* ========= Header：搜尋 & 商品分類 ========= */
+  const searchIcon = document.getElementById("searchIcon");
+  const searchBox = document.getElementById("searchBox");
+
   const menuIcon = document.getElementById("menuIcon");
   const menuBox = document.querySelector(".menu-box");
+
+  if (searchIcon && searchBox) {
+    searchIcon.addEventListener("click", (e) => {
+      e.stopPropagation();
+      searchBox.classList.toggle("active");
+      menuBox.classList.remove("active");
+
+      // 自動 focus
+      const input = searchBox.querySelector("input");
+      if (input) input.focus();
+    });
+  }
 
   if (menuIcon && menuBox) {
     menuIcon.addEventListener("click", (e) => {
       e.stopPropagation();
       menuBox.classList.toggle("active");
-    });
-
-    document.addEventListener("click", () => {
-      menuBox.classList.remove("active");
+      searchBox.classList.remove("active");
     });
   }
-});
+
+  // 點其他地方關閉
+  document.addEventListener("click", () => {
+    searchBox.classList.remove("active");
+    menuBox.classList.remove("active");
+  });
+
 
 /* 收藏切換 */
 function toggleFavorite(el) {
