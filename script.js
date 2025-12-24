@@ -97,8 +97,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 /* 收藏切換 */
-function toggleFavorite(el) {
-  el.src = el.src.includes("heart")
-    ? "images/love.png"
-    : "images/heart.png";
-}
+window.toggleFavorite = function(el) {
+  el.src = el.src.includes("heart") ? "images/love.png" : "images/heart.png";
+};
