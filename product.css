@@ -9,6 +9,7 @@
 .product-image img {
   width: 100%;
   hight:100%;
+  object-fit:cover;
   max-width: 500px;
 }
 
