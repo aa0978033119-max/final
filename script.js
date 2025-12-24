@@ -85,7 +85,8 @@ document.addEventListener("DOMContentLoaded", () => {
     menuIcon.addEventListener("click", (e) => {
       e.stopPropagation();
       menuBox.classList.toggle("active");
-      searchBox.classList.remove("active");
+      if (searchBox) searchBox.classList.remove("active");
+      console.log("menu icon clicked"); // 偵錯
     });
   }
 
