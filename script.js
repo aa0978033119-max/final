@@ -61,41 +61,49 @@ document.addEventListener("DOMContentLoaded", () => {
       icon.src = "images/love.png";
     }
   });
-
-    /* ========= Header：搜尋 & 商品分類 ========= */
+/* ========= Header：搜尋 & 商品分類 ========= */
   const searchIcon = document.getElementById("searchIcon");
   const searchBox = document.getElementById("searchBox");
-
   const menuIcon = document.getElementById("menuIcon");
   const menuBox = document.querySelector(".menu-box");
 
+  // 點擊搜尋圖示
   if (searchIcon && searchBox) {
     searchIcon.addEventListener("click", (e) => {
-      e.stopPropagation();
+      e.preventDefault();
+      e.stopPropagation(); // 阻止事件傳到 document
       searchBox.classList.toggle("active");
-      menuBox.classList.remove("active");
+      if (menuBox) menuBox.classList.remove("active"); // 關閉另一個
 
-      // 自動 focus
       const input = searchBox.querySelector("input");
       if (input) input.focus();
     });
   }
 
+  // 點擊衣服圖示
   if (menuIcon && menuBox) {
     menuIcon.addEventListener("click", (e) => {
-      e.stopPropagation();
+      e.preventDefault();
+      e.stopPropagation(); // 阻止事件傳到 document
       menuBox.classList.toggle("active");
-      if (searchBox) searchBox.classList.remove("active");
-      console.log("menu icon clicked"); // 偵錯
+      if (searchBox) searchBox.classList.remove("active"); // 關閉另一個
     });
   }
 
-  // 點其他地方關閉
-  document.addEventListener("click", () => {
-    searchBox.classList.remove("active");
-    menuBox.classList.remove("active");
+  // 點擊選單內部時，不要觸發 document 的關閉事件
+  [searchBox, menuBox].forEach(box => {
+    if (box) {
+      box.addEventListener("click", (e) => {
+        e.stopPropagation();
+      });
+    }
   });
 
+  // 點擊頁面其他地方關閉選單
+  document.addEventListener("click", () => {
+    if (searchBox) searchBox.classList.remove("active");
+    if (menuBox) menuBox.classList.remove("active");
+  });
 
 /* 收藏切換 */
 window.toggleFavorite = function(el) {
