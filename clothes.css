@@ -1,1 +1,82 @@
+/* ===== Product ===== */
+.product-container {
+  display: flex;
+  align-items:flex-start;
+  padding: 40px;
+  gap: 40px;
+}
+
+.product-image img {
+  width: 100%;
+  hight:100%;
+  object-fit:cover;
+  max-width: 500px;
+}
+
+.product-info {
+  width: 400px;
+}
+
+.product-info h1 {
+  margin-bottom: 10px;
+}
+
+.product-price {
+  font-size: 24px;
+  margin: 15px 0;
+}
+
+.product-info label {
+  display: block;
+  margin-top: 15px;
+}
+
+.product-info select,
+.product-info input {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+}
+
+.add-cart {
+  margin-top: 20px;
+  padding: 12px;
+  width: 100%;
+  background: black;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+/* ===== Tabs ===== */
+.tabs {
+  display: flex;
+  border-top: 2px solid #000;
+  border-bottom: 2px solid #000;
+}
+
+.tab {
+  flex: 1;
+  padding: 15px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.tab.active {
+  border-bottom: 3px solid black;
+  font-weight: bold;
+}
+
+.tab-content {
+  padding: 30px;
+}
+
+.content {
+  display: none;
+}
+
+.content.active {
+  display: block;
+}
 
