@@ -139,3 +139,22 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+if (userArea) {
+  if (user) {
+    userArea.innerHTML = `
+      <div class="user-menu">
+        <img src="images/user.png">
+        <div class="dropdown">
+          <a href="member.html">會員中心</a>
+          <a href="#" onclick="logout()">登出</a>
+        </div>
+      </div>
+    `;
+  } else {
+    userArea.innerHTML = `
+      <a href="member.html">
+        <img src="images/user.png" title="註冊 / 登入">
+      </a>
+    `;
+  }
+}
