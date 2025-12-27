@@ -97,60 +97,62 @@ document.addEventListener("DOMContentLoaded", () => {
     menuBox?.classList.remove("active");
   });
 
- /* ========= 收藏切換 ========= */
-window.toggleFavorite = function(el) {
-  const productName = el.closest(".product").querySelector(".product-name")?.textContent;
-  if (!productName) return;
+  /* ========= 收藏切換 ========= */
+  window.toggleFavorite = function(el) {
+    const productName = el.closest(".product").querySelector(".product-name")?.textContent;
+    if (!productName) return;
 
-  let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+    let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
 
-  if (el.src.includes("heart.png")) {
-    el.src = "images/love.png";
-    if (!favorites.includes(productName)) favorites.push(productName);
-  } else {
-    el.src = "images/heart.png";
-    favorites = favorites.filter(name => name !== productName);
-  }
+    if (el.src.includes("heart.png")) {
+      el.src = "images/love.png";
+      if (!favorites.includes(productName)) favorites.push(productName);
+    } else {
+      el.src = "images/heart.png";
+      favorites = favorites.filter(name => name !== productName);
+    }
 
-  localStorage.setItem("favorites", JSON.stringify(favorites));
-};
+    localStorage.setItem("favorites", JSON.stringify(favorites));
+  };
 
-/* ========= 會員登入狀態渲染 ========= */
-function renderUserArea() {
-  const userArea = document.getElementById("user-area");
-  const user = localStorage.getItem("user");
+  /* ========= 會員登入狀態渲染 ========= */
+  function renderUserArea() {
+    const userArea = document.getElementById("user-area");
+    const user = localStorage.getItem("user");
 
-  if (!userArea) return;
+    if (!userArea) return;
 
-  if (user) {
-    userArea.innerHTML = `
-      <div class="user-menu">
-        <img src="images/user.png" alt="Member">
-        <span style="margin-left:8px;">Hi, ${user}</span>
-        <div class="dropdown">
-          <a href="member.html">會員中心</a>
-          <a href="#" onclick="logout()">登出</a>
+    if (user) {
+      userArea.innerHTML = `
+        <div class="user-menu">
+          <img src="images/user.png" alt="Member">
+          <span style="margin-left:8px;">Hi, ${user}</span>
+          <div class="dropdown">
+            <a href="member.html">會員中心</a>
+            <a href="#" onclick="logout()">登出</a>
+          </div>
         </div>
-      </div>
-    `;
-  } else {
-    userArea.innerHTML = `
-      <a href="member.html">
-        <img src="images/user.png" title="註冊 / 登入">
-      </a>
-    `;
+      `;
+    } else {
+      userArea.innerHTML = `
+        <a href="member.html">
+          <img src="images/user.png" title="註冊 / 登入">
+        </a>
+      `;
+    }
   }
-}
 
-/* ========= 登出 ========= */
-window.logout = function() {
-  localStorage.removeItem("isLogin");
-  localStorage.removeItem("user");
-  localStorage.removeItem("userProfile");
-  alert("已登出");
   renderUserArea();
-  window.location.href = "index.html";
-};
+
+  /* ========= 登出 ========= */
+  window.logout = function() {
+    localStorage.removeItem("isLogin");
+    localStorage.removeItem("user");
+    localStorage.removeItem("userProfile");
+    alert("已登出");
+    renderUserArea();
+    window.location.href = "index.html";
+  };
 
   /* ========= profileForm 提交 ========= */
   const profileForm = document.getElementById("profileForm");
