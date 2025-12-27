@@ -212,3 +212,12 @@ profileForm.addEventListener('submit', e => {
         window.opener.renderUserArea?.();
     }
 });
+
+function logout() {
+    localStorage.removeItem("isLogin");
+    localStorage.removeItem("user");
+    localStorage.removeItem("userProfile");
+    alert("已登出");
+    renderUserArea(); // 更新 icon
+    window.location.href = "index.html"; // 回首頁
+}
