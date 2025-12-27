@@ -9,6 +9,7 @@ function showSection(sectionId) {
 function logout() {
     localStorage.removeItem("isLogin");
     localStorage.removeItem("user");
+    localStorage.removeItem("userProfile");
     alert("已登出");
     window.location.href = "index.html"; // 登出後回首頁
 }
@@ -40,6 +41,16 @@ document.addEventListener("DOMContentLoaded", () => {
         if (profile.email) document.getElementById("email").value = profile.email;
         if (profile.phone) document.getElementById("phone").value = profile.phone;
 
+        // 顯示會員icon
+        const userArea = document.getElementById("user-area");
+        if (userArea) {
+            userArea.innerHTML = `
+                <a href="member.html" title="會員中心">
+                    <img src="images/user.png" alt="Member">
+                </a>
+            `;
+        }
+
     } else {
         if (loginBox) loginBox.style.display = "flex";
         if (memberContent) memberContent.style.display = "none";
@@ -58,7 +69,20 @@ document.addEventListener("DOMContentLoaded", () => {
             };
 
             localStorage.setItem('userProfile', JSON.stringify(profileData));
-            alert('會員資料已更新！');
+            localStorage.setItem("isLogin", "true");
+            localStorage.setItem("user", "STANDARD DAY 會員");
+
+            alert('會員資料已更新，登入成功！');
+
+            // 同步更新首頁會員icon
+            const userArea = document.getElementById("user-area");
+            if (userArea) {
+                userArea.innerHTML = `
+                    <a href="member.html" title="會員中心">
+                        <img src="images/user.png" alt="Member">
+                    </a>
+                `;
+            }
         });
     }
 });
