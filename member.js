@@ -17,10 +17,3 @@ function showSection(sectionId) {
   alert("已登出");
   window.location.href = "index.html";
 }
-
-// 進會員中心就視為已登入
-if (!localStorage.getItem("user")) {
-  localStorage.setItem("user", "STANDARD DAY 會員");
-}
-
-  
