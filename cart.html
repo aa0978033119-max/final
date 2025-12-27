@@ -1,61 +1,84 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-Hant">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>購物車</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="shopping-cart.css">
 </head>
 <body>
+    <a href="cart.html" title="購物車">
+      <img src="images/shopping_cart.png" alt="Cart">
+    </a>
 
-<main class="shop-container">
-    <section class="product-card">
-        <div class="product-image">
-            <img src="images/01.jpg" alt="質感牛仔夾克">
+
+
+<div class="cart">
+
+    <div class="cart-header">
+        <div>圖片</div>
+        <div>名稱</div>
+        <div>數量</div>
+        <div>小計</div>
+    </div>
+
+    <div class="cart-item">
+        <div class="product-img">
+            <img src=images/09.jpg>
         </div>
-        <div class="product-info">
-            <h1 class="product-title">質感牛仔夾克</h1>
-            <p class="product-desc"> 形容</p>
-            <p class="product-price" id="base-price">NT$ 1,100</p>
 
-            <div class="input-group">
-                <label>尺寸選擇</label>
-                <select id="size">
-                    <option value="S">S</option>
-                    <option value="M">M</option>
-                    <option value="L">L</option>
-                </select>
-            </div>
-
-            <div class="input-group">
-                <label>數量選擇</label>
-                <div class="qty-controller">
-                    <button type="button" onclick="changeProductQty(-1)">−</button>
-                    <input type="number" id="qty" value="1" min="1" readonly>
-                    <button type="button" onclick="changeProductQty(1)">+</button>
-                </div>
-            </div>
-
-            <button class="add-cart-btn" onclick="addToCart()">加入購物車</button>
+        <div class="product-name">
+            紳士透膚襯衫<br>
+            白/L
+            <div class="price">單價 NT$1,280</div>
         </div>
-    </section>
 
-    <hr class="divider">
-
-    <section class="cart-section">
-        <h2>購物車內容</h2>
-        <div id="cart-items">
+        <div class="quantity">
+            <div class="qty-box">
+                <span class="qty-btn">+</span>
+                <span class="qty-num">1</span>
+                <span class="qty-btn">−</span>
             </div>
-        <div class="cart-summary">
-            <div class="total-row">
-                <span>總計金額</span>
-                <span id="grand-total">NT$ 0</span>
-            </div>
-            <button class="checkout-btn">前往結帳</button>
+            <span class="trash">刪除</span>
         </div>
-    </section>
-</main>
 
-<script src="script.js"></script>
+        <div class="subtotal">NT$1,280</div>
+    </div>
+
+    
+    <div class="cart-item">
+        <div class="product-img">
+            <img src="images/09.jpg" alt="紳士透膚襯衫">
+        </div>
+
+
+        <div class="product-name">
+            質感黑色牛仔夾克<br>
+            黑/M
+            <div class="price">單價 NT$1,280</div>
+        </div>
+
+        <div class="quantity">
+            <div class="qty-box">
+                <span class="qty-btn">+</span>
+                <span class="qty-num">0</span>
+                <span class="qty-btn">−</span>
+            </div>
+            <span class="trash">刪除</span>
+        </div>
+
+        <div class="subtotal">NT$1,280</div>
+    </div>
+
+    <div id="cartList"></div>
+
+    <div class="total">總金額：NT$0</div>
+
+    <div class="checkout">
+        <button>結帳</button>
+    </div>
+
+</div>
+
+<script src="cart.js"></script>
 </body>
 </html>
