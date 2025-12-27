@@ -188,3 +188,27 @@ function renderUserArea() {
         `;
     }
 }
+
+profileForm.addEventListener('submit', e => {
+    e.preventDefault();
+
+    const profileData = {
+        name: document.getElementById('name').value,
+        email: document.getElementById('email').value,
+        phone: document.getElementById('phone').value
+    };
+
+    localStorage.setItem('userProfile', JSON.stringify(profileData));
+    localStorage.setItem("isLogin", "true");
+    localStorage.setItem("user", "STANDARD DAY 會員");
+
+    alert('會員資料已更新，登入成功！');
+
+    // 立即更新會員中心 icon
+    renderUserArea();
+
+    // 若首頁已開啟，讓它同步更新（同域）
+    if (window.opener) {
+        window.opener.renderUserArea?.();
+    }
+});
