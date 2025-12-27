@@ -121,3 +121,21 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
 }); // 第一行 DOMContentLoaded 的閉合
+
+  /* ========= Header：登入狀態 ========= */
+  const userArea = document.getElementById("user-area");
+  const user = localStorage.getItem("user");
+
+  if (userArea) {
+    if (user) {
+      userArea.innerHTML = `
+        <span style="margin-right:8px;">Hi, ${user}</span>
+        <button onclick="logout()">登出</button>
+      `;
+    } else {
+      userArea.innerHTML = `
+        <a href="member.html">註冊 / 登入</a>
+      `;
+    }
+  }
+
