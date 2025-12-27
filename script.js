@@ -116,33 +116,31 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   /* ========= 會員登入狀態渲染 ========= */
-  function renderUserArea() {
-    const userArea = document.getElementById("user-area");
-    const user = localStorage.getItem("user");
+function renderUserArea() {
+  const userArea = document.getElementById("user-area");
+  const user = localStorage.getItem("user");
 
-    if (!userArea) return;
+  if (!userArea) return;
 
-    if (user) {
-      userArea.innerHTML = `
-        <div class="user-menu">
-          <img src="images/user.png" alt="Member">
-          <span style="margin-left:8px;">Hi, ${user}</span>
-          <div class="dropdown">
-            <a href="member.html">會員中心</a>
-            <a href="#" onclick="logout()">登出</a>
-          </div>
+  if (user) {
+    userArea.innerHTML = `
+      <div class="user-menu">
+        <img src="images/user.png" alt="Member">
+        <span style="margin-left:8px;">Hi, ${user}</span>
+        <div class="dropdown">
+          <a href="member.html">會員中心</a>
+          <a href="#" onclick="logout()">登出</a>
         </div>
-      `;
-    } else {
-      userArea.innerHTML = `
-        <a href="member.html">
-          <img src="images/user.png" title="註冊 / 登入">
-        </a>
-      `;
-    }
+      </div>
+    `;
+  } else {
+    userArea.innerHTML = `
+      <a href="member.html">
+        <img src="images/user.png" title="註冊 / 登入">
+      </a>
+    `;
   }
-
-  renderUserArea();
+}
 
   /* ========= 登出 ========= */
   window.logout = function() {
