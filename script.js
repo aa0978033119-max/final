@@ -99,7 +99,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* ========= 收藏切換 ========= */
   window.toggleFavorite = function(el) {
-    el.src.includes("heart.png") ? el.src = "images/love.png" : el.src = "images/heart.png";
+    const productName = el.closest(".product").querySelector(".product-name")?.textContent;
+    if (!productName) return;
+
+    let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+
+    if (el.src.includes("heart.png")) {
+      el.src = "images/love.png";
+      if (!favorites.includes(productName)) favorites.push(productName);
+    } else {
+      el.src = "images/heart.png";
+      favorites = favorites.filter(name => name !== productName);
+    }
+
+    localStorage.setItem("favorites", JSON.stringify(favorites));
   };
 
   /* ========= 會員登入狀態渲染 ========= */
@@ -113,12 +126,12 @@ document.addEventListener("DOMContentLoaded", () => {
       userArea.innerHTML = `
         <div class="user-menu">
           <img src="images/user.png" alt="Member">
+          <span style="margin-left:8px;">Hi, ${user}</span>
           <div class="dropdown">
             <a href="member.html">會員中心</a>
             <a href="#" onclick="logout()">登出</a>
           </div>
         </div>
-        <span style="margin-left:8px;">Hi, ${user}</span>
       `;
     } else {
       userArea.innerHTML = `
