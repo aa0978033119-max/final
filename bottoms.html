@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>下裝bottoms</title>
+<link rel="stylesheet" href="style.css">
+<style>
+  .favorite-icon {
+  width: 18px !important; /* 強制縮小 */ 
+  height: 18px !important; 
+  position: absolute;
+  bottom: 70px; /* 右下角 */
+  right: 15px; 
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+.favorite-icon:hover {
+  transform: scale(1.3);
+}
+.favorite-icon.active {
+  filter: invert(27%) sepia(94%) saturate(7468%) hue-rotate(357deg);
+}
+</style>
+</head>
+<body>
+
+<!-- Header / Navbar（共用主頁） -->
+<header>
+  <div class="nav-left">
+    <a href="index.html" class="logo">STANDARD DAY</a>
+  </div>
+
+  <div class="nav-icons">
+    <div class="search-wrapper">
+      <img src="images/search.png" alt="Search" id="searchIcon">
+      <div class="search-box" id="searchBox">
+        <div class="search-input">
+          <img src="images/search.png" alt="">
+          <input type="text" placeholder="搜尋商品...">
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-wrapper">
+      <img src="images/clothes.png" alt="Browse" id="menuIcon">
+      <div class="menu-box">
+        <a href="tops.html">上裝</a>
+        <a href="bottoms.html">下裝</a>
+      </div>
+    </div>
+
+    <a href="about.html" title="關於我們">
+      <img src="images/info.png" alt="About">
+    </a>
+    <a href="member.html" title="會員中心">
+      <img src="images/user.png" alt="Member">
+    </a>
+    <a href="cart.html" title="購物車">
+      <img src="images/shopping_cart.png" alt="Cart">
+    </a>
+  </div>
+</header>
+
+<!-- 下裝商品區 -->
+<section class="products">
+  <h2>下裝 Bottoms</h2>
+  <div class="product-grid">
+
+    <!-- 商品 1 -->
+    <div class="product" data-name="百搭基礎牛仔褲" data-price="1280" data-img="images/02.jpg">
+      <img src="images/02.jpg" alt="百搭基礎牛仔褲">
+      <img src="images/heart.png" class="favorite-icon" onclick="toggleFavorite(this)" alt="收藏">
+      <h3 class="product-name">百搭基礎牛仔褲</h3>
+      <div class="product-price">NT$1,280</div>
+      <button class="add-cart-btn">加入購物車</button>
+    </div>
+
+    <!-- 商品 2 -->
+    <div class="product" data-name="時尚週限定條紋長裙" data-price="1280" data-img="images/03.jpg">
+      <img src="images/03.jpg" alt="時尚週限定條紋長裙">
+      <img src="images/heart.png" class="favorite-icon" onclick="toggleFavorite(this)" alt="收藏">
+      <h3 class="product-name">時尚週限定條紋長裙</h3>
+      <div class="product-price">NT$1,280</div>
+      <button class="add-cart-btn">加入購物車</button>
+    </div>
+
+    <!-- 商品 3 -->
+    <div class="product" data-name="學院格紋顯身短裙" data-price="1280" data-img="images/04.jpg">
+      <img src="images/04.jpg" alt="學院格紋顯身短裙">
+      <img src="images/heart.png" class="favorite-icon" onclick="toggleFavorite(this)" alt="收藏">
+      <h3 class="product-name">學院格紋顯身短裙</h3>
+      <div class="product-price">NT$1,280</div>
+      <button class="add-cart-btn">加入購物車</button>
+    </div>
+    <!-- 商品 4 -->
+    <div class="product" data-name="男裝天絲彈力直筒卡其褲" data-price="1280" data-img="images/11.jpg">
+      <img src="images/11.jpg" alt="男裝天絲彈力直筒卡其褲">
+      <img src="images/heart.png" class="favorite-icon" onclick="toggleFavorite(this)" alt="收藏">
+      <h3 class="product-name">男裝天絲彈力直筒卡其褲</h3>
+      <div class="product-price">NT$1,280</div>
+      <button class="add-cart-btn">加入購物車</button>
+    </div>
+    <!-- 商品 5 -->
+    <div class="product" data-name="亮鑽百褶網紗白色長裙" data-price="1280" data-img="images/12.jpg">
+      <img src="images/12.jpg" alt="亮鑽百褶網紗白色長裙">
+      <img src="images/heart.png" class="favorite-icon" onclick="toggleFavorite(this)" alt="收藏">
+      <h3 class="product-name">亮鑽百褶網紗白色長裙</h3>
+      <div class="product-price">NT$1,280</div>
+      <button class="add-cart-btn">加入購物車</button>
+    </div>
+    <!-- 商品 6 -->
+    <div class="product" data-name="復古垂感束腳工裝褲" data-price="1280" data-img="images/10.jpg">
+      <img src="images/10.jpg" alt="復古垂感束腳工裝褲">
+      <img src="images/heart.png" class="favorite-icon" onclick="toggleFavorite(this)" alt="收藏">
+      <h3 class="product-name">復古垂感束腳工裝褲</h3>
+      <div class="product-price">NT$1,280</div>
+      <button class="add-cart-btn">加入購物車</button>
+    </div>
+
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <p>聯絡我們｜service@standardday.com</p>
+  <p>© 2025 STANDARD DAY. All rights reserved.</p>
+</footer>
+
+<script>
+// 收藏愛心切換
+function toggleFavorite(icon) {
+  icon.classList.toggle("active");
+}
+</script>
+
+</body>
+</html>
