@@ -168,3 +168,7 @@ if (userArea) {
     `;
   }
 }
+
+function goMember() {
+  location.href = "member.html";
+}
