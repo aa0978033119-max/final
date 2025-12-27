@@ -120,18 +120,31 @@ document.addEventListener("DOMContentLoaded", () => {
     const userArea = document.getElementById("user-area");
     if (!userArea) return;
 
-    const userNameSpan = userArea.querySelector(".user-name");
     const user = localStorage.getItem("user");
 
     if (user) {
-      if (userNameSpan) userNameSpan.textContent = `Hi, ${user}`;
-      userArea.classList.add("logged-in");
+      // 已登入
+      userArea.innerHTML = `
+        <div class="user-menu">
+          <img src="images/user.png" alt="Member">
+          <span class="user-name">Hi, ${user}</span>
+          <div class="dropdown">
+            <a href="member.html">會員中心</a>
+            <a href="#" onclick="logout()">登出</a>
+          </div>
+        </div>
+      `;
     } else {
-      if (userNameSpan) userNameSpan.textContent = "會員中心";
-      userArea.classList.remove("logged-in");
+      // 未登入
+      userArea.innerHTML = `
+        <a href="member.html">
+          <img src="images/user.png" title="註冊 / 登入">
+        </a>
+      `;
     }
   }
 
+  window.renderUserArea = renderUserArea;
   renderUserArea();
 
   /* ========= 登出 ========= */
@@ -161,7 +174,6 @@ document.addEventListener("DOMContentLoaded", () => {
       alert("會員資料已更新，登入成功！");
       renderUserArea();
 
-      // 若首頁已開啟，讓它同步更新
       if (window.opener?.renderUserArea) window.opener.renderUserArea();
     });
   }
