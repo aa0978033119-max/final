@@ -346,22 +346,30 @@ footer {
     padding: 20px;
     margin-top: 40px;
   }
-  
+
+// user-menu
 .user-menu {
+  display: flex;
+  align-items: center;
   position: relative;
-  display: inline-block;
   cursor: pointer;
+}
+
+.user-menu img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
 }
 
 .user-menu .dropdown {
   display: none;
   position: absolute;
   top: 100%;
-  left: 0;
+  right: 0;
   background: #fff;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-  border-radius: 4px;
-  overflow: hidden;
+  border: 1px solid #ccc;
+  padding: 8px 0;
+  min-width: 120px;
   z-index: 10;
 }
 
@@ -371,11 +379,11 @@ footer {
 
 .user-menu .dropdown a {
   display: block;
-  padding: 8px 12px;
-  text-decoration: none;
+  padding: 5px 12px;
   color: #333;
+  text-decoration: none;
 }
 
 .user-menu .dropdown a:hover {
-  background-color: #f5f5f5;
+  background: #f0f0f0;
 }
