@@ -10,7 +10,7 @@ function logout() {
     localStorage.removeItem("isLogin");
     localStorage.removeItem("user");
     alert("已登出");
-    window.location.href = "index.html";
+    window.location.href = "index.html"; // 登出後回首頁
 }
 
 // 登入（模擬）
@@ -18,6 +18,7 @@ function loginAsGuest() {
     localStorage.setItem("isLogin", "true");
     localStorage.setItem("user", "STANDARD DAY 會員");
 
+    // 登入後跳轉回先前想去的頁面，若無則回首頁
     const redirect = localStorage.getItem("redirectAfterLogin") || "index.html";
     localStorage.removeItem("redirectAfterLogin");
     location.href = redirect;
