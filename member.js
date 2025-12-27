@@ -17,3 +17,10 @@ function showSection(sectionId) {
   alert("已登出");
   window.location.href = "index.html";
 }
+
+//登入
+function loginAsGuest() {
+  localStorage.setItem("user", "STANDARD 會員");
+  alert("登入成功");
+  location.reload(); // 重新整理，使 header 更新
+}
