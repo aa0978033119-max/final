@@ -117,37 +117,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* ========= 會員登入狀態渲染 ========= */
   function renderUserArea() {
-  const userArea = document.getElementById("user-area");
-  if (!userArea) return;
+    const userArea = document.getElementById("user-area");
+    if (!userArea) return;
 
-  const user = localStorage.getItem("user");
+    const userNameSpan = userArea.querySelector(".user-name");
+    const user = localStorage.getItem("user");
 
-  // 清空原本內容
-  userArea.innerHTML = "";
-
-  if (user) {
-    // 登入後顯示下拉選單
-    userArea.innerHTML = `
-      <div class="user-menu">
-        <img src="images/user.png" alt="Member">
-        <span style="margin-left:8px;">Hi, ${user}</span>
-        <div class="dropdown">
-          <a href="member.html">會員中心</a>
-          <a href="#" onclick="logout()">登出</a>
-        </div>
-      </div>
-    `;
-  } else {
-    // 未登入也要保留文字 + icon，讓首頁不會消失
-    userArea.innerHTML = `
-      <a href="member.html">
-        <img src="images/user.png" title="註冊 / 登入">
-        <span style="margin-left:4px;">會員中心</span>
-      </a>
-    `;
+    if (user) {
+      if (userNameSpan) userNameSpan.textContent = `Hi, ${user}`;
+      userArea.classList.add("logged-in");
+    } else {
+      if (userNameSpan) userNameSpan.textContent = "會員中心";
+      userArea.classList.remove("logged-in");
+    }
   }
-}
 
+  renderUserArea();
 
   /* ========= 登出 ========= */
   window.logout = function() {
