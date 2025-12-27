@@ -8,59 +8,43 @@
 </head>
 <body>
 
-  <!-- Header / Navbar -->
-<!-- 1、 首頁（Home） -->
+    <!-- Header / Navbar -->
   <header>
-  <!-- Logo -->
-  <div class="nav-left">
-    <a href="index.html" class="logo">STANDARD DAY</a>
-  </div>
+    <div class="nav-left">
+      <a href="index.html" class="logo">STANDARD DAY</a>
+    </div>
 
-  <!-- Icons -->
-  <div class="nav-icons">
-
-    <!-- 搜尋欄 -->
-    <div class="search-wrapper">
-      <img src="images/search.png" alt="Search" id="searchIcon">
-
-      <div class="search-box" id="searchBox">
-        <div class="search-input">
-          <img src="images/search.png" alt="">
-          <input type="text" placeholder="搜尋商品...">
+    <div class="nav-icons">
+      <div class="search-wrapper">
+        <img src="images/search.png" alt="Search" id="searchIcon">
+        <div class="search-box" id="searchBox">
+          <div class="search-input">
+            <img src="images/search.png" alt="">
+            <input type="text" placeholder="搜尋商品...">
+          </div>
         </div>
       </div>
-    </div>
 
-    <!-- 商品瀏覽 -->
-    <div class="menu-wrapper">
-      <img src="images/clothes.png" alt="Browse" id="menuIcon">
-      <div class="menu-box">
-        <a href="tops.html">上裝</a>
-        <a href="bottoms.html">下裝</a>
+      <div class="menu-wrapper">
+        <img src="images/clothes.png" alt="Browse" id="menuIcon">
+        <div class="menu-box">
+          <a href="tops.html">上裝</a>
+          <a href="bottoms.html">下裝</a>
+        </div>
       </div>
-    </div>
 
+      <a href="about.html" title="關於我們">
+        <img src="images/info.png" alt="About">
+      </a>
 
-    <!-- 關於我們 -->
-    <a href="about.html" title="關於我們">
-      <img src="images/info.png" alt="About">
-    </a>
-
-    <!-- 會員中心 / 登入狀態 -->
-    <div id="user-area" class="user-icon" onclick="goMember()">
-        <img src="images/user.png" alt="Member">
-    </div>
-
-
-
-    <!-- 購物車 -->
-    <a href="cart.html" title="購物車">
-      <img src="images/shopping_cart.png" alt="Cart">
-    </a>
-
-  </div>
-</header>
-
+      <!-- 統一 user-area，由 script.js 控制 -->
+        <div id="user-area" class="user-icon"></div>
+    
+              <a href="cart.html" title="購物車">
+                <img src="images/shopping_cart.png" alt="Cart">
+              </a>
+        </div>
+      </header>
 
   <!-- Banner -->
   <section class="banner">
