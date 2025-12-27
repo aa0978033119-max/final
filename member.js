@@ -13,9 +13,14 @@ function showSection(sectionId) {
   
   // 登出
   function logout() {
-    alert('已登出');
-    // 清除登入資訊
-    // localStorage.removeItem("user");
-    window.location.href = 'login.html';
-  }
+  localStorage.removeItem("user");   // 登出
+  alert("已登出");
+  window.location.href = "index.html";
+}
+
+// 進會員中心就視為已登入
+if (!localStorage.getItem("user")) {
+  localStorage.setItem("user", "STANDARD DAY 會員");
+}
+
   
