@@ -43,7 +43,6 @@ body {
     border-radius: 8px;
 }
 
-/* 商品名稱欄 */
 .cart-item .product-name {
     flex: 2;
     text-align: left;
@@ -88,7 +87,6 @@ body {
     padding: 5px 15px;
 }
 
-/* 刪除按鈕 */
 .trash {
     margin-top: 5px;
     color: #b84f3c;
