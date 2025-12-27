@@ -1,86 +1,86 @@
-const pricePerUnit = 1100;
 
-function changeProductQty(val) {
-    const qtyInput = document.getElementById('qty');
-    let currentQty = parseInt(qtyInput.value);
-    if (currentQty + val >= 1) {
-        qtyInput.value = currentQty + val;
-    }
-}
-
-function addToCart() {
-    const size = document.getElementById('size').value;
-    const qty = parseInt(document.getElementById('qty').value);
-    
-    let cart = JSON.parse(localStorage.getItem('cartData')) || [];
-
-
-    const existIndex = cart.findIndex(item => item.size === size);
-    
-    if (existIndex > -1) {
-        cart[existIndex].qty += qty;
-    } else {
-        cart.push({
-            name: "質感牛仔夾克",
-            price: pricePerUnit,
-            size: size,
-            qty: qty,
-            img: "images/01.jpg"
-        });
-    }
-
-    localStorage.setItem('cartData', JSON.stringify(cart));
-    renderCart();
-}
+let cartData = JSON.parse(localStorage.getItem('cart')) || [
+    {id: 'p1', name: '紳士透膚襯衫', option: '白/L', price: 1280, qty: 1, img: 'images/09.jpg'},
+    {id: 'p2', name: '質感黑色牛仔夾克', option: '黑/M', price: 1280, qty: 0, img: 'images/09.jpg'}
+];
 
 
 function renderCart() {
-    const cart = JSON.parse(localStorage.getItem('cartData')) || [];
-    const container = document.getElementById('cart-items');
-    const totalEl = document.getElementById('grand-total');
-    
-    container.innerHTML = '';
-    let grandTotal = 0;
+    const cartList = document.querySelector('#cartList');
+    cartList.innerHTML = '';
 
-    cart.forEach((item, index) => {
-        const subtotal = item.price * item.qty;
-        grandTotal += subtotal;
+    if(cartData.length === 0) {
+        cartList.innerHTML = '<p>購物車空空如也</p>';
+    }
 
-        container.innerHTML += `
-            <div class="cart-item">
-                <div class="info">
-                    <strong>${item.name}</strong> (${item.size}) <br>
-                    <small>單價: NT$ ${item.price}</small>
-                </div>
-                <div class="qty-controller">
-                    <button onclick="updateCartQty(${index}, -1)">−</button>
-                    <span>${item.qty}</span>
-                    <button onclick="updateCartQty(${index}, 1)">+</button>
-                </div>
-                <div class="subtotal">NT$ ${subtotal.toLocaleString()}</div>
-                <button onclick="removeItem(${index})" style="background:none; border:none; cursor:pointer;">✕</button>
+    cartData.forEach(item => {
+        const cartItem = document.createElement('div');
+        cartItem.className = 'cart-item';
+        cartItem.setAttribute('data-id', item.id);
+        cartItem.innerHTML = `
+            <div class="product-img"><img src="${item.img}" alt="${item.name}"></div>
+            <div class="product-name">${item.name}<br>${item.option}
+                <div class="price">單價 NT$${item.price}</div>
             </div>
+            <div class="quantity">
+                <div class="qty-box">
+                    <span class="qty-btn">+</span>
+                    <span class="qty-num">${item.qty}</span>
+                    <span class="qty-btn">−</span>
+                </div>
+                <span class="trash">刪除</span>
+            </div>
+            <div class="subtotal">NT$${item.price * item.qty}</div>
         `;
+        cartList.appendChild(cartItem);
     });
 
-    totalEl.innerText = `NT$ ${grandTotal.toLocaleString()}`;
+    bindEvents();
+    updateTotal();
 }
 
-function updateCartQty(index, val) {
-    let cart = JSON.parse(localStorage.getItem('cartData'));
-    if (cart[index].qty + val >= 1) {
-        cart[index].qty += val;
-        localStorage.setItem('cartData', JSON.stringify(cart));
-        renderCart();
-    }
+function bindEvents() {
+    document.querySelectorAll('.cart-item').forEach(item => {
+        const id = item.getAttribute('data-id');
+
+        item.querySelectorAll('.qty-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const qtyElem = item.querySelector('.qty-num');
+                let qty = parseInt(qtyElem.textContent);
+
+                if(btn.textContent === '+') qty++;
+                else if(btn.textContent === '−' && qty > 0) qty--;
+
+                qtyElem.textContent = qty;
+
+                const product = cartData.find(p => p.id === id);
+                product.qty = qty;
+
+                updateSubtotal(item, product.price, qty);
+                updateTotal();
+                saveCart();
+            });
+        });
+
+        item.querySelector('.trash').addEventListener('click', () => {
+            cartData = cartData.filter(p => p.id !== id);
+            renderCart();
+            saveCart();
+        });
+    });
 }
 
+function updateSubtotal(item, price, qty) {
+    item.querySelector('.subtotal').textContent = `NT$${price * qty}`;
+}
 
-function removeItem(index) {
-    let cart = JSON.parse(localStorage.getItem('cartData'));
-    cart.splice(index, 1);
-    localStorage.setItem('cartData', JSON.stringify(cart));
-    renderCart();
+function updateTotal() {
+    const total = cartData.reduce((sum, item) => sum + item.price * item.qty, 0);
+    document.querySelector('.total').textContent = `總金額：NT$${total}`;
+}
+
+function saveCart() {
+    localStorage.setItem('cart', JSON.stringify(cartData));
 }
 
 renderCart();
