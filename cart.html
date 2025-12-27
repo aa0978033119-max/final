@@ -72,12 +72,13 @@
 </head>
     <script>
         if (!localStorage.getItem('isLogin')) {
-            // 登入或註冊回來購物車
-            localStorage.setItem('redirectAfterLogin', 'cart.html');
+            // 先跳回首頁，提示登入
             alert('請先登入或註冊會員');
-            location.href = 'member.html';
+            localStorage.setItem('redirectAfterLogin', 'cart.html');
+            location.href = 'index.html';
         }
     </script>
+
 <body>
     <a href="cart.html" title="購物車"></a>
         <img src="images/shopping_cart.png" alt="購物車" width="32">
