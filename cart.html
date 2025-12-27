@@ -1,95 +1,171 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-    <meta charset="UTF-8">
-    <title>購物車</title>
-    <link rel="stylesheet" href="shopping-cart.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>購物車範例</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #dacba5;
+        padding: 50px;
+    }
+    .cart-item {
+        display: flex;
+        align-items: center;
+        background-color: #fff9e6;
+        padding: 50px;
+        margin-bottom: 30px;
+        border-radius: 10px;
+    }
+    .cart-item img {
+        width: 80px;
+        height: 80px;
+        object-fit: cover;
+        border-radius: 8px;
+        margin-right: 15px;
+    }
+    .item-info {
+        flex: 1;
+    }
+    .item-info p {
+        margin: 5px 0;
+    }
+    .quantity-controls {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+    }
+    .quantity-controls button {
+        width: 30px;
+        height: 30px;
+        border: none;
+        background-color: #a3785b;
+        color: rgb(254, 249, 249);
+        font-size: 20px;
+        cursor: pointer;
+        border-radius: 4px;
+    }
+    .quantity-controls input {
+        width: 50px;
+        text-align: center;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+        height: 28px;
+    }
+    .remove-btn {
+        background-color: #b58a6d;
+        color: white;
+        border: none;
+        padding: 7px 10px;
+        cursor: pointer;
+        border-radius: 4px;
+        margin-left: 50px;
+    }
+    .total {
+        text-align: right;
+        font-size: 20px;
+        font-weight: bold;
+        margin-top: 20px;
+    }
+</style>
 </head>
 <body>
-    <a href="cart.html" title="購物車">
-        <img src="images/cart-icon.svg" alt="購物車" width="32">
+    <a href="cart.html" title="購物車"></a>
+        <img src="images/shopping_cart.png" alt="購物車" width="32">
     </a>
-
-
-<div class="cart">
-
-    <!-- Header -->
-    <div class="cart-header">
-        <div>圖片</div>
-        <div>名稱</div>
-        <div>數量</div>
-        <div>小計</div>
+<div class="cart-item" data-price="1,280">
+    <img src="images/07.jpg" alt="紳士透膚襯衫">
+    <div class="item-info">
+        <p>紳士透膚襯衫<br>白/L</p>
+        <p>單價：NT$1,280</p>
+        <div class="quantity-controls">
+            <button class="decrease">-</button>
+            <input type="number" class="quantity" value="1" min="0">
+            <button class="increase">+</button>
+            <button class="remove-btn">刪除</button>
+        </div>
     </div>
-
-    <div class="cart-item" data-id="product1">
-        <div class="product-img">
-            <img src="images/09.jpg" alt="紳士透膚襯衫">
-        </div>
-    
-        <div class="product-name">
-            紳士透膚襯衫<br>白/L
-            <div class="price">單價 NT$1,280</div>
-        </div>
-    
-        <div class="quantity">
-            <div class="qty-box">
-                <span class="qty-btn">+</span>
-                <span class="qty-num">1</span>
-                <span class="qty-btn">−</span>
-            </div>
-            <span class="trash">刪除</span>
-        </div>
-    
-        <div class="subtotal">NT$1,280</div>
-    </div>
-
-        <div class="quantity">
-            <div class="qty-box">
-                <span class="qty-btn">+</span>
-                <span class="qty-num">1</span>
-                <span class="qty-btn">−</span>
-            </div>
-            <span class="trash">刪除</span>
-        </div>
-
-        <div class="subtotal">NT$1,280</div>
-    </div>
-
-    
-    <div class="cart-item">
-        <div class="product-img">
-            <img src="images/09.jpg" alt="紳士透膚襯衫">
-        </div>
-
-
-        <div class="product-name">
-            質感黑色牛仔夾克<br>
-            黑/M
-            <div class="price">單價 NT$1,280</div>
-        </div>
-
-        <div class="quantity">
-            <div class="qty-box">
-                <span class="qty-btn">+</span>
-                <span class="qty-num">0</span>
-                <span class="qty-btn">−</span>
-            </div>
-            <span class="trash">刪除</span>
-        </div>
-
-        <div class="subtotal">NT$1,280</div>
-    </div>
-
-    <div id="cartList"></div>
-
-    <div class="total">總金額：NT$0</div>
-
-    <div class="checkout">
-        <button>結帳</button>
-    </div>
-
 </div>
 
-<script src="cart.js"></script>
+<div class="cart-item" data-price="1,280">
+    <img src="images/01.jpg" alt="夢幻粉色大衣">
+    <div class="item-info">
+        <p>夢幻粉色大衣<br>粉/L</p>
+        <p>單價：NT$1,280</p>
+        <div class="quantity-controls">
+            <button class="decrease">-</button>
+            <input type="number" class="quantity" value="1" min="0">
+            <button class="increase">+</button>
+            <button class="remove-btn">刪除</button>
+        </div>
+    </div>
+</div>
+
+<div class="cart-item" data-price="1,280">
+    <img src="images/06.jpg" alt="質感黑色牛仔夾克">
+    <div class="item-info">
+        <p>質感黑色牛仔夾克<br>黑/XL</p>
+        <p>單價：NT$1,280</p>
+        <div class="quantity-controls">
+            <button class="decrease">-</button>
+            <input type="number" class="quantity" value="2" min="0">
+            <button class="increase">+</button>
+            <button class="remove-btn">刪除</button>
+        </div>
+    </div>
+</div>
+
+<div class="total">
+    總計：NT$<span id="totalAmount">0</span>
+</div>
+
+<script>
+function updateTotal() {
+    const items = document.querySelectorAll('.cart-item');
+    let total = 0;
+    items.forEach(item => {
+        const price = parseInt(item.dataset.price);
+        const quantity = parseInt(item.querySelector('.quantity').value);
+        total += price * quantity;
+    });
+    document.getElementById('totalAmount').textContent = total;
+}
+
+document.querySelectorAll('.increase').forEach(button => {
+    button.addEventListener('click', () => {
+        const input = button.parentElement.querySelector('.quantity');
+        input.value = parseInt(input.value) + 1;
+        updateTotal();
+    });
+});
+
+document.querySelectorAll('.decrease').forEach(button => {
+    button.addEventListener('click', () => {
+        const input = button.parentElement.querySelector('.quantity');
+        if (parseInt(input.value) > 0) {
+            input.value = parseInt(input.value) - 1;
+            updateTotal();
+        }
+    });
+});
+
+document.querySelectorAll('.quantity').forEach(input => {
+    input.addEventListener('change', () => {
+        if (parseInt(input.value) < 0) input.value = 0;
+        updateTotal();
+    });
+});
+
+document.querySelectorAll('.remove-btn').forEach(button => {
+    button.addEventListener('click', () => {
+        button.closest('.cart-item').remove();
+        updateTotal();
+    });
+});
+
+updateTotal();
+</script>
+
 </body>
 </html>
