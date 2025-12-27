@@ -20,17 +20,23 @@ function showSection(sectionId) {
 
 // 登入
 function loginAsGuest() {
+  // 統一登入狀態
+  localStorage.setItem("isLogin", "true");
   localStorage.setItem("user", "STANDARD DAY 會員");
-  alert("登入成功");
-  location.reload(); // 重新整理，使 header 更新
+
+  // 看是不是從購物車被擋來的
+  const redirect = localStorage.getItem("redirectAfterLogin") || "index.html";
+  localStorage.removeItem("redirectAfterLogin");
+
+  location.href = redirect;
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  const user = localStorage.getItem("user");
+  const isLogin = localStorage.getItem("isLogin");
   const loginBox = document.getElementById("loginBox");
   const memberContent = document.getElementById("memberContent");
 
-  if (user) {
+  if (isLogin) {
     // 已登入
     if (loginBox) loginBox.style.display = "none";
     if (memberContent) memberContent.style.display = "flex";
@@ -40,5 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (memberContent) memberContent.style.display = "none";
   }
 });
+
+
 
 
