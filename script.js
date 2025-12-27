@@ -1,13 +1,3 @@
-<script>
-if (!localStorage.getItem('isLogin')) {
-    // 登入或註冊回來購物車
-    localStorage.setItem('redirectAfterLogin', 'cart.html');
-    alert('請先登入或註冊會員');
-    location.href = 'member.html';
-}
-</script>
-
-
 document.addEventListener("DOMContentLoaded", () => {
 
   /* ========= Banner ========= */
