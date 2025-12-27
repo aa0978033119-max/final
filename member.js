@@ -25,4 +25,20 @@ function loginAsGuest() {
   location.reload(); // 重新整理，使 header 更新
 }
 
+document.addEventListener("DOMContentLoaded", () => {
+  const user = localStorage.getItem("user");
+  const loginBox = document.getElementById("loginBox");
+  const memberContent = document.getElementById("memberContent");
+
+  if (user) {
+    // 已登入
+    if (loginBox) loginBox.style.display = "none";
+    if (memberContent) memberContent.style.display = "flex";
+  } else {
+    // 未登入
+    if (loginBox) loginBox.style.display = "flex";
+    if (memberContent) memberContent.style.display = "none";
+  }
+});
+
 
