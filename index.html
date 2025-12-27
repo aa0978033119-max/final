@@ -193,7 +193,7 @@
     <!-- 3、商品詳細頁（Product Detail）：小雯 -->
     <!-- 4、收藏商品/購物車頁面（Cart）：幸宜 -->
     <!-- 5、 結帳頁（Checkout）：幸宜 -->
-    // Tabs 切換
+    <!-- Tabs 切換-->
     const tabs = document.querySelectorAll('.tab');
     const contents = document.querySelectorAll('.content');
     
@@ -207,7 +207,7 @@
       });
     });
     
-    // 回到頂部
+    <!-- 回到頂部-->
     document.getElementById('topBtn').addEventListener('click', () => {
       window.scrollTo({
         top: 0,
@@ -215,7 +215,7 @@
       });
     });
     
-    // 加入購物車（示意）
+    <!-- 加入購物車（示意）-->
     document.querySelector('.add-cart').addEventListener('click', () => {
       const size = document.getElementById('size').value;
       const qty = document.getElementById('qty').value;
