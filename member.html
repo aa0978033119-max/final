@@ -6,64 +6,49 @@
   <link rel="stylesheet" href="member.css">
 </head>
 <body>
-      <!-- Header / Navbar -->
-    <!-- 1、 首頁（Home） -->
-      <header>
-      <!-- Logo -->
-      <div class="nav-left">
-        <a href="index.html" class="logo">STANDARD DAY</a>
-      </div>
-    
-      <!-- Icons -->
-      <div class="nav-icons">
-    
-        <!-- 搜尋欄 -->
-        <div class="search-wrapper">
-          <img src="images/search.png" alt="Search" id="searchIcon">
-    
-          <div class="search-box" id="searchBox">
-            <div class="search-input">
-              <img src="images/search.png" alt="">
-              <input type="text" placeholder="搜尋商品...">
-            </div>
+  <!-- Header / Navbar -->
+  <header>
+    <div class="nav-left">
+      <a href="index.html" class="logo">STANDARD DAY</a>
+    </div>
+
+    <div class="nav-icons">
+      <div class="search-wrapper">
+        <img src="images/search.png" alt="Search" id="searchIcon">
+        <div class="search-box" id="searchBox">
+          <div class="search-input">
+            <img src="images/search.png" alt="">
+            <input type="text" placeholder="搜尋商品...">
           </div>
         </div>
-    
-        <!-- 商品瀏覽 -->
-        <div class="menu-wrapper">
-          <img src="images/clothes.png" alt="Browse">
-    
-          <div class="menu-box">
-            <a href="tops.html">上裝</a>
-            <a href="bottoms.html">下裝</a>
-          </div>
-        </div>
-    
-        <!-- 關於我們 -->
-        <a href="about.html" title="關於我們">
-          <img src="images/info.png" alt="About">
-        </a>
-    
-        <!-- 會員中心 -->
-        <a href="member.html" title="會員中心">
-          <img src="images/user.png" alt="Member">
-        </a>
-    
-        <!-- 購物車 -->
-        <a href="cart.html" title="購物車">
-          <img src="images/shopping_cart.png" alt="Cart">
-        </a>
-    
       </div>
-    </header>
-  <!-- Header -->
+
+      <div class="menu-wrapper">
+        <img src="images/clothes.png" alt="Browse" id="menuIcon">
+        <div class="menu-box">
+          <a href="tops.html">上裝</a>
+          <a href="bottoms.html">下裝</a>
+        </div>
+      </div>
+
+      <a href="about.html" title="關於我們">
+        <img src="images/info.png" alt="About">
+      </a>
+
+      <!-- 統一 user-area，由 script.js 控制 -->
+      <div id="user-area" class="user-icon"></div>
+
+      <a href="cart.html" title="購物車">
+        <img src="images/shopping_cart.png" alt="Cart">
+      </a>
+    </div>
+  </header>
+
   <header class="member-header">
     <h1>會員中心</h1>
   </header>
 
-  <!-- 會員中心主體 -->
   <div class="member-container">
-
     <!-- 左側選單 -->
     <aside class="member-sidebar">
       <ul>
@@ -76,48 +61,39 @@
 
     <!-- 右側內容 -->
     <main class="member-content">
+      <section id="profile" class="content-section active">
+        <h2>會員資料</h2>
+        <form id="profileForm">
+          <div class="form-group">
+            <label>姓名</label>
+            <input type="text" id="name" placeholder="請輸入姓名" required>
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" id="email" placeholder="請輸入 Email" required>
+          </div>
+          <div class="form-group">
+            <label>電話</label>
+            <input type="tel" id="phone" placeholder="請輸入電話" required>
+          </div>
+          <button type="submit" class="save-btn">送出修改</button>
+        </form>
+      </section>
 
-        <section id="profile" class="content-section active">
-            <h2>會員資料</h2>
-          
-            <form id="profileForm">
-              <div class="form-group">
-                <label>姓名</label>
-                <input type="text" id="name" placeholder="請輸入姓名" required>
-              </div>
-          
-              <div class="form-group">
-                <label>Email</label>
-                <input type="email" id="email" placeholder="請輸入 Email" required>
-              </div>
-          
-              <div class="form-group">
-                <label>電話</label>
-                <input type="tel" id="phone" placeholder="請輸入電話" required>
-              </div>
-          
-              <button type="submit" class="save-btn">送出修改</button>
-            </form>
-          </section>          
-
-      <!-- 訂單紀錄 -->
       <section id="orders" class="content-section">
         <h2>訂單紀錄</h2>
         <p>目前尚無訂單</p>
       </section>
 
-      <!-- 修改密碼 -->
       <section id="password" class="content-section">
         <h2>修改密碼</h2>
         <input type="password" placeholder="舊密碼">
         <input type="password" placeholder="新密碼">
         <button>送出</button>
       </section>
-
     </main>
   </div>
 
   <script src="member.js"></script>
 </body>
-
 </html>
