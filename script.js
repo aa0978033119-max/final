@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const dotsContainer = document.getElementById("dotsContainer");
 
   function showBanner(index) {
-    if (!bannerImage) return; // 安全檢查
+    if (!bannerImage) return;
     bannerImage.src = banners[index].img;
     bannerTitle.textContent = banners[index].title;
     bannerDesc.textContent = banners[index].desc;
@@ -49,14 +49,13 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // 將按鈕功能掛載到 window，讓 HTML 的 onclick 可以用到
   window.nextBanner = nextBanner;
   window.prevBanner = prevBanner;
 
   showBanner(currentIndex);
   setInterval(nextBanner, 4000);
 
-  /* ========= 收藏狀態初始化 ========= */
+  /* ========= 收藏初始化 ========= */
   const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
   document.querySelectorAll(".product").forEach(product => {
     const name = product.querySelector(".product-name")?.textContent;
@@ -66,158 +65,102 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  /* ========= Header：搜尋 & 商品分類 ========= */
+  /* ========= Header 搜尋 & 商品分類 ========= */
   const searchIcon = document.getElementById("searchIcon");
   const searchBox = document.getElementById("searchBox");
   const menuIcon = document.getElementById("menuIcon");
   const menuBox = document.querySelector(".menu-box");
 
-  // 搜尋圖示點擊
   if (searchIcon && searchBox) {
-    searchIcon.addEventListener("click", (e) => {
-      e.preventDefault();
+    searchIcon.addEventListener("click", e => {
       e.stopPropagation();
       searchBox.classList.toggle("active");
-      if (menuBox) menuBox.classList.remove("active");
-
-      const input = searchBox.querySelector("input");
-      if (input) input.focus();
+      menuBox?.classList.remove("active");
+      searchBox.querySelector("input")?.focus();
     });
   }
 
-  // 衣服圖示點擊
   if (menuIcon && menuBox) {
-    menuIcon.addEventListener("click", (e) => {
-      e.preventDefault();
+    menuIcon.addEventListener("click", e => {
       e.stopPropagation();
       menuBox.classList.toggle("active");
-      if (searchBox) searchBox.classList.remove("active");
+      searchBox?.classList.remove("active");
     });
   }
 
-  // 防止點擊選單內部時自動關閉
   [searchBox, menuBox].forEach(box => {
-    if (box) {
-      box.addEventListener("click", (e) => {
-        e.stopPropagation();
-      });
-    }
+    box?.addEventListener("click", e => e.stopPropagation());
   });
 
-  // 點擊頁面其他地方關閉所有選單
   document.addEventListener("click", () => {
-    if (searchBox) searchBox.classList.remove("active");
-    if (menuBox) menuBox.classList.remove("active");
+    searchBox?.classList.remove("active");
+    menuBox?.classList.remove("active");
   });
 
-  /* 收藏切換函數 (全域) */
+  /* ========= 收藏切換 ========= */
   window.toggleFavorite = function(el) {
-    // 簡單檢查目前的圖片路徑來切換
-    if (el.src.includes("heart.png")) {
-      el.src = "images/love.png";
-    } else {
-      el.src = "images/heart.png";
-    }
+    el.src.includes("heart.png") ? el.src = "images/love.png" : el.src = "images/heart.png";
   };
 
-}); // 第一行 DOMContentLoaded 的閉合
-
-  /* ========= Header：登入狀態 ========= */
-  const userArea = document.getElementById("user-area");
-  const user = localStorage.getItem("user");
-
-  if (userArea) {
-    if (user) {
-      userArea.innerHTML = `
-        <span style="margin-right:8px;">Hi, ${user}</span>
-        <button onclick="logout()">登出</button>
-      `;
-    } else {
-      userArea.innerHTML = `
-        <a href="member.html">註冊 / 登入</a>
-      `;
-    }
-  }
-
-if (userArea) {
-  if (user) {
-    userArea.innerHTML = `
-      <div class="user-menu">
-        <img src="images/user.png">
-        <div class="dropdown">
-          <a href="member.html">會員中心</a>
-          <a href="#" onclick="logout()">登出</a>
-        </div>
-      </div>
-    `;
-  } else {
-    userArea.innerHTML = `
-      <a href="member.html">
-        <img src="images/user.png" title="註冊 / 登入">
-      </a>
-    `;
-  }
-}
-
-function goMember() {
-  location.href = "member.html";
-}
-
-function renderUserArea() {
+  /* ========= 會員登入狀態渲染 ========= */
+  function renderUserArea() {
     const userArea = document.getElementById("user-area");
     const user = localStorage.getItem("user");
 
     if (!userArea) return;
 
     if (user) {
-        userArea.innerHTML = `
+      userArea.innerHTML = `
         <div class="user-menu">
-            <img src="images/user.png" alt="Member">
-            <div class="dropdown">
-                <a href="member.html">會員中心</a>
-                <a href="#" onclick="logout()">登出</a>
-            </div>
+          <img src="images/user.png" alt="Member">
+          <div class="dropdown">
+            <a href="member.html">會員中心</a>
+            <a href="#" onclick="logout()">登出</a>
+          </div>
         </div>
         <span style="margin-left:8px;">Hi, ${user}</span>
-        `;
+      `;
     } else {
-        userArea.innerHTML = `
+      userArea.innerHTML = `
         <a href="member.html">
-            <img src="images/user.png" title="註冊 / 登入">
+          <img src="images/user.png" title="註冊 / 登入">
         </a>
-        `;
+      `;
     }
-}
+  }
 
-profileForm.addEventListener('submit', e => {
-    e.preventDefault();
+  renderUserArea();
 
-    const profileData = {
-        name: document.getElementById('name').value,
-        email: document.getElementById('email').value,
-        phone: document.getElementById('phone').value
-    };
-
-    localStorage.setItem('userProfile', JSON.stringify(profileData));
-    localStorage.setItem("isLogin", "true");
-    localStorage.setItem("user", "STANDARD DAY 會員");
-
-    alert('會員資料已更新，登入成功！');
-
-    // 立即更新會員中心 icon
-    renderUserArea();
-
-    // 若首頁已開啟，讓它同步更新（同域）
-    if (window.opener) {
-        window.opener.renderUserArea?.();
-    }
-});
-
-function logout() {
+  /* ========= 登出 ========= */
+  window.logout = function() {
     localStorage.removeItem("isLogin");
     localStorage.removeItem("user");
     localStorage.removeItem("userProfile");
     alert("已登出");
-    renderUserArea(); // 更新 icon
-    window.location.href = "index.html"; // 回首頁
-}
+    renderUserArea();
+    window.location.href = "index.html";
+  };
+
+  /* ========= profileForm 提交 ========= */
+  const profileForm = document.getElementById("profileForm");
+  if (profileForm) {
+    profileForm.addEventListener("submit", e => {
+      e.preventDefault();
+      const profileData = {
+        name: document.getElementById("name").value,
+        email: document.getElementById("email").value,
+        phone: document.getElementById("phone").value
+      };
+      localStorage.setItem("userProfile", JSON.stringify(profileData));
+      localStorage.setItem("isLogin", "true");
+      localStorage.setItem("user", "STANDARD DAY 會員");
+
+      alert("會員資料已更新，登入成功！");
+      renderUserArea();
+
+      // 若首頁已開啟，讓它同步更新
+      if (window.opener?.renderUserArea) window.opener.renderUserArea();
+    });
+  }
+
+});
