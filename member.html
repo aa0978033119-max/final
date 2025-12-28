@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <title>會員中心</title>
+
+  <style>
+    .member-header{
+      padding-left:225px ;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 40px;
+      background-color: #222;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    .member-container {
+      display: flex;
+      min-height: 200vh;
+    }
+
+    .member-sidebar {
+      width: 200px;
+      background-color: #333;
+      color: white;
+    }
+
+    .member-sidebar ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .member-sidebar li {
+      padding: 15px 15px 15px 30px;
+      cursor: pointer;
+    }
+
+    .member-sidebar li:hover {
+      background-color: #555;
+    }
+
+    .member-content {
+      flex: 1;
+      padding: 30px;
+    }
+
+    .content-section {
+      display: none;
+    }
+
+    .content-section.active {
+      display: block;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 8px;
+      box-sizing: border-box;
+    }
+
+    .save-btn {
+      padding: 10px 20px;
+      background-color: #333;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    .save-btn:hover {
+      background-color: #555;
+    }
+
+    .logo {
+      color: white;
+      font-size: 24px;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    /* ===== Header Icons Layout ===== */
+
+    .nav-icons {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .nav-icons img {
+      width: 22px;
+      height: 22px;
+      cursor: pointer;
+      filter: invert(1);
+    }
+
+    .nav-icons img:hover {
+      opacity: 0.8;
+    }
+
+    .search-wrapper,
+    .menu-wrapper {
+      position: relative;
+    }
+
+    .search-box,
+    .menu-box {
+      position: absolute;
+      top: 35px;
+      right: 0;
+      background: white;
+      border: 1px solid #ddd;
+      padding: 10px;
+      display: none;
+      min-width: 160px;
+      z-index: 100;
+    }
+
+    .search-wrapper:hover .search-box,
+    .menu-wrapper:hover .menu-box {
+      display: block;
+    }
+
+    .search-input {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .search-input input {
+      border: 1px solid #ccc;
+      padding: 5px;
+      width: 120px;
+    }
+
+    .menu-box a {
+      display: block;
+      padding: 5px 0;
+      text-decoration: none;
+      color: #333;
+    }
+
+    .menu-box a:hover {
+      color: #000;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ===== Header / Navbar（共用） ===== -->
+  <header>
+    <a href="index.html" class="logo">STANDARD DAY</a>
+
+    <div class="nav-icons">
+      <div class="search-wrapper">
+        <img src="images/search.png" alt="Search">
+        <div class="search-box">
+          <div class="search-input">
+            <input type="text" placeholder="搜尋商品">
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-wrapper">
+        <img src="images/clothes.png" alt="Browse">
+        <div class="menu-box">
+          <a href="tops.html">上裝</a>
+          <a href="bottoms.html">下裝</a>
+        </div>
+      </div>
+
+      <a href="about.html">
+        <img src="images/info.png" alt="About">
+      </a>
+      <a href="member.html">
+        <img src="images/user.png" alt="Member">
+      </a>
+      <a href="cart.html">
+        <img src="images/shopping_cart.png" alt="Cart">
+      </a>
+    </div>
+  </header>
+
+  <!-- ===== 會員中心 ===== -->
+  <div class="member-container">
+
+    <aside class="member-sidebar">
+      <ul>
+        <li onclick="showSection('profile')">會員資料</li>
+        <li onclick="showSection('orders')">訂單紀錄</li>
+        <li onclick="showSection('password')">修改密碼</li>
+        <li onclick="logout()">登出</li>
+      </ul>
+    </aside>
+
+    <main class="member-content">
+      <h1>會員中心</h1>
+
+      <section id="profile" class="content-section active">
+        <h2>會員資料</h2>
+
+        <div class="form-group">
+          <label>姓名</label>
+          <input type="text" placeholder="請輸入姓名">
+        </div>
+
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" placeholder="請輸入 Email">
+        </div>
+
+        <div class="form-group">
+          <label>電話</label>
+          <input type="tel" placeholder="請輸入電話">
+        </div>
+
+        <button class="save-btn">送出修改</button>
+      </section>
+
+      <section id="orders" class="content-section">
+        <h2>訂單紀錄</h2>
+        <p>目前尚無訂單</p>
+      </section>
+
+      <section id="password" class="content-section">
+        <h2>修改密碼</h2>
+        <input type="password" placeholder="舊密碼"><br><br>
+        <input type="password" placeholder="新密碼"><br><br>
+        <button class="save-btn">送出</button>
+      </section>
+    </main>
+
+  </div>
+
+  <!-- JS可以寫這裡 -->
+  <script>
+    function showSection(id) {
+      document.querySelectorAll('.content-section').forEach(section => {
+        section.classList.remove('active');
+      });
+      document.getElementById(id).classList.add('active');
+    }
+
+    function logout() {
+      alert('已登出');
+    }
+  </script>
+
+</body>
+</html>
