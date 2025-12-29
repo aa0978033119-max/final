@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>購物車範例</title>
+<title>購物車</title>
 <style>
     body {
         font-family: Arial, sans-serif;
@@ -54,14 +54,20 @@
         height: 28px;
     }
     .remove-btn {
-        background-color: #b58a6d;
-        color: white;
-        border: none;
-        padding: 7px 10px;
-        cursor: pointer;
-        border-radius: 4px;
-        margin-left: 50px;
-    }
+    background-color: #a3785b;
+    color: white;
+    border: none;
+    padding: 8px 12px;       
+    min-width: 60px;      
+    height: 32px;           
+    display: flex;          
+    align-items: center;   
+    justify-content: center; 
+    cursor: pointer;
+    border-radius: 4px;
+    white-space: nowrap;   
+}
+
     .total {
         text-align: right;
         font-size: 20px;
@@ -70,19 +76,11 @@
     }
 </style>
 </head>
-    <script>
-        if (!localStorage.getItem('isLogin')) {
-            // 先跳回首頁，提示登入
-            alert('請先登入或註冊會員');
-            localStorage.setItem('redirectAfterLogin', 'cart.html');
-            location.href = 'index.html';
-        }
-    </script>
-
 <body>
     <a href="cart.html" title="購物車"></a>
         <img src="images/shopping_cart.png" alt="購物車" width="32">
     </a>
+
 <div class="cart-item" data-price="1,280">
     <img src="images/07.jpg" alt="紳士透膚襯衫">
     <div class="item-info">
@@ -133,11 +131,14 @@
 function updateTotal() {
     const items = document.querySelectorAll('.cart-item');
     let total = 0;
+
     items.forEach(item => {
         const price = parseInt(item.dataset.price);
         const quantity = parseInt(item.querySelector('.quantity').value);
         total += price * quantity;
     });
+
+    total *= 1280;
     document.getElementById('totalAmount').textContent = total;
 }
 
@@ -172,6 +173,7 @@ document.querySelectorAll('.remove-btn').forEach(button => {
         updateTotal();
     });
 });
+
 
 updateTotal();
 </script>
