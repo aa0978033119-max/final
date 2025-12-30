@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
     alert(`已加入購物車\n尺寸：${size}\n數量：${qty}`);
   });
 
- document.querySelectorAll(".tab").forEach(tab => {
+document.querySelectorAll(".tab").forEach(tab => {
   tab.addEventListener("click", () => {
 
     // 移除全部 active
@@ -48,5 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // 加到目前點擊的
     tab.classList.add("active");
     document.getElementById(tab.dataset.tab).classList.add("active");
-  });
+  }); 
+}); 
 
+});  
