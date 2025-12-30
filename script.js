@@ -179,3 +179,17 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 });
+document.querySelectorAll('.product-link').forEach(link => {
+  link.addEventListener('click', () => {
+    const product = link.closest('.product');
+    const id = product.dataset.id;
+    window.location.href = `product.html?id=${id}`;
+  });
+});
+
+document.querySelectorAll('.add-cart-btn').forEach(btn => {
+  btn.addEventListener('click', e => {
+    e.stopPropagation();
+    alert('已加入購物車');
+  });
+});
