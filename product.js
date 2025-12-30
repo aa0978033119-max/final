@@ -1,31 +1,3 @@
-// Tabs 切換
-const tabs = document.querySelectorAll('.tab');
-const contents = document.querySelectorAll('.content');
-
-tabs.forEach(tab => {
-  tab.addEventListener('click', () => {
-    tabs.forEach(t => t.classList.remove('active'));
-    contents.forEach(c => c.classList.remove('active'));
-
-    tab.classList.add('active');
-    document.getElementById(tab.dataset.tab).classList.add('active');
-  });
-});
-
-// 回到頂部
-document.getElementById('topBtn').addEventListener('click', () => {
-  window.scrollTo({
-    top: 0,
-    behavior: 'smooth'
-  });
-});
-
-// 加入購物車（示意）
-document.querySelector('.add-cart').addEventListener('click', () => {
-const size = document.getElementById('sizeSelect').value;
-const qty = document.querySelector('input[type="number"]').value;
-  alert(`已加入購物車\n尺寸：${size}\n數量：${qty}`);
-});
 
 const params = new URLSearchParams(window.location.search);
 const id = Number(params.get("id")) || 1;
@@ -44,4 +16,24 @@ product.sizes.forEach(size => {
   option.value = size;
   option.textContent = size;
   sizeSelect.appendChild(option);
+});
+// Tabs 切換
+const tabs = document.querySelectorAll('.tab');
+const contents = document.querySelectorAll('.content');
+
+tabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    tabs.forEach(t => t.classList.remove('active'));
+    contents.forEach(c => c.classList.remove('active'));
+
+    tab.classList.add('active');
+    document.getElementById(tab.dataset.tab).classList.add('active');
+  });
+});
+
+// 加入購物車（示意）
+document.querySelector('.add-cart').addEventListener('click', () => {
+const size = document.getElementById('sizeSelect').value;
+const qty = document.querySelector('input[type="number"]').value;
+  alert(`已加入購物車\n尺寸：${size}\n數量：${qty}`);
 });
