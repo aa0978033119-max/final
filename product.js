@@ -49,5 +49,4 @@ document.addEventListener("DOMContentLoaded", () => {
     tab.classList.add("active");
     document.getElementById(tab.dataset.tab).classList.add("active");
   });
-});
-});
+
