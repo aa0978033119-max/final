@@ -11,11 +11,11 @@
   gap: 40px;
 }
 
-.product-image img {
+.product-images img {
   width: 100%;
-  hight:100%;
-  object-fit:cover;
   max-width: 500px;
+  height: auto;
+  display: block;
 }
 
 .product-info {
