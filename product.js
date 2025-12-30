@@ -50,3 +50,4 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById(tab.dataset.tab).classList.add("active");
   });
 });
+});
