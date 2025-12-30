@@ -45,7 +45,7 @@
 .tab {
   flex: 1;
   padding: 12px;
-  background: none;
+  background: gray;
   border: none;
   cursor: pointer;
   font-size: 16px;
