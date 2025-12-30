@@ -181,22 +181,4 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 document.addEventListener('DOMContentLoaded', () => {
 
-  //加入購物車
-  document.querySelectorAll('.add-cart-btn').forEach(btn => {
-    btn.addEventListener('click', e => {
-      e.preventDefault();
-      e.stopPropagation();
-      alert('已加入購物車');
-    });
-  });
-
-  //收藏
-  document.querySelectorAll('.favorite-icon').forEach(icon => {
-    icon.addEventListener('click', e => {
-      e.preventDefault();
-      e.stopPropagation();
-      toggleFavorite(icon);
-    });
-  });
-
-});
+  
