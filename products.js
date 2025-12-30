@@ -6,7 +6,7 @@ const products = [
     desc: "簡約日常 T-shirt",
     detail: "100% Cotton / Made in Taiwan",
     sizes: ["S", "M", "L"],
-    images: ["images/p1-1.jpg"]
+    images: ["images/01.jpg"]
   },
    {
     id: 2,
@@ -15,7 +15,7 @@ const products = [
     desc: "簡約日常 T-shirt",
     detail: "100% Cotton / Made in Taiwan",
     sizes: ["S", "M", "L"],
-    images: ["images/p1-1.jpg"]
+    images: ["images/02.jpg"]
   },
    {
     id: 3,
@@ -24,7 +24,7 @@ const products = [
     desc: "簡約日常 T-shirt",
     detail: "100% Cotton / Made in Taiwan",
     sizes: ["S", "M", "L"],
-    images: ["images/p1-1.jpg"]
+    images: ["images/03.jpg"]
   },
     {
     id: 4,
@@ -33,7 +33,7 @@ const products = [
     desc: "簡約日常 T-shirt",
     detail: "100% Cotton / Made in Taiwan",
     sizes: ["S", "M", "L"],
-    images: ["images/p1-1.jpg"]
+    images: ["images/04.jpg"]
   },
     {
     id: 5,
@@ -42,7 +42,7 @@ const products = [
     desc: "簡約日常 T-shirt",
     detail: "100% Cotton / Made in Taiwan",
     sizes: ["S", "M", "L"],
-    images: ["images/p1-1.jpg"]
+    images: ["images/05.jpg"]
   },
     {
     id: 6,
@@ -51,7 +51,7 @@ const products = [
     desc: "簡約日常 T-shirt",
     detail: "100% Cotton / Made in Taiwan",
     sizes: ["S", "M", "L"],
-    images: ["images/p1-1.jpg"]
+    images: ["images/06.jpg"]
   },
     {
     id: 7,
@@ -60,7 +60,7 @@ const products = [
     desc: "簡約日常 T-shirt",
     detail: "100% Cotton / Made in Taiwan",
     sizes: ["S", "M", "L"],
-    images: ["images/p1-1.jpg"]
+    images: ["images/07.jpg"]
   },
     {
     id: 8,
@@ -69,7 +69,7 @@ const products = [
     desc: "簡約日常 T-shirt",
     detail: "100% Cotton / Made in Taiwan",
     sizes: ["S", "M", "L"],
-    images: ["images/p1-1.jpg"]
+    images: ["images/08.jpg"]
   },
     {
     id: 9,
@@ -78,7 +78,7 @@ const products = [
     desc: "簡約日常 T-shirt",
     detail: "100% Cotton / Made in Taiwan",
     sizes: ["S", "M", "L"],
-    images: ["images/p1-1.jpg"]
+    images: ["images/09.jpg"]
   },
     {
     id: 10,
@@ -87,7 +87,7 @@ const products = [
     desc: "簡約日常 T-shirt",
     detail: "100% Cotton / Made in Taiwan",
     sizes: ["S", "M", "L"],
-    images: ["images/p1-1.jpg"]
+    images: ["images/10.jpg"]
   },
     {
     id: 11,
@@ -96,17 +96,9 @@ const products = [
     desc: "簡約日常 T-shirt",
     detail: "100% Cotton / Made in Taiwan",
     sizes: ["S", "M", "L"],
-    images: ["images/p1-1.jpg"]
-  },
-    {
-    id: 1,
-    name: "夢幻粉色大衣",
-    price: 1280,
-    desc: "簡約日常 T-shirt",
-    detail: "100% Cotton / Made in Taiwan",
-    sizes: ["S", "M", "L"],
-    images: ["images/p1-1.jpg"]
-  },
+    images: ["images/11.jpg"]
+    },
+  
     {
     id: 12,
     name: "亮鑽百褶網紗白色長裙",
@@ -114,7 +106,7 @@ const products = [
     desc: "簡約日常 T-shirt",
     detail: "100% Cotton / Made in Taiwan",
     sizes: ["S", "M", "L"],
-    images: ["images/p1-1.jpg"]
+    images: ["images/12.jpg"]
   },
     {
     id: 13,
@@ -123,7 +115,7 @@ const products = [
     desc: "簡約日常 T-shirt",
     detail: "100% Cotton / Made in Taiwan",
     sizes: ["S", "M", "L"],
-    images: ["images/p1-1.jpg"]
+    images: ["images/13.jpg"]
   },
     {
     id: 14,
@@ -132,7 +124,7 @@ const products = [
     desc: "簡約日常 T-shirt",
     detail: "100% Cotton / Made in Taiwan",
     sizes: ["S", "M", "L"],
-    images: ["images/p1-1.jpg"]
+    images: ["images/14.jpg"]
   },
    {
     id: 15,
@@ -141,6 +133,6 @@ const products = [
     desc: "簡約日常 T-shirt",
     detail: "100% Cotton / Made in Taiwan",
     sizes: ["S", "M", "L"],
-    images: ["images/p1-1.jpg"]
+    images: ["images/15.jpg"]
   },
 ];
