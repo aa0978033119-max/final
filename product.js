@@ -45,12 +45,3 @@ product.sizes.forEach(size => {
   option.textContent = size;
   sizeSelect.appendChild(option);
 });
-
-// tabs
-document.querySelectorAll(".tab").forEach(tab => {
-  tab.addEventListener("click", () => {
-    document.querySelectorAll(".tab, .content").forEach(el => el.classList.remove("active"));
-    tab.classList.add("active");
-    document.getElementById(tab.dataset.tab).classList.add("active");
-  });
-});
