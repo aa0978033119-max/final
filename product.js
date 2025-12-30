@@ -38,16 +38,19 @@ document.addEventListener("DOMContentLoaded", () => {
     alert(`已加入購物車\n尺寸：${size}\n數量：${qty}`);
   });
 
-  // 6️⃣ Tabs
-  document.querySelectorAll(".tab").forEach(tab => {
-    tab.addEventListener("click", () => {
-      document
-        .querySelectorAll(".tab, .content")
-        .forEach(el => el.classList.remove("active"));
+ document.querySelectorAll(".tab").forEach(tab => {
+  tab.addEventListener("click", () => {
 
-      tab.classList.add("active");
-      document.getElementById(tab.dataset.tab).classList.add("active");
-    });
+    // 移除全部 active
+    document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+    document.querySelectorAll(".content").forEach(c => c.classList.remove("active"));
+
+    // 加到目前點擊的
+    tab.classList.add("active");
+    document.getElementById(tab.dataset.tab).classList.add("active");
+  });
+});
+
   });
 
 });
