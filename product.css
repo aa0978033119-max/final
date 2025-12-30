@@ -35,34 +35,36 @@
 }
 
 /* ===== Tabs ===== */
+/* Tabs 樣式 */
 .tabs {
   display: flex;
-  border-top: 2px solid #000;
-  border-bottom: 2px solid #000;
+  border-top: 1px solid #000;
+  border-bottom: 1px solid #000;
 }
 
 .tab {
   flex: 1;
-  padding: 15px;
+  padding: 12px;
   background: none;
   border: none;
   cursor: pointer;
+  font-size: 16px;
 }
 
 .tab.active {
-  border-bottom: 3px solid black;
+  border-bottom: 2px solid black;
   font-weight: bold;
 }
 
+/* 內容區 */
 .tab-content {
-  padding: 30px;
+  padding: 20px;
 }
 
 .content {
-  display: none;
+  display: none;  
 }
 
 .content.active {
-  display: block;
+  display: block;  
 }
-
