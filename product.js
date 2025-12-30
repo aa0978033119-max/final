@@ -22,8 +22,8 @@ document.getElementById('topBtn').addEventListener('click', () => {
 
 // 加入購物車（示意）
 document.querySelector('.add-cart').addEventListener('click', () => {
-  const size = document.getElementById('size').value;
-  const qty = document.getElementById('qty').value;
+const size = document.getElementById('sizeSelect').value;
+const qty = document.querySelector('input[type="number"]').value;
   alert(`已加入購物車\n尺寸：${size}\n數量：${qty}`);
 });
 
