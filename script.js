@@ -195,3 +195,4 @@ productLinks.forEach(link => {
     window.location.href = `product.html?id=${productId}`;
   });
 });
+});
