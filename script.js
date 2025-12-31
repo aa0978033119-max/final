@@ -178,18 +178,12 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-});
-document.querySelectorAll('.product-link').forEach(link => {
-  link.addEventListener('click', () => {
-    const product = link.closest('.product');
-    const id = product.dataset.id;
-    window.location.href = `product.html?id=${id}`;
-  });
-});
+const productLinks = document.querySelectorAll('.product-link');
 
-document.querySelectorAll('.add-cart-btn').forEach(btn => {
-  btn.addEventListener('click', e => {
-    e.stopPropagation();
-    alert('已加入購物車');
+productLinks.forEach(link => {
+  link.addEventListener('click', () => {
+    const productDiv = link.closest('.product');
+    const productName = encodeURIComponent(productDiv.getAttribute('data-name'));
+    window.location.href = `product.html?name=${productName}`;
   });
 });
