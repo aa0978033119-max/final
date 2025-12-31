@@ -1,36 +1,39 @@
-document.addEventListener("DOMContentLoaded", () => {
+const urlParams = new URLSearchParams(window.location.search);
+const productId = parseInt(urlParams.get('id'));
 
-  // 取得商品 id
-  const params = new URLSearchParams(window.location.search);
-  const id = Number(params.get("id")) || 1;
+// 找到對應商品
+const product = products.find(p => p.id === productId);
 
-  // 找商品
-  const product = products.find(p => p.id === id);
-  if (!product) {
-    alert("找不到商品");
-    return;
-  }
+// 如果找不到商品，顯示錯誤
+if (!product) {
+  document.body.innerHTML = "<h2>找不到商品</h2>";
+} else {
+  // 渲染商品圖片、名稱、價格
+  document.getElementById('product-img').src = product.img;
+  document.getElementById('product-img').alt = product.name;
+  document.getElementById('product-name').textContent = product.name;
+  document.getElementById('product-price').textContent = `NT$${product.price}`;
 
-  // 塞資料
-  document.getElementById("productName").innerText = product.name;
-  document.getElementById("productDesc").innerText = product.desc;
-  document.getElementById("productPrice").innerText = `NT$ ${product.price}`;
-  document.getElementById("detail").innerText = product.detail;
+  // 渲染 Tab 內容
+  document.getElementById('description').textContent = product.description;
+  document.getElementById('shipping').textContent = product.shipping;
+  document.getElementById('reviews').innerHTML = product.reviews.map(r => `<p>• ${r}</p>`).join('');
+}
 
-  const img = document.getElementById("mainImage");
-  img.src = product.images[0];
-  img.alt = product.name;
+// Tab 切換功能
+const tabButtons = document.querySelectorAll('.tab-buttons button');
+const tabContents = document.querySelectorAll('.tab-content div');
 
-  // 尺寸選擇
-  const sizeSelect = document.getElementById("sizeSelect");
-  sizeSelect.innerHTML = "";
-  product.sizes.forEach(size => {
-    const option = document.createElement("option");
-    option.value = size;
-    option.textContent = size;
-    sizeSelect.appendChild(option);
+tabButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    // 切換按鈕 active 樣式
+    tabButtons.forEach(b => b.classList.remove('active'));
+    button.classList.add('active');
+
+    // 顯示對應內容
+    const tab = button.getAttribute('data-tab');
+    tabContents.forEach(content => {
+      content.id === tab ? content.classList.add('active') : content.classList.remove('active');
+    });
   });
-
-  // 加入購物車
-  const cartBtn = document.queryS
-});  
+});
