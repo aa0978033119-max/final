@@ -3,7 +3,7 @@ const products = [
     id: 1,
     name: "夢幻粉色大衣",
     price: 1280,
-    desc: "簡約日常 T-shirt",
+    desc: "帶給你暖呼呼的冬日氛圍，打造慵懶休閒的穿搭",
     detail: "100% Cotton / Made in Taiwan",
     sizes: ["S", "M", "L"],
     images: ["images/01.jpg"]
@@ -12,25 +12,25 @@ const products = [
     id: 2,
     name: "百搭基礎牛仔褲",
     price: 1280,
-    desc: "簡約日常 T-shirt",
+    desc: "衣櫃裡一定要有的一條牛仔褲，不挑身材的日常款式",
     detail: "100% Cotton / Made in Taiwan",
-    sizes: ["S", "M", "L"],
+    sizes: ["S", "M", "L","XL"],
     images: ["images/02.jpg"]
   },
    {
     id: 3,
     name: "時尚週限定條紋長裙",
     price: 1280,
-    desc: "簡約日常 T-shirt",
+    desc: "時髦剪裁搭配黑白條紋，展現精緻氣息",
     detail: "100% Cotton / Made in Taiwan",
-    sizes: ["S", "M", "L"],
+    sizes: ["F"],
     images: ["images/03.jpg"]
   },
     {
     id: 4,
     name: "學院格紋顯身短裙",
     price: 1280,
-    desc: "簡約日常 T-shirt",
+    desc: "經典格紋，甜美的復古學院感",
     detail: "100% Cotton / Made in Taiwan",
     sizes: ["S", "M", "L"],
     images: ["images/04.jpg"]
@@ -39,7 +39,7 @@ const products = [
     id: 5,
     name: "質感牛仔夾克",
     price: 1100,
-    desc: "簡約日常 T-shirt",
+    desc: "牛仔元素永不過時，顯身材比例的最佳單品",
     detail: "100% Cotton / Made in Taiwan",
     sizes: ["S", "M", "L"],
     images: ["images/05.jpg"]
@@ -48,7 +48,7 @@ const products = [
     id: 6,
     name: "質感黑色牛仔夾克",
     price: 1280,
-    desc: "簡約日常 T-shirt",
+    desc: "牛仔元素永不過時，顯身材比例的最佳單品",
     detail: "100% Cotton / Made in Taiwan",
     sizes: ["S", "M", "L"],
     images: ["images/06.jpg"]
