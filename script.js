@@ -178,15 +178,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-const productLinks = document.querySelectorAll('.product-link');
-
-productLinks.forEach(link => {
-  link.addEventListener('click', () => {
-    const productDiv = link.closest('.product');
-    const productName = encodeURIComponent(productDiv.getAttribute('data-name'));
-    window.location.href = `product.html?name=${productName}`;
-  });
-});
   document.querySelectorAll('.product-link').forEach(link => {
   link.addEventListener('click', (e) => {
     e.stopPropagation(); // 防止冒泡到按鈕
