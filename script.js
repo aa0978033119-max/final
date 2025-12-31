@@ -187,3 +187,11 @@ productLinks.forEach(link => {
     window.location.href = `product.html?name=${productName}`;
   });
 });
+
+  document.querySelectorAll('.product-link').forEach(link => {
+  link.addEventListener('click', (e) => {
+    e.stopPropagation(); // 防止冒泡到按鈕
+    const productId = link.closest('.product').getAttribute('data-id');
+    window.location.href = `product.html?id=${productId}`;
+  });
+});
