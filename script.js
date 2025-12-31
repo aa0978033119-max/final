@@ -178,10 +178,19 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  document.querySelectorAll('.product-link').forEach(link => {
+document.querySelectorAll('.product-link').forEach(link => {
   link.addEventListener('click', (e) => {
-    e.stopPropagation(); // 防止冒泡到按鈕
-    const productId = link.closest('.product').getAttribute('data-id');
-    window.location.href = `product.html?id=${productId}`;
+    e.preventDefault();    // 阻止 <a> 的預設跳轉（若有 href）
+    e.stopPropagation();   // 防止冒泡到其他元素
+
+    const productDiv = link.closest('.product');
+    if (!productDiv) return;
+
+    const productId = productDiv.getAttribute('data-id');
+    if (productId) {
+      window.location.href = `product.html?id=${encodeURIComponent(productId)}`;
+    } else {
+      console.warn('此商品缺少 data-id 屬性');
+    }
   });
 });
