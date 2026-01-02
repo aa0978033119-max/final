@@ -1,182 +1,63 @@
 <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>購物車</title>
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #dacba5;
-        padding: 50px;
-    }
-    .cart-item {
-        display: flex;
-        align-items: center;
-        background-color: #fff9e6;
-        padding: 50px;
-        margin-bottom: 30px;
-        border-radius: 10px;
-    }
-    .cart-item img {
-        width: 80px;
-        height: 80px;
-        object-fit: cover;
-        border-radius: 8px;
-        margin-right: 15px;
-    }
-    .item-info {
-        flex: 1;
-    }
-    .item-info p {
-        margin: 5px 0;
-    }
-    .quantity-controls {
-        display: flex;
-        align-items: center;
-        gap: 7px;
-    }
-    .quantity-controls button {
-        width: 30px;
-        height: 30px;
-        border: none;
-        background-color: #a3785b;
-        color: rgb(254, 249, 249);
-        font-size: 20px;
-        cursor: pointer;
-        border-radius: 4px;
-    }
-    .quantity-controls input {
-        width: 50px;
-        text-align: center;
-        border-radius: 4px;
-        border: 1px solid #ccc;
-        height: 28px;
-    }
-    .remove-btn {
-    background-color: #a3785b;
-    color: white;
-    border: none;
-    padding: 8px 12px;       
-    min-width: 60px;      
-    height: 32px;           
-    display: flex;          
-    align-items: center;   
-    justify-content: center; 
-    cursor: pointer;
-    border-radius: 4px;
-    white-space: nowrap;   
-}
-
-    .total {
-        text-align: right;
-        font-size: 20px;
-        font-weight: bold;
-        margin-top: 20px;
-    }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>購物車</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <a href="cart.html" title="購物車"></a>
+    <a href="cart.html" title="購物車">
         <img src="images/shopping_cart.png" alt="購物車" width="32">
     </a>
 
-<div class="cart-item" data-price="1,280">
-    <img src="images/07.jpg" alt="紳士透膚襯衫">
-    <div class="item-info">
-        <p>紳士透膚襯衫<br>白/L</p>
-        <p>單價：NT$1,280</p>
-        <div class="quantity-controls">
-            <button class="decrease">-</button>
-            <input type="number" class="quantity" value="1" min="0">
-            <button class="increase">+</button>
-            <button class="remove-btn">刪除</button>
+    <div class="cart-item" data-price="1280">
+        <img src="images/07.jpg" alt="紳士透膚襯衫">
+        <div class="item-info">
+            <p>紳士透膚襯衫<br>白/L</p>
+            <p>單價：NT$1,280</p>
+            <div class="quantity-controls">
+                <button class="decrease">-</button>
+                <input type="number" class="quantity" value="1" min="0">
+                <button class="increase">+</button>
+                <button class="remove-btn">刪除</button>
+            </div>
         </div>
     </div>
-</div>
 
-<div class="cart-item" data-price="1,280">
-    <img src="images/01.jpg" alt="夢幻粉色大衣">
-    <div class="item-info">
-        <p>夢幻粉色大衣<br>粉/L</p>
-        <p>單價：NT$1,280</p>
-        <div class="quantity-controls">
-            <button class="decrease">-</button>
-            <input type="number" class="quantity" value="1" min="0">
-            <button class="increase">+</button>
-            <button class="remove-btn">刪除</button>
+    <div class="cart-item" data-price="1280">
+        <img src="images/01.jpg" alt="夢幻粉色大衣">
+        <div class="item-info">
+            <p>夢幻粉色大衣<br>粉/L</p>
+            <p>單價：NT$1,280</p>
+            <div class="quantity-controls">
+                <button class="decrease">-</button>
+                <input type="number" class="quantity" value="1" min="0">
+                <button class="increase">+</button>
+                <button class="remove-btn">刪除</button>
+            </div>
         </div>
     </div>
-</div>
 
-<div class="cart-item" data-price="1,280">
-    <img src="images/06.jpg" alt="質感黑色牛仔夾克">
-    <div class="item-info">
-        <p>質感黑色牛仔夾克<br>黑/XL</p>
-        <p>單價：NT$1,280</p>
-        <div class="quantity-controls">
-            <button class="decrease">-</button>
-            <input type="number" class="quantity" value="2" min="0">
-            <button class="increase">+</button>
-            <button class="remove-btn">刪除</button>
+    <div class="cart-item" data-price="1280">
+        <img src="images/06.jpg" alt="質感黑色牛仔夾克">
+        <div class="item-info">
+            <p>質感黑色牛仔夾克<br>黑/XL</p>
+            <p>單價：NT$1,280</p>
+            <div class="quantity-controls">
+                <button class="decrease">-</button>
+                <input type="number" class="quantity" value="2" min="0">
+                <button class="increase">+</button>
+                <button class="remove-btn">刪除</button>
+            </div>
         </div>
     </div>
-</div>
 
-<div class="total">
-    總計：NT$<span id="totalAmount">0</span>
-</div>
+    <div class="total">
+        總計：NT$<span id="totalAmount">0</span>
+    </div>
 
-<script>
-function updateTotal() {
-    const items = document.querySelectorAll('.cart-item');
-    let total = 0;
-
-    items.forEach(item => {
-        const price = parseInt(item.dataset.price);
-        const quantity = parseInt(item.querySelector('.quantity').value);
-        total += price * quantity;
-    });
-
-    total *= 1280;
-    document.getElementById('totalAmount').textContent = total;
-}
-
-document.querySelectorAll('.increase').forEach(button => {
-    button.addEventListener('click', () => {
-        const input = button.parentElement.querySelector('.quantity');
-        input.value = parseInt(input.value) + 1;
-        updateTotal();
-    });
-});
-
-document.querySelectorAll('.decrease').forEach(button => {
-    button.addEventListener('click', () => {
-        const input = button.parentElement.querySelector('.quantity');
-        if (parseInt(input.value) > 0) {
-            input.value = parseInt(input.value) - 1;
-            updateTotal();
-        }
-    });
-});
-
-document.querySelectorAll('.quantity').forEach(input => {
-    input.addEventListener('change', () => {
-        if (parseInt(input.value) < 0) input.value = 0;
-        updateTotal();
-    });
-});
-
-document.querySelectorAll('.remove-btn').forEach(button => {
-    button.addEventListener('click', () => {
-        button.closest('.cart-item').remove();
-        updateTotal();
-    });
-});
-
-
-updateTotal();
-</script>
-
+    <script src="script.js"></script>
 </body>
 </html>
