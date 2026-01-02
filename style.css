@@ -110,7 +110,7 @@ nav a:hover {
 .banner {
   position: relative;
   width: 100%;
-  aspect-ratio: 16 / 9;
+  height: 600px;
   overflow: hidden;
   
 }
