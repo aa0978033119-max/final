@@ -1,10 +1,26 @@
 document.addEventListener("DOMContentLoaded", () => {
 
   const banners = [
-    { img: "images/banner1.jpg", title: "NEW ARRIVAL", desc: "秋冬新品 8 折起" },
-    { img: "images/banner2.jpg", title: "SALE", desc: "限時優惠 20% OFF" },
-    { img: "images/banner3.jpg", title: "HOT ITEMS", desc: "人氣熱銷商品" }
+    { 
+      img: "images/banner1.jpg",   // 顯示用
+      title: "NEW ARRIVAL",
+      desc: "秋冬新品 8 折起",
+      productId: 4               // 點擊跳轉對應產品 id
+    },
+    { 
+      img: "images/banner2.jpg",
+      title: "SALE",
+      desc: "限時優惠 20% OFF",
+      productId: 14
+    },
+    { 
+      img: "images/banner3.jpg",
+      title: "HOT ITEMS",
+      desc: "人氣熱銷商品",
+      productId: 3
+    }
   ];
+
 
   let currentIndex = 0;
   let timer = null;
@@ -70,6 +86,16 @@ document.addEventListener("DOMContentLoaded", () => {
   window.nextBanner = nextBanner;
   window.prevBanner = prevBanner;
 });
+
+  //banner bottom
+  const bannerButton = document.querySelector(".banner-text button");
+  
+  bannerButton.addEventListener("click", () => {
+    const currentBanner = banners[currentIndex];
+    // 這裡跳轉到產品頁，使用 productId
+    window.location.href = `product.html?id=${currentBanner.productId}`;
+  });
+
 
 
   /* ========= 收藏初始化 ========= */
