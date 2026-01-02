@@ -1,47 +1,49 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-  /* ========= Banner ========= */
   const banners = [
     { img: "images/banner1.jpg", title: "NEW ARRIVAL", desc: "秋冬新品 8 折起" },
     { img: "images/banner2.jpg", title: "SALE", desc: "限時優惠 20% OFF" },
     { img: "images/banner3.jpg", title: "HOT ITEMS", desc: "人氣熱銷商品" }
   ];
-  
+
   let currentIndex = 0;
   let timer = null;
-  
+
   const bannerImage = document.getElementById("bannerImage");
   const bannerTitle = document.getElementById("bannerTitle");
   const bannerDesc  = document.getElementById("bannerDesc");
   const dotsContainer = document.getElementById("dotsContainer");
-  
-  /* 顯示 Banner */
+
+  if (!bannerImage || !dotsContainer) {
+    console.error("Banner DOM not found");
+    return;
+  }
+
   function showBanner(index) {
     clearTimeout(timer);
-  
+
     if (index >= banners.length) currentIndex = 0;
     if (index < 0) currentIndex = banners.length - 1;
-  
+
     bannerImage.src = banners[currentIndex].img;
     bannerTitle.textContent = banners[currentIndex].title;
     bannerDesc.textContent  = banners[currentIndex].desc;
-  
+
     updateDots();
-    timer = setTimeout(nextBanner, 4000); // 重啟自動播放
+    timer = setTimeout(nextBanner, 4000);
   }
-  
-  /* 左右 */
+
   function nextBanner() {
     currentIndex++;
     showBanner(currentIndex);
   }
-  
+
   function prevBanner() {
     currentIndex--;
     showBanner(currentIndex);
   }
-  
-  /* 圓點 */
+
+  // dots
   banners.forEach((_, index) => {
     const dot = document.createElement("span");
     dot.className = "dot";
@@ -51,20 +53,21 @@ document.addEventListener("DOMContentLoaded", () => {
     };
     dotsContainer.appendChild(dot);
   });
-  
+
   function updateDots() {
     const dots = document.querySelectorAll(".dot");
     dots.forEach((dot, i) => {
       dot.classList.toggle("active", i === currentIndex);
     });
   }
-  
-  /* 初始化 */
+
+  // 初始化
   showBanner(currentIndex);
-  
-  /* 提供 HTML onclick 使用 */
+
+  // 給 HTML onclick 用
   window.nextBanner = nextBanner;
   window.prevBanner = prevBanner;
+});
 
 
   /* ========= 收藏初始化 ========= */
