@@ -182,12 +182,37 @@
   
     localStorage.setItem("favorites", JSON.stringify(favorites));
   };
-  
+  function addToCart(button) {
+    const product = button.closest('.product');
+    const id = product.dataset.id;
+    const name = product.dataset.name;
+    const price = parseInt(product.dataset.price);
+    const img = product.dataset.img;
+
+    if (!id || !name || !price || !img) return;
+
+    // 取出購物車
+    let cart = JSON.parse(localStorage.getItem("cart")) || {};
+
+    // 如果商品已存在就 +1
+    if (cart[id]) {
+        cart[id].quantity += 1;
+    } else {
+        cart[id] = { id, name, price, img, quantity: 1 };
+    }
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+
+    // 顯示提示框
+    alert(`${name} 已加入購物車！`);
+}
+
   </script>
   
 
 </body>
 </html>
+
 
 
 
