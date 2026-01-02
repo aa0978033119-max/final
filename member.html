@@ -160,6 +160,52 @@
       color: #000;
       font-weight: bold;
     }
+
+     /* ===== FAQ 樣式 ===== */
+
+  .faq {
+    max-width: 600px;
+    margin-top: 20px;
+  }
+
+  .faq-item {
+    border-bottom: 1px solid #ddd;
+  }
+
+  .faq-question {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 15px;
+    font-size: 16px;
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .faq-question .icon {
+    transition: transform 0.3s ease;
+    font-size: 20px;
+  }
+
+  .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    padding: 0 15px;
+    color: #555;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+  }
+
+  .faq-item.active .faq-answer {
+    max-height: 200px;
+    padding: 10px 15px 20px;
+  }
+
+  .faq-item.active .icon {
+    transform: rotate(45deg); /* + 變成 × */
+  }
   </style>
 </head>
 
@@ -292,6 +338,7 @@
 </body>
 
 </html>
+
 
 
 
