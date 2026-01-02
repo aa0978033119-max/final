@@ -1,9 +1,10 @@
 body {
     font-family: "Microsoft JhengHei", sans-serif;
-    background-color: #f4f7f6;
+    background-color: #ffffff;
     display: flex;
     justify-content: center;
     padding: 20px;
+    color: #000;
 }
 
 .checkout-container {
@@ -11,23 +12,46 @@ body {
     max-width: 500px;
     width: 100%;
     padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    border: 1px solid #eee;
 }
 
-h2 { text-align: center; color: #333; }
-h3 { border-left: 4px solid #2ecc71; padding-left: 10px; margin-bottom: 15px; font-size: 1.1rem; }
+h2 { 
+    text-align: center; 
+    color: #000; 
+    font-weight: bold;
+    font-size: 2rem;
+    margin-bottom: 40px;
+}
 
-.section { margin-bottom: 25px; }
+h3 { 
+    border-left: none; 
+    padding-left: 0; 
+    margin-bottom: 20px; 
+    font-size: 1.4rem; 
+    font-weight: bold;
+}
 
-.form-group { margin-bottom: 15px; }
-label { display: block; margin-bottom: 5px; color: #666; }
+.section { margin-bottom: 30px; }
+
+.form-group { margin-bottom: 20px; }
+
+label { 
+    display: block; 
+    margin-bottom: 8px; 
+    color: #000; 
+    font-weight: bold; 
+}
+
 input {
     width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+    padding: 12px;
+    border: 1px solid #333; 
+    border-radius: 0px; 
     box-sizing: border-box; 
+}
+
+input::placeholder {
+    color: #aaa;
 }
 
 .payment-method {
@@ -41,29 +65,34 @@ input {
 .summary-item {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
+    color: #333;
 }
 
 .total {
-    font-size: 1.3rem;
+    font-size: 1.5rem;
     font-weight: bold;
-    color: #e74c3c;
+    color: #000;
+    border-top: 2px solid #000;
+    padding-top: 10px;
+    margin-top: 10px;
 }
-
 button {
     width: 100%;
     padding: 15px;
-    background-color: #2ecc71;
+    background-color: #333; 
     color: white;
     border: none;
-    border-radius: 4px;
+    border-radius: 0px;    
     font-size: 1.1rem;
     cursor: pointer;
     transition: background 0.3s;
+    margin-top: 20px;
 }
 
-button:hover { background-color: #27ae60; }
-
+button:hover { 
+    background-color: #000; 
+}
 
 .payment-options {
     display: flex;
@@ -75,20 +104,19 @@ button:hover { background-color: #27ae60; }
     display: flex;
     align-items: center;
     padding: 12px 15px;
-    border: 2px solid #eee;
-    border-radius: 6px;
+    border: 1px solid #ddd;
+    border-radius: 0px;
     cursor: pointer;
     transition: all 0.2s ease;
 }
 
 .payment-item:hover {
-    background-color: #f9f9f9;
-    border-color: #2ecc71;
+    background-color: #f0f0f0;
+    border-color: #000;
 }
 
-.payment-item input[type="radio"]:checked + .payment-text {
-    color: #298951;
-    font-weight: bold;
+.payment-item input[type="radio"]:checked {
+    accent-color: #000;
 }
 
 .payment-item input[type="radio"]:checked {
