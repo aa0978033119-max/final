@@ -13,8 +13,8 @@ body {
     border: 1px solid #e0e0e0;/
 }
 .cart-item img {
-    width: 150px;
-    height: 150px;
+    width: 200px;
+    height: 300px;
     object-fit: cover;
     border-radius: 4px;
     margin-right: 15px;
