@@ -86,3 +86,27 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 });
+document.querySelectorAll(".faq-question").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const currentItem = btn.parentElement;
+    const currentAnswer = currentItem.querySelector(".faq-answer");
+
+    // 關閉其他已打開的
+    document.querySelectorAll(".faq-item.active").forEach(item => {
+      if (item !== currentItem) {
+        const answer = item.querySelector(".faq-answer");
+        answer.style.maxHeight = null;
+        item.classList.remove("active");
+      }
+    });
+
+    // 切換目前這個
+    if (currentItem.classList.contains("active")) {
+      currentAnswer.style.maxHeight = null;
+      currentItem.classList.remove("active");
+    } else {
+      currentAnswer.style.maxHeight = currentAnswer.scrollHeight + "px";
+      currentItem.classList.add("active");
+    }
+  });
+});
