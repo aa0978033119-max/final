@@ -1,18 +1,17 @@
 body {
     font-family: "Microsoft JhengHei", sans-serif;
-    background-color: #ffffff;
+    background-color: #ffffff; 
     display: flex;
     justify-content: center;
     padding: 20px;
     color: #000;
 }
-
 .checkout-container {
     background: white;
     max-width: 500px;
     width: 100%;
     padding: 30px;
-    border: 1px solid #eee;
+    border: 1px solid #eee; 
 }
 
 h2 { 
@@ -72,18 +71,19 @@ input::placeholder {
 .total {
     font-size: 1.5rem;
     font-weight: bold;
-    color: #000;
+    color: #000; 
     border-top: 2px solid #000;
     padding-top: 10px;
     margin-top: 10px;
 }
+
 button {
     width: 100%;
     padding: 15px;
     background-color: #333; 
     color: white;
     border: none;
-    border-radius: 0px;    
+    border-radius: 0px;   
     font-size: 1.1rem;
     cursor: pointer;
     transition: background 0.3s;
@@ -91,8 +91,9 @@ button {
 }
 
 button:hover { 
-    background-color: #000; 
-}
+    background-color: #000;
+ }
+
 
 .payment-options {
     display: flex;
@@ -115,12 +116,13 @@ button:hover {
     border-color: #000;
 }
 
-.payment-item input[type="radio"]:checked {
-    accent-color: #000;
+.payment-item input[type="radio"]:checked + .payment-text {
+    color: #298951;
+    font-weight: bold;
 }
 
 .payment-item input[type="radio"]:checked {
-    accent-color: #095a2c;
+    accent-color: #000;
 }
 
 .payment-item input[type="radio"] {
