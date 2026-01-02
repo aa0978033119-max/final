@@ -6,54 +6,66 @@ document.addEventListener("DOMContentLoaded", () => {
     { img: "images/banner2.jpg", title: "SALE", desc: "限時優惠 20% OFF" },
     { img: "images/banner3.jpg", title: "HOT ITEMS", desc: "人氣熱銷商品" }
   ];
-
+  
   let currentIndex = 0;
+  let timer = null;
+  
   const bannerImage = document.getElementById("bannerImage");
   const bannerTitle = document.getElementById("bannerTitle");
-  const bannerDesc = document.getElementById("bannerDesc");
+  const bannerDesc  = document.getElementById("bannerDesc");
   const dotsContainer = document.getElementById("dotsContainer");
-
+  
+  /* 顯示 Banner */
   function showBanner(index) {
-    if (!bannerImage) return;
-    bannerImage.src = banners[index].img;
-    bannerTitle.textContent = banners[index].title;
-    bannerDesc.textContent = banners[index].desc;
+    clearTimeout(timer);
+  
+    if (index >= banners.length) currentIndex = 0;
+    if (index < 0) currentIndex = banners.length - 1;
+  
+    bannerImage.src = banners[currentIndex].img;
+    bannerTitle.textContent = banners[currentIndex].title;
+    bannerDesc.textContent  = banners[currentIndex].desc;
+  
     updateDots();
+    timer = setTimeout(nextBanner, 4000); // 重啟自動播放
   }
-
+  
+  /* 左右 */
   function nextBanner() {
-    currentIndex = (currentIndex + 1) % banners.length;
+    currentIndex++;
     showBanner(currentIndex);
   }
-
+  
   function prevBanner() {
-    currentIndex = (currentIndex - 1 + banners.length) % banners.length;
+    currentIndex--;
     showBanner(currentIndex);
   }
-
-  if (dotsContainer) {
-    banners.forEach((_, index) => {
-      const dot = document.createElement("span");
-      dot.classList.add("dot");
-      dot.addEventListener("click", () => {
-        currentIndex = index;
-        showBanner(currentIndex);
-      });
-      dotsContainer.appendChild(dot);
-    });
-  }
-
+  
+  /* 圓點 */
+  banners.forEach((_, index) => {
+    const dot = document.createElement("span");
+    dot.className = "dot";
+    dot.onclick = () => {
+      currentIndex = index;
+      showBanner(currentIndex);
+    };
+    dotsContainer.appendChild(dot);
+  });
+  
   function updateDots() {
-    document.querySelectorAll(".dot").forEach((dot, index) => {
-      dot.classList.toggle("active", index === currentIndex);
+    const dots = document.querySelectorAll(".dot");
+    dots.forEach((dot, i) => {
+      dot.classList.toggle("active", i === currentIndex);
     });
   }
-
+  
+  /* 初始化 */
+  showBanner(currentIndex);
+  
+  /* 提供 HTML onclick 使用 */
   window.nextBanner = nextBanner;
   window.prevBanner = prevBanner;
 
-  showBanner(currentIndex);
-  setInterval(nextBanner, 4000);
 
   /* ========= 收藏初始化 ========= */
   const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
