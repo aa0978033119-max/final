@@ -43,4 +43,12 @@ document.querySelectorAll('.remove-btn').forEach(button => {
     });
 });
 
+document.getElementById('checkoutBtn').addEventListener('click', () => {
+    const total = document.getElementById('totalAmount').textContent;
+    if (total === "0") {
+        alert("您的購物車目前是空的喔！");
+    } else {
+        window.location.href = 'check.html';
+    }
+});
 updateTotal();
