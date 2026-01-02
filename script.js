@@ -61,6 +61,15 @@ document.addEventListener("DOMContentLoaded", () => {
     showBanner(currentIndex);
   }
 
+    //banner bottom
+  const bannerButton = document.querySelector(".banner-text button");
+  
+  bannerButton.addEventListener("click", () => {
+    const currentBanner = banners[currentIndex];
+    // 這裡跳轉到產品頁，使用 productId
+    window.location.href = `product.html?id=${currentBanner.productId}`;
+  });
+
   // dots
   banners.forEach((_, index) => {
     const dot = document.createElement("span");
@@ -86,17 +95,6 @@ document.addEventListener("DOMContentLoaded", () => {
   window.nextBanner = nextBanner;
   window.prevBanner = prevBanner;
 });
-
-  //banner bottom
-  const bannerButton = document.querySelector(".banner-text button");
-  
-  bannerButton.addEventListener("click", () => {
-    const currentBanner = banners[currentIndex];
-    // 這裡跳轉到產品頁，使用 productId
-    window.location.href = `product.html?id=${currentBanner.productId}`;
-  });
-
-
 
   /* ========= 收藏初始化 ========= */
   const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
