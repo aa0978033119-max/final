@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
     alert(`已加入購物車\n尺寸：${sizeSelect.value}\n數量：${qty}`);
   });
 
-  // tabs 切換（⚠️ 關鍵：完整結尾）
+  // tabs 切換
   document.querySelectorAll(".tab").forEach(tab => {
     tab.addEventListener("click", () => {
 
@@ -48,4 +48,4 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-}); // ← ⚠️ 很多人少的就是這個
+}); 
