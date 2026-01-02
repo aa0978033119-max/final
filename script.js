@@ -1,9 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
 
   const banners = [
-    { img: "images/08.jpg", title: "NEW ARRIVAL", desc: "秋冬新品 8 折起" },
-    { img: "images/13.jpg", title: "SALE", desc: "限時優惠 20% OFF" },
-    { img: "images/14.jpg", title: "HOT ITEMS", desc: "人氣熱銷商品" }
+    { img: "images/banner1.jpg", title: "NEW ARRIVAL", desc: "秋冬新品 8 折起" },
+    { img: "images/banner2.jpg", title: "SALE", desc: "限時優惠 20% OFF" },
+    { img: "images/banner3.jpg", title: "HOT ITEMS", desc: "人氣熱銷商品" }
   ];
 
   let currentIndex = 0;
