@@ -86,26 +86,3 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 });
-document.querySelectorAll(".faq-question").forEach(btn => {
-  btn.addEventListener("click", () => {
-    const currentItem = btn.parentElement;
-    const currentAnswer = currentItem.querySelector(".faq-answer");
-
-    // 關閉其他 FAQ
-    document.querySelectorAll(".faq-item.active").forEach(item => {
-      if (item !== currentItem) {
-        item.querySelector(".faq-answer").style.maxHeight = null;
-        item.classList.remove("active");
-      }
-    });
-
-    // 切換目前的
-    if (currentItem.classList.contains("active")) {
-      currentAnswer.style.maxHeight = null;
-      currentItem.classList.remove("active");
-    } else {
-      currentAnswer.style.maxHeight = currentAnswer.scrollHeight + "px";
-      currentItem.classList.add("active");
-    }
-  });
-});
