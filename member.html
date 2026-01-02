@@ -54,11 +54,17 @@
     }
 
     .content-section {
-      display: none;
+     opacity: 0;
+     max-height: 0;
+     overflow: hidden;
+     pointer-events: none;
+     transition: opacity 0.3s ease;
     }
 
     .content-section.active {
-      display: block;
+     opacity: 1;
+     max-height: 2000px;
+     pointer-events: auto;
     }
 
     .form-group {
@@ -338,6 +344,7 @@
 </body>
 
 </html>
+
 
 
 
