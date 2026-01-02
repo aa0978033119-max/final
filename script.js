@@ -22,6 +22,8 @@ document.addEventListener("DOMContentLoaded", () => {
   function showBanner(index) {
     clearTimeout(timer);
 
+    currentIndex = index;
+    
     if (index >= banners.length) currentIndex = 0;
     if (index < 0) currentIndex = banners.length - 1;
 
