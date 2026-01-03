@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
       img: "images/banner1.jpg",
       title: "NEW ARRIVAL",
       desc: "秋冬新品 8 折起",
-      productId: 4               // 點擊跳轉對應產品 id
+      productId: 4
     },
     { 
       img: "images/banner2.jpg",
