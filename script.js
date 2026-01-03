@@ -140,21 +140,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* ========= 收藏切換 ========= */
   window.toggleFavorite = function(el) {
-    const productName = el.closest(".product").querySelector(".product-name")?.textContent;
-    if (!productName) return;
+  const productName = el.closest(".product")
+    .querySelector(".product-name")?.textContent;
+  if (!productName) return;
 
-    let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
-
-    if (el.src.includes("heart.png")) {
-      el.src = "images/love.png";
-      if (!favorites.includes(productName)) favorites.push(productName);
-    } else {
-      el.src = "images/heart.png";
-      favorites = favorites.filter(name => name !== productName);
+  if (el.src.includes("heart.png")) {
+    el.src = "images/love.png";
+    if (!favorites.includes(productName)) {
+      favorites.push(productName);
     }
+  } else {
+    el.src = "images/heart.png";
+    favorites = favorites.filter(name => name !== productName);
+  }
 
-    localStorage.setItem("favorites", JSON.stringify(favorites));
-  };
+  localStorage.setItem("favorites", JSON.stringify(favorites));
+};
 
   /* ========= 會員登入狀態渲染 ========= */
   function renderUserArea() {
