@@ -93,6 +93,24 @@ nav a:hover {
   width: 120px;
 }
 
+.search-result {
+  background: #fff;
+  border: 1px solid #ddd;
+  margin-top: 5px;
+}
+
+.search-item {
+  display: block;
+  padding: 8px 12px;
+  color: #333;
+  text-decoration: none;
+}
+
+.search-item:hover {
+  background-color: #f4f4f4;
+}
+
+
 /* 商品分類連結 */
 .menu-box {
   position: absolute;
