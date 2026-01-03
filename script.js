@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const banners = [
     { 
-      img: "images/banner1.jpg",   // 顯示用
+      img: "images/banner1.jpg",
       title: "NEW ARRIVAL",
       desc: "秋冬新品 8 折起",
       productId: 4               // 點擊跳轉對應產品 id
@@ -221,7 +221,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 document.querySelectorAll('.product-link').forEach(link => {
   link.addEventListener('click', (e) => {
-    e.preventDefault();    // 阻止 <a> 的預設跳轉（若有 href）
+    e.preventDefault();    // 阻止 <a> 的預設跳轉
     e.stopPropagation();   // 防止冒泡到其他元素
 
     const productDiv = link.closest('.product');
