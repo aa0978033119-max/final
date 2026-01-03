@@ -97,7 +97,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
   /* ========= 收藏初始化 ========= */
-  const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+  let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
   document.querySelectorAll(".product").forEach(product => {
     const name = product.querySelector(".product-name")?.textContent;
     const icon = product.querySelector(".favorite-icon");
