@@ -264,3 +264,8 @@ if (searchInput) {
     });
   });
 }
+
+searchResult?.addEventListener("click", e => {
+  e.stopPropagation();
+});
+
