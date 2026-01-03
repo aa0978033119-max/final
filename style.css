@@ -71,6 +71,7 @@ nav a:hover {
   min-width: 160px;
   z-index: 3000;
   pointer-events: auto;
+  align-items: center;
 }
 
 .search-box.active,
