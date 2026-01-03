@@ -102,17 +102,27 @@ input[type="text"], input[type="tel"] {
 }
 
 .submit-btn {
-    width: 100%;
-    background-color: #000;
-    color: #fff;
+    width: 100%;             
+    background-color: #000; 
+    color: #fff;        
     border: none;
-    padding: 15px;
-    font-size: 16px;
-    border-radius: 5px;
+    padding: 20px;         
+    font-size: 20px;      
+    font-weight: 800;     
+    letter-spacing: 2px; 
+    border-radius: 8px;     
     cursor: pointer;
-    margin-top: 20px;
+    margin-top: 30px;        
+    transition: all 0.3s ease; 
 }
 
 .submit-btn:hover {
-    background-color: #333;
+    background-color: #222; 
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2); 
 }
+.submit-btn:active {
+    transform: translateY(0);
+    box-shadow: none;
+}
+
