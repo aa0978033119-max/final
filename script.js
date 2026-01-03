@@ -235,3 +235,32 @@ document.querySelectorAll('.product-link').forEach(link => {
     }
   });
 });
+
+const searchInput = document.getElementById("searchInput");
+const searchResult = document.getElementById("searchResult");
+
+if (searchInput) {
+  searchInput.addEventListener("input", () => {
+    const keyword = searchInput.value.trim().toLowerCase();
+    searchResult.innerHTML = "";
+
+    if (keyword === "") return;
+
+    const results = products.filter(p =>
+      p.name.toLowerCase().includes(keyword)
+    );
+
+    if (results.length === 0) {
+      searchResult.innerHTML = "<p>找不到商品</p>";
+      return;
+    }
+
+    results.forEach(p => {
+      const item = document.createElement("a");
+      item.className = "search-item";
+      item.href = `product.html?id=${p.id}`;
+      item.textContent = p.name;
+      searchResult.appendChild(item);
+    });
+  });
+}
