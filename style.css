@@ -93,6 +93,30 @@ nav a:hover {
 }
 
 /* 商品分類連結 */
+.menu-box {
+  position: absolute;
+  top: 60px;
+  right: 0;
+  background: #222;
+  padding: 10px;
+  border-radius: 8px;
+
+  display: none;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 999;
+}
+
+.menu-box.active {
+  display: flex;
+}
+
+.menu-box img {
+  width: 90px;
+  height: auto;
+  display: block;
+}
+
 .menu-box a {
   display: block;
   padding: 5px 0;
