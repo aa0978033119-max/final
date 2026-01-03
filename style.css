@@ -97,6 +97,8 @@ nav a:hover {
   background: #fff;
   border: 1px solid #ddd;
   margin-top: 5px;
+  max-height: 250px;
+  overflow-y: auto;
 }
 
 .search-item {
