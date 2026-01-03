@@ -289,24 +289,27 @@ footer {
   </div>
 </main>
 
-<footer>
-  <p>聯絡我們｜service@standardday.com</p>
-  <p>© 2025 STANDARD DAY</p>
-</footer>
+    <footer>
+      <p>聯絡我們｜service@standardday.com</p>
+      <p>© 2025 STANDARD DAY</p>
+    </footer>
+    
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      document.querySelectorAll(".progress-fill").forEach(bar => {
+        const percent = bar.dataset.percent;
+        setTimeout(() => {
+          bar.style.width = percent + "%";
+        }, 300);
+      });
+    });
+    </script>
 
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll(".progress-fill").forEach(bar => {
-    const percent = bar.dataset.percent;
-    setTimeout(() => {
-      bar.style.width = percent + "%";
-    }, 300);
-  });
-});
-</script>
+    <script src="products.js"></script>
 
 </body>
 </html>
+
 
 
 
