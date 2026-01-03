@@ -115,6 +115,7 @@ nav a:hover {
   width: 90px;
   height: auto;
   display: block;
+  filter: none;
 }
 
 .menu-box a {
