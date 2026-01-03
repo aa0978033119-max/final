@@ -212,54 +212,123 @@
   .faq-item.active .icon {
     transform: rotate(45deg); /* + 變成 × */
   }
+  /* ===== 收藏 ===== */
+  /* 收藏列表容器 */
+#favorite-list {
+  display: flex;
+  flex-direction: column; /* 上下排列 */
+  gap: 15px;
+  padding: 10px 0;
+  max-width: 1000px; /* 整個收藏區塊不要太寬 */
+}
+
+/* 每個商品卡片 */
+#favorite-list .product {
+  display: flex;
+  align-items: left;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+  padding: 10px;
+  transition: box-shadow 0.2s;
+}
+
+#favorite-list .product:hover {
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* 商品圖片 */
+#favorite-list .product img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-left: 0;   /* 左邊不留空白 */
+}
+
+/* 文字區塊 */
+#favorite-list .product-info {
+  flex: 1;
+  flex-direction: column;
+  justify-content: right;
+}
+
+/* 商品名稱 */
+#favorite-list .product-name {
+  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+/* 價格 */
+#favorite-list .product-price {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+/* 加入購物車按鈕 */
+#favorite-list .add-cart-btn {
+  width: fit-content;
+  background-color: #000;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
+/* 收藏愛心 */
+#favorite-list .favorite-icon {
+  width: 24px;
+  height: 24px;
+  margin-left: 15px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+#favorite-list .favorite-icon:hover {
+  transform: scale(1.3);
+}
   </style>
 </head>
 
 <body>
 
   <!-- ===== Header / Navbar（共用） ===== -->
-    <header>
-      <div class="nav-left">
-        <a href="index.html" class="logo">STANDARD DAY</a>
-      </div>
-    
-      <div class="nav-icons">
-        <div class="search-wrapper">
-          <img src="images/search.png" alt="Search" id="searchIcon">
-          <div class="search-box" id="searchBox">
-            <div class="search-input">
-              <img src="images/search.png" alt="">
-              <input type="text" placeholder="搜尋商品...">
-            </div>
-          </div>
-        </div>
-    
-        <div class="menu-wrapper">
-          <img src="images/clothes.png" alt="Browse" id="menuIcon">
-           <div class="menu-box" id="menuBox">
-                <a href="tops.html" class="menu-item">
-                  <img src="images/tops.png" alt="Tops">
-                </a>
-                <a href="bottoms.html" class="menu-item">
-                  <img src="images/bottoms.png" alt="Bottoms">
-                </a>
-          </div>
-        </div>
-    
-        <a href="about.html" title="關於我們">
-          <img src="images/info.png" alt="About">
-        </a>
-    
-        <!-- user-area -->
-        <a href="member.html" title="會員中心">
-          <img src="images/user.png" alt="Member">
-        </a>
+  <header>
+    <a href="index.html" class="logo">STANDARD DAY</a>
 
-        <a href="cart.html" title="購物車">
-          <img src="images/shopping_cart.png" alt="Cart">
-        </a>
+    <div class="nav-icons">
+      <div class="search-wrapper">
+        <img src="images/search.png" alt="Search">
+        <div class="search-box">
+          <div class="search-input">
+            <input type="text" placeholder="搜尋商品">
+          </div>
+        </div>
       </div>
-    </header>
+
+      <div class="menu-wrapper">
+        <img src="images/clothes.png" alt="Browse">
+        <div class="menu-box">
+          <a href="tops.html">上裝</a>
+          <a href="bottoms.html">下裝</a>
+        </div>
+      </div>
+
+      <a href="about.html">
+        <img src="images/info.png" alt="About">
+      </a>
+      <a href="member.html">
+        <img src="images/user.png" alt="Member">
+      </a>
+      <a href="cart.html">
+        <img src="images/shopping_cart.png" alt="Cart">
+      </a>
+    </div>
+  </header>
 
   <!-- ===== 會員中心 ===== -->
   <div class="member-container">
@@ -269,7 +338,7 @@
         <li onclick="showSection('profile')">會員資料</li>
         <li onclick="showSection('orders')">訂單紀錄</li>
         <li onclick="showSection('password')">修改密碼</li>
-        <li onclick="showSection('collectibles')">收藏商品</li>
+        <li onclick="showSection('like')">收藏商品</li>
         <li onclick="showSection('question')">常見問題</li>
         <li onclick="logout()">登出</li>
       </ul>
@@ -298,7 +367,12 @@
 
         <button class="save-btn">送出修改</button>
       </section>
-
+      <section id="like" class="content-section">
+        <h2>收藏商品</h2>
+        <div id="favorite-list" class="product-grid">
+          <!-- 收藏商品會動態生成在這裡 -->
+        </div>
+      </section>
       <section id="orders" class="content-section">
         <h2>訂單紀錄</h2>
         <p>目前尚無訂單</p>
@@ -309,11 +383,6 @@
         <input type="password" placeholder="舊密碼"><br><br>
         <input type="password" placeholder="新密碼"><br><br>
         <button class="save-btn">送出</button>
-      </section>
-
-      <section id="collectibles" class="content-section">
-        <h2>收藏商品</h2>
-        <p>目前尚無收藏商品</p>
       </section>
       
     <section id="question" class="content-section">
@@ -335,11 +404,10 @@
           <span class="icon">+</span>
         </button>
         <div class="faq-answer">
-          請點擊會員中心的「修改密碼」進行重設。
+          請點擊登入頁的「忘記密碼」進行重設。
         </div>
       </div>
-
-        <div class="faq-item">
+      <div class="faq-item">
         <button type="button" class="faq-question">
           有提供海外配送服務嗎？
           <span class="icon">+</span>
@@ -378,45 +446,36 @@
           若訂單已付費且欲修改地址，請立即以訂單編號聯絡我們。一旦倉庫已處理訂單，將無法編輯地址或修改訂單。
         </div>
         </div>
-
-       <div class="faq-item">
-        <button type="button" class="faq-question">
-          聯絡我們
-          <span class="icon">+</span>
-        </button>
-        <div class="faq-answer">
-         <p>客服電話：03-1234-4321</p>
-         <p>客服信箱：standardday@gmail.com</p>
-         <p>週一至週五 10:00-12:00/13:00-18:00</p>
-        </div>
-        </div>
+        <div class="faq-item">
+          <button type="button" class="faq-question">
+            聯絡我們
+            <span class="icon">+</span>
+          </button>
+          <div class="faq-answer">
+           <p>客服電話：03-1234-4321</p>
+           <p>客服信箱：standardday@gmail.com</p>
+           <p>週一至週五 10:00-12:00/13:00-18:00</p>
+          </div>
     </section>
 
     </main>
   </div>
-
+<script>
   <!-- JS可以寫這裡 -->
-  <script>
-    function showSection(id) {
-      document.querySelectorAll('.content-section').forEach(section => {
-        section.classList.remove('active');
-      });
-      document.getElementById(id).classList.add('active');
-    }
-
-    function logout() {
-      alert('已登出');
-    }
-  </script>
-
-  <script>
-document.querySelectorAll('.faq-question').forEach(button => {
-  button.addEventListener('click', () => {
-    const faqItem = button.parentElement;
-    faqItem.classList.toggle('active');
+/* ==================== 頁面切換 ==================== */
+function showSection(id) {
+  document.querySelectorAll('.content-section').forEach(section => {
+    section.classList.remove('active');
   });
-});
-    /* ==================== 收藏功能 ==================== */
+  document.getElementById(id).classList.add('active');
+}
+
+/* ==================== 登出 ==================== */
+function logout() {
+  alert('已登出');
+}
+
+/* ==================== 收藏功能 ==================== */
 function loadFavorites() {
   const favoriteList = document.getElementById('favorite-list');
   if (!favoriteList) return;
@@ -479,15 +538,28 @@ function removeFavorite(id, icon) {
   const productIcon = document.querySelector(`.product[data-id="${id}"] .favorite-icon`);
   if (productIcon) productIcon.src = 'images/heart.png';
 }
+
+/* ==================== 加入購物車 ==================== */
+function addToCartFromMember(btn, id, name, price, img) {
+  // 假設你有 addToCart 函數
+  addToCart(btn); 
+  alert(`已將 ${name} 加入購物車`);
+}
+
+/* ==================== FAQ 折疊 ==================== */
+document.querySelectorAll('.faq-question').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.closest('.faq-item');
+    item.classList.toggle('active');
+  });
+});
+
+/* ==================== 頁面載入 ==================== */
+document.addEventListener('DOMContentLoaded', () => {
+  loadFavorites(); // 載入會員收藏
+});
 </script>
-<footer>
-    <p>聯絡我們｜service@standardday.com</p>
-    <p>© 2025 STANDARD DAY. All rights reserved.</p>
-  </footer>
 
 </body>
 
 </html>
-
-
-
