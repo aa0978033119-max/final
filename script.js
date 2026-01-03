@@ -260,6 +260,13 @@ if (searchInput) {
       item.className = "search-item";
       item.href = `product.html?id=${p.id}`;
       item.textContent = p.name;
+    
+      item.addEventListener("click", () => {
+        searchBox.classList.remove("active");
+        searchInput.value = "";
+        searchResult.innerHTML = "";
+      });
+    
       searchResult.appendChild(item);
     });
   });
