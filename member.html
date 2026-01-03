@@ -421,44 +421,29 @@ function loadFavorites() {
   const favoriteList = document.getElementById('favorite-list');
   if (!favoriteList) return;
 
-  favoriteList.innerHTML = ''; // 清空
+  favoriteList.innerHTML = '';
 
-  const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+  let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
 
-  favorites.forEach(item => {
-    const div = document.createElement('div');
-    div.classList.add('product');
-    div.dataset.id = item.id;
-    div.dataset.name = item.name;
-    div.dataset.price = item.price;
-    div.dataset.img = item.img;
+  // 過濾掉不完整資料（避免 undefined）
+  favorites = favorites.filter(item => item.id && item.name && item.price && item.img);
 
-    div.innerHTML = `
-      <a href="product.html?id=${item.id}" class="product-link">
-        <img src="${item.img}" alt="${item.name}">
-        <h3 class="product-name">${item.name}</h3>
-        <div class="product-price">NT$${item.price}</div>
-      </a>
-      <img src="images/love.png" class="favorite-icon" onclick="removeFavorite('${item.id}', this)" alt="收藏">
-      <button class="add-cart-btn" onclick="addToCartFromMember(this, '${item.id}', '${item.name}', '${item.price}', '${item.img}')">加入購物車</button>
+  // ⭐ 沒有收藏時顯示提示
+  if (favorites.length === 0) {
+    favoriteList.innerHTML = `
+      <p style="
+        color:#777;
+        font-size:16px;
+        padding:20px 0;
+      ">
+        目前沒有收藏商品
+      </p>
     `;
+    return;
+  }
 
-    favoriteList.appendChild(div);
-  });
-}
-/* ==================== 會員中心載入收藏 ==================== */
-function loadFavorites() {
-  const favoriteList = document.getElementById('favorite-list');
-  if (!favoriteList) return;
-
-  favoriteList.innerHTML = ''; // 先清空
-
-  const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
-
+  // 有收藏才渲染商品
   favorites.forEach(item => {
-    // 確保 item 的資料完整
-    if (!item.id || !item.name || !item.price || !item.img) return;
-
     const div = document.createElement('div');
     div.classList.add('product');
 
@@ -467,22 +452,20 @@ function loadFavorites() {
       <div class="product-info">
         <h3 class="product-name">${item.name}</h3>
         <div class="product-price">NT$${item.price}</div>
-        <button class="add-cart-btn" onclick="addToCartFromMember(this, '${item.id}', '${item.name}', '${item.price}', '${item.img}')">加入購物車</button>
+        <button class="add-cart-btn"
+          onclick="addToCartFromMember(this, '${item.id}', '${item.name}', '${item.price}', '${item.img}')">
+          加入購物車
+        </button>
       </div>
-      <img src="images/love.png" class="favorite-icon" onclick="removeFavorite('${item.id}', this)" alt="收藏">
+      <img src="images/love.png"
+        class="favorite-icon"
+        onclick="removeFavorite('${item.id}', this)"
+        alt="收藏">
     `;
 
     favoriteList.appendChild(div);
   });
 }
-document.addEventListener('DOMContentLoaded', () => {
-  let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
-  // 移除不完整的商品
-  favorites = favorites.filter(item => item.id && item.name && item.price && item.img);
-  localStorage.setItem('favorites', JSON.stringify(favorites));
-
-  loadFavorites();
-});
 /* ==================== 會員中心取消收藏 ==================== */
 function removeFavorite(id, icon) {
   let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
@@ -505,5 +488,6 @@ function removeFavorite(id, icon) {
 </body>
 
 </html>
+
 
 
