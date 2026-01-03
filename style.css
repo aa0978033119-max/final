@@ -131,6 +131,12 @@ nav a:hover {
   font-weight: bold;
 }
 
+.menu-item {
+  display: flex;
+  justify-content: center;
+}
+
+
 
 /* banner */
 .banner {
