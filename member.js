@@ -4,13 +4,7 @@ function showSection(sectionId) {
     document.getElementById(sectionId).classList.add('active');
 }
 
-// 登出
-function logout() {
-    localStorage.removeItem("isLogin");
-    localStorage.removeItem("userProfile");
-    alert("已登出");
-    window.location.href = "index.html";
-}
+// 登出function logout() {localStorage.removeItem("isLogin");localStorage.removeItem("userProfile");alert("已登出");window.location.href = "index.html";}
 
 // DOM 加載完畢
 document.addEventListener("DOMContentLoaded", () => {
@@ -49,3 +43,4 @@ document.addEventListener("DOMContentLoaded", () => {
         window.location.href = redirect;
     });
 });
+
