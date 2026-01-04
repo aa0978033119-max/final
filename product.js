@@ -1,17 +1,17 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-  // 1️⃣ 取得商品 ID
+  //取得商品 ID
   const params = new URLSearchParams(window.location.search);
   const productId = Number(params.get("id")) || 1;
 
-  // 2️⃣ 找到對應商品
+  //找到對應商品
   const product = products.find(p => p.id === productId);
   if (!product) {
     alert("找不到商品");
     return;
   }
 
-  // 3️⃣ 填充商品資料
+  //填充商品資料
   document.getElementById("productName").innerText = product.name;
   document.getElementById("productDesc").innerText = product.desc;
   document.getElementById("productPrice").innerText = `NT$ ${product.price}`;
@@ -29,13 +29,13 @@ document.addEventListener("DOMContentLoaded", () => {
     sizeSelect.appendChild(option);
   });
 
-  // 4️⃣ 加入購物車
+  //加入購物車
   document.querySelector(".add-cart").addEventListener("click", () => {
     const qty = document.querySelector("input[type='number']").value;
     alert(`已加入購物車\n尺寸：${sizeSelect.value}\n數量：${qty}`);
   });
 
-  // 5️⃣ Tab 切換
+  //Tab 切換
   document.querySelectorAll(".tab").forEach(tab => {
     tab.addEventListener("click", () => {
       document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // 6️⃣ 顧客評價
+  // 顧客評價
   const productReviews = reviews[productId] || [];
   const reviewContainer = document.getElementById("review");
   reviewContainer.innerHTML = "";
@@ -64,7 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // 7️⃣ 送貨及付款方式（可動態填充，也可保持 HTML 靜態）
+  //送貨及付款方式
   const shippingContainer = document.getElementById("shipping");
   shippingContainer.innerHTML = `
     <p>宅配 7-11 全家</p>
