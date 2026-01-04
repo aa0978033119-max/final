@@ -269,8 +269,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   searchResult?.addEventListener("click", e => e.stopPropagation());
-  document.addEventListener("DOMContentLoaded", () => {
-  // ===== 其他程式碼都保留 =====
   
   // ===== 回到頂部按鈕 =====
   const backToTopBtn = document.getElementById("backToTop");
