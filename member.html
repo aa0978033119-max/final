@@ -7,16 +7,14 @@
   <script src="products.js"></script>
   <script src="script.js"></script>
   <style>
-    .member-header{
-      padding-left:225px ;
-    }
-
     header {
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 15px 40px;
       background-color: #222;
+      position: relative;
+      z-index: 1000;
     }
 
     body {
@@ -130,14 +128,14 @@
     .search-box,
     .menu-box {
       position: absolute;
-      top: 35px;
+      top: 100%;
       right: 0;
       background: white;
       border: 1px solid #ddd;
       padding: 10px;
       display: none;
       min-width: 160px;
-      z-index: 100;
+      z-index: 1000;
     }
 
     .search-wrapper:hover .search-box,
@@ -167,6 +165,11 @@
     .menu-box a:hover {
       color: #000;
       font-weight: bold;
+    }
+
+    .menu-box .menu-item img {
+      width: 100%;
+      display: block;
     }
 
      /* ===== FAQ 樣式 ===== */
@@ -299,49 +302,51 @@
 <body>
 
   <!-- ===== Header / Navbar（共用） ===== -->
-    <header>
-      <div class="nav-left">
-        <a href="index.html" class="logo">STANDARD DAY</a>
-      </div>
-    
-      <div class="nav-icons">
-        <div class="search-wrapper">
-          <img src="images/search.png" alt="Search" id="searchIcon">
-          <div class="search-box" id="searchBox">
-            <div class="search-input">
-                <img src="images/search.png" alt="">
-                <input type="text" id="searchInput" placeholder="搜尋商品...">
-                <div class="search-result" id="searchResult"></div>
-            </div>
-          </div>
-        </div>
-    
-        <div class="menu-wrapper">
-          <img src="images/clothes.png" alt="Browse" id="menuIcon">
-           <div class="menu-box" id="menuBox">
-                <a href="tops.html" class="menu-item">
-                  <img src="images/tops.png" alt="Tops">
-                </a>
-                <a href="bottoms.html" class="menu-item">
-                  <img src="images/bottoms.png" alt="Bottoms">
-                </a>
-          </div>
-        </div>
-    
-        <a href="about.html" title="關於我們">
-          <img src="images/info.png" alt="About">
-        </a>
-    
-        <!-- user-area -->
-        <a href="member.html" title="會員中心">
-          <img src="images/user.png" alt="Member">
-        </a>
+<header>
+  <div class="nav-left">
+    <a href="index.html" class="logo">STANDARD DAY</a>
+  </div>
 
-        <a href="cart.html" title="購物車">
-          <img src="images/shopping_cart.png" alt="Cart">
+  <div class="nav-icons">
+    <!-- 搜尋欄 -->
+    <div class="search-wrapper">
+      <img src="images/search.png" alt="Search" id="searchIcon">
+      <div class="search-box" id="searchBox">
+        <div class="search-input">
+          <img src="images/search.png" alt="">
+          <input type="text" id="searchInput" placeholder="搜尋商品...">
+          <div class="search-result" id="searchResult"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 上下裝選單 -->
+    <div class="menu-wrapper">
+      <img src="images/clothes.png" alt="Browse" id="menuIcon">
+      <div class="menu-box" id="menuBox">
+        <a href="tops.html" class="menu-item">
+          <img src="images/tops.png" alt="Tops">
+        </a>
+        <a href="bottoms.html" class="menu-item">
+          <img src="images/bottoms.png" alt="Bottoms">
         </a>
       </div>
-    </header>
+    </div>
+
+    <!-- 其他圖示 -->
+    <a href="about.html" title="關於我們">
+      <img src="images/info.png" alt="About">
+    </a>
+
+    <a href="member.html" title="會員中心">
+      <img src="images/user.png" alt="Member">
+    </a>
+
+    <a href="cart.html" title="購物車">
+      <img src="images/shopping_cart.png" alt="Cart">
+    </a>
+  </div>
+</header>
 
   <!-- ===== 會員中心 ===== -->
   <div class="member-container">
@@ -576,6 +581,7 @@ document.addEventListener('DOMContentLoaded', () => {
 </body>
 
 </html>
+
 
 
 
