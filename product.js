@@ -1,4 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
+  //reviews
+  const productReviews = reviews[productId] || [];
 
   // 取得商品 id
   const params = new URLSearchParams(window.location.search);
