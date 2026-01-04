@@ -26,18 +26,6 @@
   margin: 10px 0;
 }
 
-.tabs {
-  margin: 40px;
-}
-
-.content {
-  display: none;
-}
-
-.content.active {
-  display: block;
-}
-
 /* ===== Tabs ===== */
 /* Tabs 樣式 */
 .tabs {
@@ -68,8 +56,4 @@
 .content {
   display: none;
   text-align:center;
-}
-
-.content.active {
-  display: block;  
 }
