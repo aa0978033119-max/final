@@ -93,3 +93,22 @@
   display: none;
   text-align: center;
 }
+
+.size-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 12px;
+  font-size: 14px;
+}
+
+.size-table th,
+.size-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+.size-table th {
+  background-color: #f5f5f5;
+  font-weight: 600;
+}
