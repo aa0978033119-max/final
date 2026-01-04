@@ -218,6 +218,24 @@
   
     // 提示框
     alert(`${name} 已加入購物車！`);
+
+    // 取得按鈕
+    const backToTopBtn = document.getElementById("backToTop");
+    
+    // 當滾動超過 200px 顯示按鈕
+    window.onscroll = function() {
+      if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+        backToTopBtn.style.display = "block";
+      } else {
+        backToTopBtn.style.display = "none";
+      }
+    };
+    
+    // 點擊平滑回到頂部
+    backToTopBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
   }
   </script>  
   <script src="products.js"></script>
@@ -226,6 +244,7 @@
     <button id="backToTop" title="回到頂部">↑</button>
 </body>
 </html>
+
 
 
 
