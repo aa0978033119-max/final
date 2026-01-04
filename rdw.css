@@ -198,9 +198,29 @@ footer {
     border-radius: 4px;
 }
 
-/* ========================== 響應式 ========================== */
+/* ==========================
+   公共樣式
+========================== */
+.product-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+}
 
-/* 手機版 */
+.product-list, .product-grid {
+    margin: 20px 0;
+}
+
+.section-title {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* ==========================
+   手機版
+   max-width: 767px
+========================== */
 @media (max-width: 767px) {
     .container {
         padding: 0 15px;
@@ -216,8 +236,10 @@ footer {
     .product-item {
         width: 100%;
         margin-bottom: 0; /* gap 已經有間距 */
+        box-sizing: border-box;
     }
 
+    /* header / navbar */
     .nav-menu {
         display: none; 
     }
@@ -225,31 +247,91 @@ footer {
     .cart-text {
         display: none;
     }
+
+    /* hero banner */
+    .hero-banner {
+        height: 300px;
+    }
+    .hero-banner h1 {
+        font-size: 20px;
+    }
+
+    /* 商品標題 */
+    .section-title {
+        font-size: 1.1rem;
+        margin: 10px 0;
+    }
 }
 
-/* 平板版 */
+/* ==========================
+   平板版
+   768px ~ 1023px
+========================== */
 @media (min-width: 768px) and (max-width: 1023px) {
+    .product-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+        justify-content: space-between;
+        padding: 0 20px;
+    }
+
     .product-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(2, 1fr); /* 兩欄 */
+    }
+
+    .product-item {
+        width: calc(50% - 7.5px);
+        box-sizing: border-box;
     }
 
     .product-container {
         flex-direction: row;
     }
+
+    .hero-banner {
+        height: 400px;
+    }
+
+    .hero-banner h1 {
+        font-size: 24px;
+    }
 }
 
-/* 筆電 */
+/* ==========================
+   筆電
+   1024px ~ 1440px
+========================== */
 @media (min-width: 1024px) and (max-width: 1440px) {
-    .product-grid {
-        grid-template-columns: repeat(3, 1fr);
+    .product-list, .product-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr); /* 三欄 */
+        gap: 20px;
+        padding: 0 40px;
+    }
+
+    .product-item {
+        width: 100%;
+        box-sizing: border-box;
     }
 
     .product-container {
         gap: 30px;
     }
+
+    .hero-banner {
+        height: 500px;
+    }
+
+    .hero-banner h1 {
+        font-size: 28px;
+    }
 }
 
-/* 大螢幕 */
+/* ==========================
+   大螢幕
+   1441px+
+========================== */
 @media (min-width: 1441px) {
     header, .product-container, .product-grid, footer {
         max-width: 1400px;
@@ -257,7 +339,14 @@ footer {
     }
 
     .product-grid {
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(4, 1fr); /* 四欄 */
+    }
+
+    .hero-banner {
+        height: 600px;
+    }
+
+    .hero-banner h1 {
+        font-size: 32px;
     }
 }
-
