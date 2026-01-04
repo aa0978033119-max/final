@@ -321,51 +321,52 @@
 <body>
 
   <!-- ===== Header / Navbar（共用） ===== -->
-<header>
-  <div class="nav-left">
-    <a href="index.html" class="logo">STANDARD DAY</a>
-  </div>
-
-  <div class="nav-icons">
-    <!-- 搜尋欄 -->
-    <div class="search-wrapper">
-      <img src="images/search.png" alt="Search" id="searchIcon">
-      <div class="search-box" id="searchBox">
-        <div class="search-input">
-          <img src="images/search.png" alt="">
-          <input type="text" id="searchInput" placeholder="搜尋商品...">
-          <div class="search-result" id="searchResult"></div>
+  <header>
+    <div class="nav-left">
+      <a href="index.html" class="logo">STANDARD DAY</a>
+    </div>
+  
+    <div class="nav-icons">
+      <!-- 搜尋欄 -->
+      <div class="search-wrapper">
+        <img src="images/search.png" alt="Search" id="searchIcon">
+        <div class="search-box" id="searchBox">
+          <div class="search-input">
+            <img src="images/search.png" alt="">
+            <input type="text" id="searchInput" placeholder="搜尋商品...">
+            <div class="search-result" id="searchResult"></div>
+          </div>
         </div>
       </div>
-    </div>
-
-    <!-- 上下裝選單 -->
-    <div class="menu-wrapper">
-      <img src="images/clothes.png" alt="Browse" id="menuIcon">
-      <div class="menu-box" id="menuBox">
-        <a href="tops.html" class="menu-item">
-          <img src="images/tops.png" alt="Tops">
-        </a>
-        <a href="bottoms.html" class="menu-item">
-          <img src="images/bottoms.png" alt="Bottoms">
-        </a>
+  
+      <!-- 上下裝選單 -->
+      <div class="menu-wrapper">
+        <img src="images/clothes.png" alt="Browse" id="menuIcon">
+        <div class="menu-box" id="menuBox">
+          <a href="tops.html" class="menu-item">
+            <img src="images/tops.png" alt="Tops">
+          </a>
+          <a href="bottoms.html" class="menu-item">
+            <img src="images/bottoms.png" alt="Bottoms">
+          </a>
+        </div>
       </div>
+  
+      <!-- 其他圖示 -->
+      <a href="about.html" title="關於我們">
+        <img src="images/info.png" alt="About">
+      </a>
+  
+      <!-- 新增 id 讓 script.js 可以綁定 -->
+      <a href="member.html" title="會員中心" id="memberLink">
+        <img src="images/user.png" alt="Member">
+      </a>
+  
+      <a href="cart.html" title="購物車" id="cartLink">
+        <img src="images/shopping_cart.png" alt="Cart">
+      </a>
     </div>
-
-    <!-- 其他圖示 -->
-    <a href="about.html" title="關於我們">
-      <img src="images/info.png" alt="About">
-    </a>
-
-    <a href="member.html" title="會員中心">
-      <img src="images/user.png" alt="Member">
-    </a>
-
-    <a href="cart.html" title="購物車">
-      <img src="images/shopping_cart.png" alt="Cart">
-    </a>
-  </div>
-</header>
+  </header>
 
   <!-- ===== 會員中心 ===== -->
   <div class="member-container">
@@ -517,7 +518,7 @@ function loadFavorites() {
     return;
   }
 
-  favorites.forEach(item => {
+    favorites.forEach(item => {
     const div = document.createElement('div');
     div.classList.add('product');
     div.innerHTML = `
@@ -525,13 +526,18 @@ function loadFavorites() {
       <div class="product-info">
         <h3 class="product-name">${item.name}</h3>
         <div class="product-price">NT$${item.price}</div>
-        <button class="add-cart-btn" onclick="addToCartFromMember(this, '${item.id}', '${item.name}', '${item.price}', '${item.img}')">加入購物車</button>
+        <button class="add-cart-btn">加入購物車</button>
       </div>
       <img src="images/love.png" class="favorite-icon" onclick="removeFavorite('${item.id}', this)" alt="收藏">
     `;
     favoriteList.appendChild(div);
+  
+    // 綁定事件一次，避免重複 alert
+    div.querySelector('.add-cart-btn').addEventListener('click', () => {
+      addToCartFromMember(div.querySelector('.add-cart-btn'), item.id, item.name, item.price, item.img);
+    });
   });
-}
+
 
 function removeFavorite(id, icon) {
   let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
@@ -607,6 +613,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 </body>
 </html>
+
 
 
 
