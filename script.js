@@ -96,30 +96,33 @@ document.addEventListener("DOMContentLoaded", () => {
   window.logout = logout;
 
       // ===================== 加入購物車 =====================
-    document.querySelectorAll(".add-cart-btn").forEach(btn => {
+   document.querySelectorAll(".add-cart-btn").forEach(btn => {
       btn.addEventListener("click", (e) => {
         e.preventDefault(); // 避免 a/button default
         const product = btn.closest(".product");
         if (!product) return;
     
+        const { id, name, price, img } = product.dataset;
+    
+        // ===================== 登入檢查 =====================
         if (localStorage.getItem("isLogin") !== "true") {
           localStorage.setItem("redirectAfterLogin", window.location.href);
-          showToast("請先註冊 / 登入", "error");
-          setTimeout(() => { window.location.href = "member.html"; }, 500);
+          showToast("請先登入會員");  // 改用 toast，不是 alert
+          setTimeout(() => { window.location.href = "member.html"; }, 800);
           return;
         }
     
-        const { id, name, price, img } = product.dataset;
-    
+        // ===================== 加入購物車 =====================
         let cart = JSON.parse(localStorage.getItem("cart")) || {};
         cart[id] = cart[id]
           ? { ...cart[id], quantity: cart[id].quantity + 1 }
           : { id, name, price: Number(price), img, quantity: 1 };
     
         localStorage.setItem("cart", JSON.stringify(cart));
-        showToast(`${name} 已加入購物車！`, "success");
+        showToast(`${name} 已加入購物車！`);
       });
     });
+
 
     /* ========= Toast ========= */
     function showToast(msg) {
