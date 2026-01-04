@@ -94,7 +94,26 @@ const products = [
     name: "時尚週限定條紋長裙",
     price: 840,
     desc: "時髦剪裁搭配深色條紋，展現精緻氣息",
-    detail: "100% Cotton / Made in Taiwan",
+    detail: `
+    <p><strong>材質</strong></p>
+    <p>Polyester 100%</p>
+
+    <p><strong>尺寸表（cm）</strong></p>
+    <table class="size-table">
+      <tr>
+        <th>Size</th>
+        <th>腰圍</th>
+        <th>臀圍</th>
+        <th>裙長</th>
+      </tr>   
+       <tr>
+        <td>F</td>
+        <td>66</td>
+        <td>92</td>
+        <td>80</td>
+      </tr>
+      </table>
+  `,
     sizes: ["F"],
     images: ["images/03.jpg"]
   },
@@ -103,7 +122,38 @@ const products = [
     name: "學院格紋顯身短裙",
     price: 590,
     desc: "經典格紋，甜美的復古學院感",
-    detail: "100% Cotton / Made in Taiwan",
+    detail:  `
+    <p><strong>材質</strong></p>
+    <p>Polyester 70% Rayon 30%</p>
+
+    <p><strong>尺寸表（cm）</strong></p>
+    <table class="size-table">
+      <tr>
+        <th>Size</th>
+        <th>腰圍</th>
+        <th>臀圍</th>
+        <th>裙長</th>
+      </tr>   
+       <tr>
+        <td>S</td>
+        <td>64</td>
+        <td>88</td>
+        <td>33</td>
+      </tr>
+      <tr>
+        <td>M</td>
+        <td>68</td>
+        <td>90</td>
+        <td>34</td>
+      </tr>
+      <tr>
+        <td>L</td>
+        <td>71</td>
+        <td>92</td>
+        <td>35</td>
+      </tr>
+      </table>
+  `,
     sizes: ["S", "M", "L"],
     images: ["images/04.jpg"]
   },
@@ -112,7 +162,42 @@ const products = [
     name: "質感牛仔夾克",
     price: 1100,
     desc: "牛仔元素永不過時，顯身材比例的最佳單品",
-    detail: "100% Cotton / Made in Taiwan",
+    detail:  `
+    <p><strong>材質</strong></p>
+    <p>Cotten 100%</p>
+
+    <p><strong>尺寸表（cm）</strong></p>
+    <table class="size-table">
+      <tr>
+        <th>Size</th>
+        <th>肩寬</th>
+        <th>胸圍</th>
+        <th>衣長</th>
+        <th>袖長</th>
+      </tr>
+      <tr>
+        <td>S</td>
+        <td>40</td>
+        <td>96</td>
+        <td>105</td>
+        <td>58</td>
+      </tr>
+      <tr>
+        <td>M</td>
+        <td>42</td>
+        <td>100</td>
+        <td>110</td>
+        <td>59</td>
+      </tr>
+      <tr>
+        <td>L</td>
+        <td>44</td>
+        <td>104</td>
+        <td>115</td>
+        <td>60</td>
+      </tr>
+    </table>
+  `,
     sizes: ["S", "M", "L"],
     images: ["images/05.jpg"]
   },
@@ -121,7 +206,42 @@ const products = [
     name: "質感黑色牛仔夾克",
     price: 1280,
     desc: "牛仔元素永不過時，顯身材比例的最佳單品",
-    detail: "100% Cotton / Made in Taiwan", 
+    detail:  `
+    <p><strong>材質</strong></p>
+    <p>Cotten 100%</p>
+
+    <p><strong>尺寸表（cm）</strong></p>
+    <table class="size-table">
+      <tr>
+        <th>Size</th>
+        <th>肩寬</th>
+        <th>胸圍</th>
+        <th>衣長</th>
+        <th>袖長</th>
+      </tr>
+      <tr>
+        <td>S</td>
+        <td>40</td>
+        <td>96</td>
+        <td>105</td>
+        <td>58</td>
+      </tr>
+      <tr>
+        <td>M</td>
+        <td>42</td>
+        <td>100</td>
+        <td>110</td>
+        <td>59</td>
+      </tr>
+      <tr>
+        <td>L</td>
+        <td>44</td>
+        <td>104</td>
+        <td>115</td>
+        <td>60</td>
+      </tr>
+    </table>
+  `,
     sizes: ["S", "M", "L"],
     images: ["images/06.jpg"]
   },
@@ -130,7 +250,49 @@ const products = [
     name: "紳士透膚襯衫",
     price: 1280,
     desc: "簡約日常的百搭單品",
-    detail: "100% Cotton / Made in Taiwan",
+    detail:   `
+    <p><strong>材質</strong></p>
+    <p>Polyester 100%</p>
+
+    <p><strong>尺寸表（cm）</strong></p>
+    <table class="size-table">
+      <tr>
+        <th>Size</th>
+        <th>肩寬</th>
+        <th>胸圍</th>
+        <th>衣長</th>
+        <th>袖長</th>
+      </tr>
+      <tr>
+        <td>S</td>
+        <td>38</td>
+        <td>88</td>
+        <td>56</td>
+        <td>56</td>
+      </tr>
+      <tr>
+        <td>M</td>
+        <td>40</td>
+        <td>92</td>
+        <td>58</td>
+        <td>57</td>
+      </tr>
+      <tr>
+        <td>L</td>
+        <td>42</td>
+        <td>96</td>
+        <td>60</td>
+        <td>58</td>
+      </tr>
+       <tr>
+        <td>XL</td>
+        <td>44</td>
+        <td>100</td>
+        <td>62</td>
+        <td>59</td>
+      </tr>
+    </table>
+  `,
     sizes: ["S", "M", "L","XL"],
     images: ["images/07.jpg"]
   },
