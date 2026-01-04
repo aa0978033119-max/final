@@ -202,21 +202,28 @@ footer {
 
 /* 手機版 */
 @media (max-width: 767px) {
-    .product-container {
-        flex-direction: column;
+    .container {
+        padding: 0 15px;
+    }
+
+    .product-list, .product-grid {
+        display: flex;
+        flex-direction: column; /* 上下排列 */
         gap: 15px;
+        width: 100%;
     }
 
-    .tabs {
-        flex-direction: column;
+    .product-item {
+        width: 100%;
+        margin-bottom: 0; /* gap 已經有間距 */
     }
 
-    .nav-icons {
-        gap: 10px;
+    .nav-menu {
+        display: none; 
     }
 
-    .menu-box, .search-box {
-        right: 10px;
+    .cart-text {
+        display: none;
     }
 }
 
@@ -253,3 +260,4 @@ footer {
         grid-template-columns: repeat(4, 1fr);
     }
 }
+
