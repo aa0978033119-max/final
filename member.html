@@ -140,14 +140,11 @@
 
     .menu-box {
       display: none;
+      z-index: 2000;
+      transform: translateX(-50%);
     }
 
     .menu-wrapper.active .menu-box {
-      display: block;
-    }
-
-    .search-wrapper:hover .search-box,
-    .menu-wrapper:hover .menu-box {
       display: block;
     }
 
@@ -612,3 +609,4 @@ document.addEventListener('DOMContentLoaded', () => {
 </body>
 
 </html>
+
