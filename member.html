@@ -387,23 +387,26 @@
       <section id="profile" class="content-section active">
         <h2>會員資料</h2>
 
-        <div class="form-group">
-          <label>姓名</label>
-          <input type="text" placeholder="請輸入姓名">
-        </div>
-
-        <div class="form-group">
-          <label>Email</label>
-          <input type="email" placeholder="請輸入 Email">
-        </div>
-
-        <div class="form-group">
-          <label>電話</label>
-          <input type="tel" placeholder="請輸入電話">
-        </div>
-
-        <button class="save-btn">送出修改</button>
+        <form id="profileForm">
+          <div class="form-group">
+            <label for="name">姓名</label>
+            <input type="text" id="name" placeholder="請輸入姓名">
+          </div>
+      
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" placeholder="請輸入 Email">
+          </div>
+      
+          <div class="form-group">
+            <label for="phone">電話</label>
+            <input type="tel" id="phone" placeholder="請輸入電話">
+          </div>
+      
+          <button type="submit" class="save-btn">送出修改</button>
+        </form>
       </section>
+
       <section id="like" class="content-section">
         <h2>收藏商品</h2>
         <div id="favorite-list" class="product-grid">
@@ -587,6 +590,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 </body>
 </html>
+
 
 
 
