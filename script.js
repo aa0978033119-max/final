@@ -151,6 +151,21 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
   }
+  if (searchIcon) {
+      searchIcon.addEventListener("click", (e) => {
+      e.stopPropagation();
+      searchBox.classList.toggle("active");
+      menuBox?.classList.remove("active");
+    });
+  }
+    
+    if (menuIcon) {
+      menuIcon.addEventListener("click", (e) => {
+        e.stopPropagation();
+        menuBox.classList.toggle("active");
+        searchBox?.classList.remove("active");
+      });
+    }
 
 
 });
