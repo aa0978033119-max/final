@@ -55,24 +55,30 @@
             </div>
         </div>
 
-        <div class="summary">
-            <div class="summary-line">
-                <span>商品小計</span>
-                <span>$1,280</span>
-            </div>
-            <div class="summary-line">
-                <span>運費</span>
-                <span>60</span>
-            </div>
-            <div class="divider"></div>
-            <div class="summary-line total">
-                <span>總計</span>
-                <span>$1,340</span>
-            </div>
-        </div>
+<div class="cart-container">
+    <div class="cart-item">
+        <input type="checkbox" class="item-checkbox" checked>
+        <span class="price" data-value="1280">NT$ 1,280</span>
+        <input type="number" class="quantity" value="1" min="1">
+    </div>
 
-        <button type="submit" class="submit-btn">確認送出訂單</button>
-    </form>
+    <div class="summary">
+        <div class="summary-line">
+            <span>商品小計</span>
+            <span id="subtotal-display">$1,280</span>
+        </div>
+        <div class="summary-line">
+            <span>運費</span>
+            <span id="shipping-fee">60</span>
+        </div>
+        <div class="divider"></div>
+        <div class="summary-line total">
+            <span>總計</span>
+            <span id="total-amount">$1,340</span>
+        </div>
+    </div>
+
+    <button type="submit" class="submit-btn">確認送出訂單</button>
 </div>
     <script src="check.js"></script>
 </body>
