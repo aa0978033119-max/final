@@ -1,10 +1,10 @@
-/* ========= Header Search / Menu ========= */
-const searchIcon = document.getElementById("searchIcon");
-const searchBox  = document.getElementById("searchBox");
-const menuIcon   = document.getElementById("menuIcon");
-const menuBox    = document.querySelector(".menu-box");
-
 document.addEventListener("DOMContentLoaded", () => {
+
+    /* ========= Header Search / Menu ========= */
+  const searchIcon = document.getElementById("searchIcon");
+  const searchBox  = document.getElementById("searchBox");
+  const menuIcon   = document.getElementById("menuIcon");
+  const menuBox    = document.querySelector(".menu-box");
 
   /* ========= 會員 / 購物車：未登入攔截 ========= */
 
