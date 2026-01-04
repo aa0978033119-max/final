@@ -269,23 +269,28 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   searchResult?.addEventListener("click", e => e.stopPropagation());
-
-});
-
-// 取得按鈕
-const backToTopBtn = document.getElementById("backToTop");
-
-// 當滾動超過 200px 顯示按鈕
-window.onscroll = function() {
-  if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
-    backToTopBtn.style.display = "block";
-  } else {
+  document.addEventListener("DOMContentLoaded", () => {
+  // ===== 其他程式碼都保留 =====
+  
+  // ===== 回到頂部按鈕 =====
+  const backToTopBtn = document.getElementById("backToTop");
+  if (backToTopBtn) {
+    // 初始隱藏
     backToTopBtn.style.display = "none";
+
+    // 滾動超過 200px 顯示按鈕
+    window.addEventListener("scroll", () => {
+      if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+        backToTopBtn.style.display = "block";
+      } else {
+        backToTopBtn.style.display = "none";
+      }
+    });
+
+    // 點擊平滑回到頂部
+    backToTopBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
   }
-};
 
-// 點擊平滑回到頂部
-backToTopBtn.addEventListener("click", () => {
-  window.scrollTo({ top: 0, behavior: "smooth" });
 });
-
