@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("productName").innerText = product.name;
   document.getElementById("productDesc").innerText = product.desc;
   document.getElementById("productPrice").innerText = `NT$ ${product.price}`;
-  document.getElementById("detail").innerText = product.detail;
+  document.getElementById("detail").innerHTML = product.detail;
   document.getElementById("mainImage").src = product.images[0];
   document.getElementById("mainImage").alt = product.name;
 
