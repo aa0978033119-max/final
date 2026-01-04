@@ -4,7 +4,42 @@ const products = [
     name: "夢幻粉色大衣",
     price: 1280,
     desc: "帶給你暖呼呼的冬日氛圍，打造慵懶休閒的穿搭",
-    detail: "80% Polyester 20% Wool / Made in Taiwan",
+    detail:  `
+    <p><strong>材質</strong></p>
+    <p>Polyester 80% / Wool 20%</p>
+
+    <p><strong>尺寸表（cm）</strong></p>
+    <table class="size-table">
+      <tr>
+        <th>Size</th>
+        <th>肩寬</th>
+        <th>胸圍</th>
+        <th>衣長</th>
+        <th>袖長</th>
+      </tr>
+      <tr>
+        <td>S</td>
+        <td>40</td>
+        <td>96</td>
+        <td>105</td>
+        <td>58</td>
+      </tr>
+      <tr>
+        <td>M</td>
+        <td>42</td>
+        <td>100</td>
+        <td>110</td>
+        <td>59</td>
+      </tr>
+      <tr>
+        <td>L</td>
+        <td>44</td>
+        <td>104</td>
+        <td>115</td>
+        <td>60</td>
+      </tr>
+    </table>
+  `,
     sizes: ["S", "M", "L"],
     images: ["images/01.jpg"]
   },
