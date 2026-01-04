@@ -4,7 +4,7 @@ const products = [
     name: "夢幻粉色大衣",
     price: 1280,
     desc: "帶給你暖呼呼的冬日氛圍，打造慵懶休閒的穿搭",
-    detail: "100% Cotton / Made in Taiwan",
+    detail: "<p>80% Polyester 20% Wool / Made in Taiwan</p><p>S 40 96 105 58</p>",
     sizes: ["S", "M", "L"],
     images: ["images/01.jpg"]
   },
