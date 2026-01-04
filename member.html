@@ -589,18 +589,26 @@ document.querySelectorAll('.faq-question').forEach(btn => {
 
 /* ==================== 頁面載入 ==================== */
 document.addEventListener('DOMContentLoaded', () => {
-  loadFavorites(); // 載入會員收藏
+  loadFavorites();
+  // 上下裝選單點擊控制
+  const menuWrapper = document.querySelector('.menu-wrapper');
+  const menuIcon = document.getElementById("menuIcon");
+
+  if (menuIcon && menuWrapper) {
+    menuIcon.addEventListener("click", e => {
+      e.stopPropagation();
+      menuWrapper.classList.toggle("active");
+    });
+
+    // 點擊頁面其他地方收起
+    document.addEventListener("click", () => {
+      menuWrapper.classList.remove("active");
+    });
+  }
 });
+  
 </script>
 
 </body>
 
 </html>
-
-
-
-
-
-
-
-
