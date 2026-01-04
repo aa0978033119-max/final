@@ -119,11 +119,13 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
   // ===== 初始化收藏圖示 =====
-  document.querySelectorAll(".product").forEach(product => {
-    const id = product.dataset.id;
-    const icon = product.querySelector(".favorite-icon");
-    if (icon && favorites.some(item => item.id === id)) icon.src = "images/love.png";
-  });
+    const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+    
+    document.querySelectorAll(".product").forEach(product => {
+        const id = product.dataset.id;
+        const icon = product.querySelector(".favorite-icon");
+        if (icon && favorites.some(item => item.id === id)) icon.src = "images/love.png";
+    });
 
   // ===== Header 搜尋 & Menu =====
   const searchIcon   = document.getElementById("searchIcon");
