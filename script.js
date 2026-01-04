@@ -1,4 +1,47 @@
 document.addEventListener("DOMContentLoaded", () => {
+    
+      // 點擊會員中心
+    const memberLink = document.getElementById("memberLink");
+    if (memberLink) {
+        memberLink.addEventListener("click", (e) => {
+            const isLogin = localStorage.getItem("isLogin") === "true";
+            if (!isLogin) {
+                e.preventDefault();
+                alert("請先註冊 / 登入");
+                localStorage.setItem("redirectAfterLogin", "member.html");
+                window.location.href = "member.html";
+            }
+        });
+    }
+    
+    // 點擊購物車
+    const cartLink = document.getElementById("cartLink");
+    if (cartLink) {
+        cartLink.addEventListener("click", (e) => {
+            const isLogin = localStorage.getItem("isLogin") === "true";
+            if (!isLogin) {
+                e.preventDefault();
+                alert("請先註冊 / 登入");
+                localStorage.setItem("redirectAfterLogin", "cart.html");
+                window.location.href = "member.html";
+            }
+        });
+    }
+    
+    // 加入購物車時檢查登入
+    function addToCart(btn) {
+        const isLogin = localStorage.getItem("isLogin") === "true";
+        if (!isLogin) {
+            alert("請先註冊 / 登入");
+            localStorage.setItem("redirectAfterLogin", "cart.html");
+            window.location.href = "member.html";
+            return;
+        }
+    
+        // 原本加入購物車邏輯
+        alert("已加入購物車");
+    }
+
 
   // ===== 會員登入狀態 =====
   function renderUserArea() {
