@@ -1,6 +1,18 @@
 document.addEventListener("DOMContentLoaded", () => {
   //reviews
   const productReviews = reviews[productId] || [];
+  const reviewContainer = document.getElementById("review");
+  reviewContainer.innerHTML = "";
+  
+  productReviews.forEach(r => {
+    const div = document.createElement("div");
+    div.className = "review-item";
+    div.innerHTML = `
+      <strong>${r.name}</strong> - ${"★".repeat(r.rating)}<br>
+      <p>${r.text}</p>
+    `;
+    reviewContainer.appendChild(div);
+  });
 
   // 取得商品 id
   const params = new URLSearchParams(window.location.search);
