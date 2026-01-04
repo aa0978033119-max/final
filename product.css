@@ -92,6 +92,7 @@
 .content {
   display: none;
   text-align: center;
+  animation: fadeSlide .4s ease;
 }
 
 .size-table {
@@ -124,15 +125,6 @@
     opacity: 1;
     transform: translateY(0);
   }
-}
-
-.content {
-  display: none;
-  animation: fadeSlide .4s ease;
-}
-
-.content.active {
-  display: block;
 }
 
 @keyframes fadeSlide {
