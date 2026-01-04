@@ -129,7 +129,7 @@
     .menu-box {
       position: absolute;
       top: 100%;
-      right: 0;
+      left: 50%;
       background: white;
       border: 1px solid #ddd;
       padding: 10px;
@@ -165,6 +165,13 @@
     .menu-box a:hover {
       color: #000;
       font-weight: bold;
+    }
+
+    .menu-box .menu-item {
+      display: flex;
+      align-items: center;
+      justify-content: center; /* 圖片置中 */
+      margin: 5px 0;
     }
 
     .menu-box .menu-item img {
@@ -581,6 +588,7 @@ document.addEventListener('DOMContentLoaded', () => {
 </body>
 
 </html>
+
 
 
 
