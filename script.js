@@ -1,5 +1,52 @@
 document.addEventListener("DOMContentLoaded", () => {
 
+    // ===== 搜尋功能 =====
+    const searchInput = document.getElementById("searchInput");
+    const searchResult = document.getElementById("searchResult");
+    
+    if (searchInput && searchResult && products) {
+      searchInput.addEventListener("input", () => {
+        const query = searchInput.value.trim().toLowerCase();
+        searchResult.innerHTML = "";
+    
+        if (!query) return; // 沒輸入就不顯示結果
+    
+        // 過濾商品名稱包含 query 的項目
+        const matches = products.filter(p => p.name.toLowerCase().includes(query));
+    
+        if (matches.length === 0) {
+          searchResult.innerHTML = "<p style='padding:10px;color:#777'>沒有找到商品</p>";
+          return;
+        }
+    
+        // 將匹配商品渲染到搜尋結果
+        matches.forEach(p => {
+          const div = document.createElement("div");
+          div.className = "search-item";
+          div.style = "display:flex; align-items:center; padding:5px; cursor:pointer; border-bottom:1px solid #eee";
+          div.innerHTML = `
+            <img src="${p.images[0]}" alt="${p.name}" style="width:40px;height:40px;object-fit:cover;margin-right:8px;">
+            <span>${p.name}</span>
+          `;
+    
+          // 點擊跳轉到商品頁（假設你有 product.html?id=）
+          div.addEventListener("click", () => {
+            window.location.href = `product.html?id=${p.id}`;
+          });
+    
+          searchResult.appendChild(div);
+        });
+      });
+    }
+
+// 點擊搜尋結果外區域隱藏結果
+document.addEventListener("click", (e) => {
+  if (!searchBox.contains(e.target) && !searchIcon.contains(e.target)) {
+    searchResult.innerHTML = "";
+  }
+});
+
+
     /* ========= Header Search / Menu ========= */
   const searchIcon = document.getElementById("searchIcon");
   const searchBox  = document.getElementById("searchBox");
