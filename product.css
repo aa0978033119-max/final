@@ -125,3 +125,23 @@
     transform: translateY(0);
   }
 }
+
+.content {
+  display: none;
+  animation: fadeSlide .4s ease;
+}
+
+.content.active {
+  display: block;
+}
+
+@keyframes fadeSlide {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
