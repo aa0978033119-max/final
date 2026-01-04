@@ -108,4 +108,29 @@ document.addEventListener("DOMContentLoaded", () => {
     alert(`${name} 已加入購物車！`);
   };
 
+    /* ========= 回到頂部按鈕 ========= */
+
+  const backToTopBtn = document.getElementById("backToTop");
+
+  if (backToTopBtn) {
+
+    // 捲動時顯示 / 隱藏
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 300) {
+        backToTopBtn.style.display = "block";
+      } else {
+        backToTopBtn.style.display = "none";
+      }
+    });
+
+    // 點擊回到頂部
+    backToTopBtn.addEventListener("click", () => {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    });
+  }
+
+
 });
