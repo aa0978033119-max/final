@@ -48,18 +48,12 @@
   border-bottom: 2px solid black;
   font-weight: bold;
 }
-
-/* 內容區 */
 .tab-content {
   padding: 20px;
-}
-
-.content {
   display: none;
   text-align: center;
 }
 
-/* 顯示目前的 tab 內容 */
 .content.active {
   display: block;
 }
