@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>STANDARD DAY Clothing Store</title>
     <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
     <script src="products.js"></script>
 </head>
 <body>
@@ -183,56 +184,6 @@
     <p>聯絡我們｜service@standardday.com</p>
     <p>© 2025 STANDARD DAY. All rights reserved.</p>
   </footer>
-    <script src="script.js"></script>
-    <script>
-      // 收藏切換功能
-      window.toggleFavorite = function(el) {
-        const product = el.closest(".product");
-        const id = product.dataset.id;
-        const name = product.dataset.name;
-        const price = product.dataset.price;
-        const img = product.dataset.img;
-    
-        if (!id || !name || !price || !img) return;
-    
-        let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
-        const index = favorites.findIndex(item => item.id === id);
-    
-        if (el.src.includes("heart.png")) {
-          el.src = "images/love.png";
-          if (index === -1) favorites.push({ id, name, price, img });
-        } else {
-          el.src = "images/heart.png";
-          if (index !== -1) favorites.splice(index, 1);
-        }
-    
-        localStorage.setItem("favorites", JSON.stringify(favorites));
-      };
-    
-      // 加入購物車功能
-      function addToCart(button) {
-        const product = button.closest('.product');
-        const id = product.dataset.id;
-        const name = product.dataset.name;
-        const price = parseInt(product.dataset.price);
-        const img = product.dataset.img;
-    
-        if (!id || !name || !price || !img) return;
-    
-        // 取出購物車（使用物件存 id 作 key）
-        let cart = JSON.parse(localStorage.getItem("cart")) || {};
-    
-        if (cart[id]) {
-            cart[id].quantity += 1; // 已存在就 +1
-        } else {
-            cart[id] = { id, name, price, img, quantity: 1 };
-        }
-    
-        localStorage.setItem("cart", JSON.stringify(cart));
-    
-        alert(`${name} 已加入購物車！`);
-      }
-    </script>
     
     <!-- 回到頂部按鈕 -->
     <button id="backToTop" title="回到頂部">↑</button>
