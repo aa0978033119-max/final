@@ -1,12 +1,12 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-  // ===== Banner DOM =====
+  // ===== Banner =====
   const bannerImage = document.getElementById("bannerImage");
   const bannerTitle = document.getElementById("bannerTitle");
   const bannerDesc  = document.getElementById("bannerDesc");
   const dotsContainer = document.getElementById("dotsContainer");
 
-  if (bannerImage && dotsContainer && bannerTitle && bannerDesc) {
+  if (bannerImage && bannerTitle && bannerDesc && dotsContainer) {
     const banners = [
       { img: "images/banner1.jpg", title: "NEW ARRIVAL", desc: "秋冬新品 8 折起", productId: 4 },
       { img: "images/banner2.jpg", title: "SALE", desc: "限時優惠 20% OFF", productId: 14 },
@@ -33,13 +33,6 @@ document.addEventListener("DOMContentLoaded", () => {
     function nextBanner() { currentIndex++; showBanner(currentIndex); }
     function prevBanner() { currentIndex--; showBanner(currentIndex); }
 
-    const bannerButton = document.querySelector(".banner-text button");
-    if (bannerButton) {
-      bannerButton.addEventListener("click", () => {
-        window.location.href = `product.html?id=${banners[currentIndex].productId}`;
-      });
-    }
-
     banners.forEach((_, i) => {
       const dot = document.createElement("span");
       dot.className = "dot";
@@ -52,12 +45,16 @@ document.addEventListener("DOMContentLoaded", () => {
       dots.forEach((dot, i) => dot.classList.toggle("active", i === currentIndex));
     }
 
+    const bannerButton = document.querySelector(".banner-text button");
+    if (bannerButton) {
+      bannerButton.addEventListener("click", () => {
+        window.location.href = `product.html?id=${banners[currentIndex].productId}`;
+      });
+    }
+
     showBanner(currentIndex);
     window.nextBanner = nextBanner;
     window.prevBanner = prevBanner;
-
-  } else {
-    console.log("Banner DOM not found, skipping banner script.");
   }
 
   // ===== 收藏初始化 =====
@@ -75,7 +72,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const searchBox    = document.getElementById("searchBox");
   const searchInput  = document.getElementById("searchInput");
   const searchResult = document.getElementById("searchResult");
+  const menuIcon = document.getElementById("menuIcon");
+  const menuBox  = document.getElementById("menuBox");
 
+  // 搜尋功能
   if (searchIcon && searchBox && searchInput && searchResult) {
     searchIcon.addEventListener("click", e => {
       e.stopPropagation();
@@ -86,31 +86,25 @@ document.addEventListener("DOMContentLoaded", () => {
     searchInput.addEventListener("input", () => {
       const keyword = searchInput.value.trim().toLowerCase();
       searchResult.innerHTML = "";
-
       if (!keyword) return;
 
-      const results = products.filter(p =>
-        p.name.toLowerCase().includes(keyword)
-      );
-
+      const results = products.filter(p => p.name.toLowerCase().includes(keyword));
       if (results.length === 0) {
         searchResult.innerHTML = "<p>找不到商品</p>";
         return;
       }
 
       results.forEach(p => {
-        const a = document.createElement("a");
-        a.className = "search-item";
-        a.href = `product.html?id=${p.id}`;
-        a.textContent = p.name;
-
-        a.addEventListener("click", () => {
+        const item = document.createElement("a");
+        item.className = "search-item";
+        item.href = `product.html?id=${p.id}`;
+        item.textContent = p.name;
+        item.addEventListener("click", () => {
           searchBox.classList.remove("active");
           searchInput.value = "";
           searchResult.innerHTML = "";
         });
-
-        searchResult.appendChild(a);
+        searchResult.appendChild(item);
       });
     });
 
@@ -120,10 +114,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const keyword = searchInput.value.trim().toLowerCase();
         if (!keyword) return;
 
-        const results = products.filter(p =>
-          p.name.toLowerCase().includes(keyword)
-        );
-
+        const results = products.filter(p => p.name.toLowerCase().includes(keyword));
         if (results.length > 0) {
           window.location.href = `product.html?id=${results[0].id}`;
         } else {
@@ -136,9 +127,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.addEventListener("click", () => searchBox.classList.remove("active"));
   }
 
-  const menuIcon = document.getElementById("menuIcon");
-  const menuBox  = document.getElementById("menuBox");
-
+  // Menu 功能
   if (menuIcon && menuBox) {
     menuIcon.addEventListener("click", e => {
       e.stopPropagation();
@@ -163,7 +152,7 @@ document.addEventListener("DOMContentLoaded", () => {
     localStorage.setItem("favorites", JSON.stringify(favorites));
   };
 
-  // ===== 會員登入狀態渲染 =====
+  // ===== 會員登入渲染 =====
   function renderUserArea() {
     const userArea = document.getElementById("user-area");
     if (!userArea) return;
@@ -239,44 +228,10 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // ===== 即時搜尋 =====
-  if (searchInput) {
-    searchInput.addEventListener("input", () => {
-      const keyword = searchInput.value.trim().toLowerCase();
-      searchResult.innerHTML = "";
-      if (!keyword) return;
-
-      const results = products.filter(p => p.name.toLowerCase().includes(keyword));
-
-      if (results.length === 0) {
-        searchResult.innerHTML = "<p>找不到商品</p>";
-        return;
-      }
-
-      results.forEach(p => {
-        const item = document.createElement("a");
-        item.className = "search-item";
-        item.href = `product.html?id=${p.id}`;
-        item.textContent = p.name;
-        item.addEventListener("click", () => {
-          searchBox.classList.remove("active");
-          searchInput.value = "";
-          searchResult.innerHTML = "";
-        });
-        searchResult.appendChild(item);
-      });
-    });
-  }
-
-  searchResult?.addEventListener("click", e => e.stopPropagation());
-  
   // ===== 回到頂部按鈕 =====
   const backToTopBtn = document.getElementById("backToTop");
   if (backToTopBtn) {
-    // 初始隱藏
     backToTopBtn.style.display = "none";
-
-    // 滾動超過 200px 顯示按鈕
     window.addEventListener("scroll", () => {
       if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
         backToTopBtn.style.display = "block";
@@ -284,8 +239,6 @@ document.addEventListener("DOMContentLoaded", () => {
         backToTopBtn.style.display = "none";
       }
     });
-
-    // 點擊平滑回到頂部
     backToTopBtn.addEventListener("click", () => {
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
