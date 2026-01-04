@@ -374,7 +374,15 @@ footer {
   transition: box-shadow 0.2s;
 }
 
+ transition: 
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+  
+  cursor: pointer;
+}
+
 .product:hover {
+  transform: translateY(-10px);
   box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
 
