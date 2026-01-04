@@ -2,7 +2,11 @@
 .product-container {
   display: flex;
   gap: 40px;
-  padding: 40px;
+  padding: 40px 20px;
+  justify-content:center;
+  max-width:1000px;
+  margin:0 auto;
+  
 }
 
 .product-images img {
