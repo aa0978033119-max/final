@@ -107,36 +107,58 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   /* ========= Header 搜尋 & 商品分類 ========= */
+  document.addEventListener("DOMContentLoaded", () => {
+
+  /* ========= Header 搜尋 ========= */
   const searchIcon = document.getElementById("searchIcon");
   const searchBox = document.getElementById("searchBox");
-  const menuIcon = document.getElementById("menuIcon");
-  const menuBox = document.querySelector(".menu-box");
+  const searchInput = document.getElementById("searchInput");
+  const searchResult = document.getElementById("searchResult");
 
-  if (searchIcon && searchBox) {
+  if (searchIcon && searchBox && searchInput) {
     searchIcon.addEventListener("click", e => {
       e.stopPropagation();
       searchBox.classList.toggle("active");
-      menuBox?.classList.remove("active");
-      searchBox.querySelector("input")?.focus();
+      searchInput.focus();
+    });
+
+    searchInput.addEventListener("input", () => {
+      const keyword = searchInput.value.trim().toLowerCase();
+      searchResult.innerHTML = "";
+      if (!keyword) return;
+
+      const results = products.filter(p =>
+        p.name.toLowerCase().includes(keyword)
+      );
+
+      if (results.length === 0) {
+        searchResult.innerHTML = "<p>找不到商品</p>";
+        return;
+      }
+
+      results.forEach(p => {
+        const a = document.createElement("a");
+        a.className = "search-item";
+        a.href = `product.html?id=${p.id}`;
+        a.textContent = p.name;
+        searchResult.appendChild(a);
+      });
     });
   }
+
+  /* ========= Menu ========= */
+  const menuIcon = document.getElementById("menuIcon");
+  const menuBox = document.getElementById("menuBox");
 
   if (menuIcon && menuBox) {
     menuIcon.addEventListener("click", e => {
       e.stopPropagation();
       menuBox.classList.toggle("active");
-      searchBox?.classList.remove("active");
     });
   }
 
-  [searchBox, menuBox].forEach(box => {
-    box?.addEventListener("click", e => e.stopPropagation());
-  });
+});
 
-  document.addEventListener("click", () => {
-    searchBox?.classList.remove("active");
-    menuBox?.classList.remove("active");
-  });
 
   /* ========= 收藏切換 ========= */
   window.toggleFavorite = function(el) {
