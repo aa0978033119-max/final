@@ -138,6 +138,14 @@
       z-index: 1000;
     }
 
+    .menu-box {
+      display: none;
+    }
+
+    .menu-wrapper.active .menu-box {
+      display: block;
+    }
+
     .search-wrapper:hover .search-box,
     .menu-wrapper:hover .menu-box {
       display: block;
@@ -588,6 +596,7 @@ document.addEventListener('DOMContentLoaded', () => {
 </body>
 
 </html>
+
 
 
 
