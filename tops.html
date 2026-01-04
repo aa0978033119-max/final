@@ -23,6 +23,27 @@
 .favorite-icon.active {
   filter: invert(27%) sepia(94%) saturate(7468%) hue-rotate(357deg);
 }
+  #backToTop {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    z-index: 1000;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 12px 16px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 20px;
+    display: none; /* 一開始隱藏 */
+    transition: background 0.3s, transform 0.2s;
+  }
+  
+  #backToTop:hover {
+    background-color: #555;
+    transform: scale(1.1);
+  }
+
 </style>
 </head>
 <body>
@@ -209,6 +230,7 @@
     <button id="backToTop" title="回到頂部">↑</button>
 </body>
 </html>
+
 
 
 
