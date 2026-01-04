@@ -124,7 +124,7 @@ const products = [
     desc: "經典格紋，甜美的復古學院感",
     detail:  `
     <p><strong>材質</strong></p>
-    <p>Polyester 70% Rayon 30%</p>
+    <p>Polyester 70% / Rayon 30%</p>
 
     <p><strong>尺寸表（cm）</strong></p>
     <table class="size-table">
@@ -314,33 +314,33 @@ const products = [
         <th>衣長</th>
         <th>袖長</th>
       </tr>
-      <tr>
+     <tr>
         <td>S</td>
         <td>38</td>
         <td>88</td>
         <td>56</td>
-        <td>56</td>
+        <td>13</td>
       </tr>
       <tr>
         <td>M</td>
         <td>40</td>
         <td>92</td>
         <td>58</td>
-        <td>57</td>
+        <td>14</td>
       </tr>
       <tr>
         <td>L</td>
         <td>42</td>
         <td>96</td>
         <td>60</td>
-        <td>58</td>
+        <td>15</td>
       </tr>
        <tr>
         <td>XL</td>
         <td>44</td>
         <td>100</td>
         <td>62</td>
-        <td>59</td>
+        <td>16</td>
       </tr>
     </table>
   `,
@@ -370,28 +370,28 @@ const products = [
         <td>38</td>
         <td>88</td>
         <td>56</td>
-        <td>56</td>
+        <td>13</td>
       </tr>
       <tr>
         <td>M</td>
         <td>40</td>
         <td>92</td>
         <td>58</td>
-        <td>57</td>
+        <td>14</td>
       </tr>
       <tr>
         <td>L</td>
         <td>42</td>
         <td>96</td>
         <td>60</td>
-        <td>58</td>
+        <td>15</td>
       </tr>
        <tr>
         <td>XL</td>
         <td>44</td>
         <td>100</td>
         <td>62</td>
-        <td>59</td>
+        <td>16</td>
       </tr>
     </table>
   `,
@@ -524,7 +524,28 @@ const products = [
     name: "歐美紫色西裝外套",
     price: 1190,
     desc: "穿上自帶氣場的西裝外套，非常時髦的剪裁設計",
-    detail: "100% Cotton / Made in Taiwan",
+    detail:   `
+    <p><strong>材質</strong></p>
+    <p>Polyester 75% / Rayon 25%</p>
+
+    <p><strong>尺寸表（cm）</strong></p>
+    <table class="size-table">
+      <tr>
+        <th>Size</th>
+        <th>肩寬</th>
+        <th>胸圍</th>
+        <th>衣長</th>
+        <th>袖長</th>
+      </tr>
+      <tr>
+        <td>F</td>
+        <td>42</td>
+        <td>94</td>
+        <td>60</td>
+        <td>58</td>
+    </tr>
+      </table>
+  `,
     sizes: ["F"],
     images: ["images/13.jpg"]
   },
@@ -533,7 +554,28 @@ const products = [
     name: "斜肩氣質荷葉邊上衣",
     price: 350,
     desc: "除了斜肩也能拉成平口上衣來穿，依照心情自由變換穿法",
-    detail: "100% Cotton / Made in Taiwan",
+    detail:   `
+    <p><strong>材質</strong></p>
+    <p>Polyester 100%
+
+    <p><strong>尺寸表（cm）</strong></p>
+    <table class="size-table">
+      <tr>
+        <th>Size</th>
+        <th>肩寬</th>
+        <th>胸圍</th>
+        <th>衣長</th>
+        <th>袖長</th>
+      </tr>
+      <tr>
+        <td>F</td>
+        <td>36</td>
+        <td>92</td>
+        <td>50</td>
+        <td>13</td>
+    </tr>
+      </table>
+  `,
     sizes: ["F"],
     images: ["images/14.jpg"]
   },
@@ -542,7 +584,28 @@ const products = [
     name: "短板聯名渲染上衣",
     price: 440,
     desc: "穿上帶你回到千禧年，渲染設計獨具特色",
-    detail: "100% Cotton / Made in Taiwan",
+    detail:  `
+    <p><strong>材質</strong></p>
+    <p>Cotton 100%
+
+    <p><strong>尺寸表（cm）</strong></p>
+    <table class="size-table">
+      <tr>
+        <th>Size</th>
+        <th>肩寬</th>
+        <th>胸圍</th>
+        <th>衣長</th>
+        <th>袖長</th>
+      </tr>
+      <tr>
+        <td>F</td>
+        <td>36</td>
+        <td>94</td>
+        <td>40</td>
+        <td>13</td>
+    </tr>
+      </table>
+  `,
     sizes: ["F"],
     images: ["images/15.jpg"]
   },
