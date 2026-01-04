@@ -48,7 +48,44 @@ const products = [
     name: "百搭基礎牛仔褲",
     price: 960,
     desc: "衣櫃裡一定要有的一條牛仔褲，不挑身材的日常款式",
-    detail: "100% Cotton / Made in Taiwan",
+    detail: `
+    <p><strong>材質</strong></p>
+    <p>Cotten 98% / Spandex 2%</p>
+
+    <p><strong>尺寸表（cm）</strong></p>
+    <table class="size-table">
+      <tr>
+        <th>Size</th>
+        <th>腰圍</th>
+        <th>臀圍</th>
+        <th>褲長</th>
+      </tr>
+      <tr>
+        <td>S</td>
+        <td>64</td>
+        <td>90</td>
+        <td>98</td>
+      </tr>
+      <tr>
+        <td>M</td>
+        <td>68</td>
+        <td>94</td>
+        <td>100</td>
+      </tr>
+      <tr>
+        <td>L</td>
+        <td>72</td>
+        <td>98</td>
+        <td>102</td>
+      </tr>
+      <tr>
+        <td>XL</td>
+        <td>76</td>
+        <td>102</td>
+        <td>104</td>
+      </tr>
+    </table>
+  `,
     sizes: ["S", "M", "L","XL"],
     images: ["images/02.jpg"]
   },
