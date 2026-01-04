@@ -1,6 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
   //reviews
-  const productReviews = reviews[productId] || [];
   const reviewContainer = document.getElementById("review");
   reviewContainer.innerHTML = "";
   
@@ -13,6 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
     `;
     reviewContainer.appendChild(div);
   });
+    const productReviews = reviews[productId] || [];
 
   // 取得商品 id
   const params = new URLSearchParams(window.location.search);
