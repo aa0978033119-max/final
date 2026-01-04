@@ -494,120 +494,121 @@
     </main>
   </div>
 
-<script>
-  /* ==================== 頁面切換 ==================== */
-  function showSection(id) {
-    document.querySelectorAll('.content-section').forEach(section => {
-      section.classList.remove('active');
-    });
-    document.getElementById(id).classList.add('active');
-  }
-
-  /* ==================== 收藏功能 ==================== */
-  function loadFavorites() {
-    const favoriteList = document.getElementById('favorite-list');
-    if (!favoriteList) return;
-    favoriteList.innerHTML = '';
-    let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+  <script>
+    /* ==================== 頁面切換 ==================== */
+    function showSection(id) {
+      document.querySelectorAll('.content-section').forEach(section => {
+        section.classList.remove('active');
+      });
+      document.getElementById(id).classList.add('active');
+    }
+  
+    /* ==================== 收藏功能 ==================== */
+    function loadFavorites() {
+      const favoriteList = document.getElementById('favorite-list');
+      if (!favoriteList) return;
+      favoriteList.innerHTML = '';
+      let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+      
+      if (favorites.length === 0) {
+        favoriteList.innerHTML = `<p style="color:#777; padding:20px 0;">目前沒有收藏商品</p>`;
+        return;
+      }
     
-    if (favorites.length === 0) {
-      favoriteList.innerHTML = `<p style="color:#777; padding:20px 0;">目前沒有收藏商品</p>`;
-      return;
-    }
-  
-      favorites.forEach(item => {
-      const div = document.createElement('div');
-      div.classList.add('product');
-      div.innerHTML = `
-        <img src="${item.img}" alt="${item.name}">
-        <div class="product-info">
-          <h3 class="product-name">${item.name}</h3>
-          <div class="product-price">NT$${item.price}</div>
-          <button class="add-cart-btn">加入購物車</button>
-        </div>
-        <img src="images/love.png" class="favorite-icon" onclick="removeFavorite('${item.id}', this)" alt="收藏">
-      `;
-      favoriteList.appendChild(div);
+        favorites.forEach(item => {
+        const div = document.createElement('div');
+        div.classList.add('product');
+        div.innerHTML = `
+          <img src="${item.img}" alt="${item.name}">
+          <div class="product-info">
+            <h3 class="product-name">${item.name}</h3>
+            <div class="product-price">NT$${item.price}</div>
+            <button class="add-cart-btn">加入購物車</button>
+          </div>
+          <img src="images/love.png" class="favorite-icon" onclick="removeFavorite('${item.id}', this)" alt="收藏">
+        `;
+        favoriteList.appendChild(div);
+      
+        // 綁定事件一次，避免重複 alert
+        div.querySelector('.add-cart-btn').addEventListener('click', () => {
+          addToCartFromMember(div.querySelector('.add-cart-btn'), item.id, item.name, item.price, item.img);
+        });
+      });
     
-      // 綁定事件一次，避免重複 alert
-      div.querySelector('.add-cart-btn').addEventListener('click', () => {
-        addToCartFromMember(div.querySelector('.add-cart-btn'), item.id, item.name, item.price, item.img);
-      });
-    });
-  
-  
-  function removeFavorite(id, icon) {
-    let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
-    favorites = favorites.filter(item => item.id !== id);
-    localStorage.setItem('favorites', JSON.stringify(favorites));
-    icon.closest('.product').remove();
-  }
-  
-  function addToCartFromMember(btn, id, name, price, img) {
-    // 這裡確保即使 script.js 沒載入，至少會跳通知
-    if (typeof addToCart === 'function') {
-      addToCart(btn);
-    } else {
-      alert(`已將 ${name} 加入購物車 (購物車功能由 script.js 提供)`);
+    
+    function removeFavorite(id, icon) {
+      let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+      favorites = favorites.filter(item => item.id !== id);
+      localStorage.setItem('favorites', JSON.stringify(favorites));
+      icon.closest('.product').remove();
     }
-  }
-  
-  /* ==================== 核心修正：導航欄控制 ==================== */
-  document.addEventListener('DOMContentLoaded', () => {
-    loadFavorites();
-  
-    // FAQ 折疊
-    document.querySelectorAll('.faq-question').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        const item = btn.closest('.faq-item');
-        item.classList.toggle('active');
-      });
-    });
-  
-    // 上下裝選單控制 (修正點擊後瞬間關閉的問題)
-    const menuIcon = document.getElementById("menuIcon");
-    const menuWrapper = document.querySelector('.menu-wrapper');
-  
-    if (menuIcon && menuWrapper) {
-      menuIcon.addEventListener("click", (e) => {
-        e.stopPropagation(); // 阻止事件傳出去
-        menuWrapper.classList.toggle("active");
-      });
+    
+    function addToCartFromMember(btn, id, name, price, img) {
+      // 這裡確保即使 script.js 沒載入，至少會跳通知
+      if (typeof addToCart === 'function') {
+        addToCart(btn);
+      } else {
+        alert(`已將 ${name} 加入購物車 (購物車功能由 script.js 提供)`);
+      }
     }
-  
-    // 點擊頁面任何其他地方，關閉所有選單
-    document.addEventListener("click", () => {
-      if (menuWrapper) menuWrapper.classList.remove("active");
-    });
-  
-    const profileForm = document.getElementById("profileForm");
-      if (profileForm) {
-        profileForm.addEventListener("submit", e => {
-          e.preventDefault();
-      
-          const name = document.getElementById("name").value.trim();
-          const email = document.getElementById("email").value.trim();
-          const phone = document.getElementById("phone").value.trim();
-      
-          if (!name || !email || !phone) {
-            alert("請填寫完整會員資料");
-            return;
-          }
-      
-          localStorage.setItem("userProfile", JSON.stringify({ name, email, phone }));
-          localStorage.setItem("isLogin", "true");
-          localStorage.setItem("user", name);
-      
-          alert("登入成功！");
-      
-          const redirect = localStorage.getItem("redirectAfterLogin") || "index.html";
-          localStorage.removeItem("redirectAfterLogin");
-          window.location.href = redirect;
+    
+    /* ==================== 核心修正：導航欄控制 ==================== */
+    document.addEventListener('DOMContentLoaded', () => {
+      loadFavorites();
+    
+      // FAQ 折疊
+      document.querySelectorAll('.faq-question').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const item = btn.closest('.faq-item');
+          item.classList.toggle('active');
+        });
+      });
+    
+      // 上下裝選單控制 (修正點擊後瞬間關閉的問題)
+      const menuIcon = document.getElementById("menuIcon");
+      const menuWrapper = document.querySelector('.menu-wrapper');
+    
+      if (menuIcon && menuWrapper) {
+        menuIcon.addEventListener("click", (e) => {
+          e.stopPropagation(); // 阻止事件傳出去
+          menuWrapper.classList.toggle("active");
         });
       }
-  });
-</script>
+    
+      // 點擊頁面任何其他地方，關閉所有選單
+      document.addEventListener("click", () => {
+        if (menuWrapper) menuWrapper.classList.remove("active");
+      });
+    
+      const profileForm = document.getElementById("profileForm");
+        if (profileForm) {
+          profileForm.addEventListener("submit", e => {
+            e.preventDefault();
+        
+            const name = document.getElementById("name").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const phone = document.getElementById("phone").value.trim();
+        
+            if (!name || !email || !phone) {
+              alert("請填寫完整會員資料");
+              return;
+            }
+        
+            localStorage.setItem("userProfile", JSON.stringify({ name, email, phone }));
+            localStorage.setItem("isLogin", "true");
+            localStorage.setItem("user", name);
+        
+            alert("登入成功！");
+        
+            const redirect = localStorage.getItem("redirectAfterLogin") || "index.html";
+            localStorage.removeItem("redirectAfterLogin");
+            window.location.href = redirect;
+          });
+        }
+    });
+  </script>
 
 </body>
 </html>
+
 
