@@ -498,7 +498,6 @@
     </main>
   </div>
 <script>
-  <!-- JS可以寫這裡 -->
 /* ==================== 頁面切換 ==================== */
 function showSection(id) {
   document.querySelectorAll('.content-section').forEach(section => {
@@ -516,112 +515,78 @@ function logout() {
 function loadFavorites() {
   const favoriteList = document.getElementById('favorite-list');
   if (!favoriteList) return;
-
   favoriteList.innerHTML = '';
-
   let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
-
-  // 過濾掉不完整資料（避免 undefined）
-  favorites = favorites.filter(item => item.id && item.name && item.price && item.img);
-
-  // ⭐ 沒有收藏時顯示提示
+  
   if (favorites.length === 0) {
-    favoriteList.innerHTML = `
-      <p style="
-        color:#777;
-        font-size:16px;
-        padding:20px 0;
-      ">
-        目前沒有收藏商品
-      </p>
-    `;
+    favoriteList.innerHTML = `<p style="color:#777; padding:20px 0;">目前沒有收藏商品</p>`;
     return;
   }
 
-  // 有收藏才渲染商品
   favorites.forEach(item => {
     const div = document.createElement('div');
     div.classList.add('product');
-
     div.innerHTML = `
       <img src="${item.img}" alt="${item.name}">
       <div class="product-info">
         <h3 class="product-name">${item.name}</h3>
         <div class="product-price">NT$${item.price}</div>
-        <button class="add-cart-btn"
-          onclick="addToCartFromMember(this, '${item.id}', '${item.name}', '${item.price}', '${item.img}')">
-          加入購物車
-        </button>
+        <button class="add-cart-btn" onclick="addToCartFromMember(this, '${item.id}', '${item.name}', '${item.price}', '${item.img}')">加入購物車</button>
       </div>
-      <img src="images/love.png"
-        class="favorite-icon"
-        onclick="removeFavorite('${item.id}', this)"
-        alt="收藏">
+      <img src="images/love.png" class="favorite-icon" onclick="removeFavorite('${item.id}', this)" alt="收藏">
     `;
-
     favoriteList.appendChild(div);
   });
 }
-/* ==================== 會員中心取消收藏 ==================== */
+
 function removeFavorite(id, icon) {
   let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
   favorites = favorites.filter(item => item.id !== id);
   localStorage.setItem('favorites', JSON.stringify(favorites));
-
-  // 移除該商品區塊
   icon.closest('.product').remove();
-
-  // 同步商品頁愛心
-  const productIcon = document.querySelector(`.product[data-id="${id}"] .favorite-icon`);
-  if (productIcon) productIcon.src = 'images/heart.png';
 }
 
-/* ==================== 加入購物車 ==================== */
 function addToCartFromMember(btn, id, name, price, img) {
-  // 假設你有 addToCart 函數
-  addToCart(btn); 
-  alert(`已將 ${name} 加入購物車`);
+  // 這裡確保即使 script.js 沒載入，至少會跳通知
+  if (typeof addToCart === 'function') {
+    addToCart(btn);
+  } else {
+    alert(`已將 ${name} 加入購物車 (購物車功能由 script.js 提供)`);
+  }
 }
 
-/* ==================== FAQ 折疊 ==================== */
-document.querySelectorAll('.faq-question').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const item = btn.closest('.faq-item');
-    item.classList.toggle('active');
-  });
-});
-
-/* ==================== 頁面載入 ==================== */
+/* ==================== 核心修正：導航欄控制 ==================== */
 document.addEventListener('DOMContentLoaded', () => {
   loadFavorites();
 
-  // 上下裝選單點擊控制
-  const menuWrapper = document.querySelector('.menu-wrapper');
+  // FAQ 折疊
+  document.querySelectorAll('.faq-question').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const item = btn.closest('.faq-item');
+      item.classList.toggle('active');
+    });
+  });
+
+  // 上下裝選單控制 (修正點擊後瞬間關閉的問題)
   const menuIcon = document.getElementById("menuIcon");
-  const menuBox = document.getElementById("menuBox"); // ← 加這行
+  const menuWrapper = document.querySelector('.menu-wrapper');
 
   if (menuIcon && menuWrapper) {
-    // 點擊圖示切換選單
-    menuIcon.addEventListener("click", e => {
-      e.stopPropagation();
+    menuIcon.addEventListener("click", (e) => {
+      e.stopPropagation(); // 阻止事件傳出去
       menuWrapper.classList.toggle("active");
     });
-
-    // 點擊 menu-box 本身不要收起
-    if(menuBox){
-      menuBox.addEventListener("click", e => e.stopPropagation());
-    }
-
-    // 點擊頁面其他地方收起
-    document.addEventListener("click", () => {
-      menuWrapper.classList.remove("active");
-    });
   }
+
+  // 點擊頁面任何其他地方，關閉所有選單
+  document.addEventListener("click", () => {
+    if (menuWrapper) menuWrapper.classList.remove("active");
+  });
 });
-  
 </script>
 
 </body>
 </html>
+
 
 
