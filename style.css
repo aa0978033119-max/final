@@ -484,3 +484,39 @@ footer {
 .user-menu .dropdown a:hover {
   background: #f0f0f0;
 }
+
+/* ===== Toast Notification ===== */
+.toast {
+  position: fixed;
+  top: 90px;                 /* 避開 header */
+  right: 30px;
+  background-color: #222;    /* 跟 header 一致 */
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-size: 14px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 成功 / 警告 / 錯誤（預留擴充） */
+.toast.success {
+  border-left: 4px solid #4caf50;
+}
+
+.toast.warning {
+  border-left: 4px solid #ff9800;
+}
+
+.toast.error {
+  border-left: 4px solid #f44336;
+}
