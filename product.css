@@ -46,7 +46,7 @@
 
 .tab.active {
   border-bottom: 2px solid black;
-  font-weight: bold;
+  font-weight: bold; 
 }
 .tab-content {
   padding: 20px;
