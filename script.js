@@ -82,38 +82,64 @@ document.addEventListener("DOMContentLoaded", () => {
     localStorage.setItem("favorites", JSON.stringify(favorites));
   };
 
-  window.addToCart = function(button) {
-    if (!button) return;
-    const product = button.closest(".product");
-    if (!product) return;
+  // ===== 檢查登入 & 會員資料完整 =====
+  function profileComplete() {
+    const profile = JSON.parse(localStorage.getItem("userProfile")) || {};
+    return profile.name && profile.email && profile.phone;
+  }
 
-    const id = product.dataset.id;
-    const name = product.dataset.name;
-    const price = parseInt(product.dataset.price);
-    const img = product.dataset.img;
-    if (!id || !name || !price || !img) return;
+  function requireLoginThen(actionCallback) {
+    const isLogin = localStorage.getItem("isLogin") === "true";
 
-    const isLogin = localStorage.getItem("isLogin");
     if (!isLogin) {
-      // 未登入 → 記錄返回頁面 & 自動加入的商品
+      alert("請先註冊 / 登入");
       localStorage.setItem("redirectAfterLogin", window.location.href);
-      localStorage.setItem("autoAddCart", JSON.stringify({ id, name, price, img, quantity: 1 }));
       window.location.href = "member.html";
-      return;
+      return false;
     }
 
-    // 已登入 → 加入購物車
-    let cart = JSON.parse(localStorage.getItem("cart")) || {};
-    if (cart[id]) {
-      cart[id].quantity += 1;
-    } else {
-      cart[id] = { id, name, price, img, quantity: 1 };
+    if (!profileComplete()) {
+      alert("請先填寫完整會員資料");
+      localStorage.setItem("redirectAfterLogin", window.location.href);
+      window.location.href = "member.html";
+      return false;
     }
-    localStorage.setItem("cart", JSON.stringify(cart));
-    alert(`${name} 已加入購物車！`);
+
+    if (actionCallback) actionCallback();
+    return true;
+  }
+
+  window.addToCart = function(button) {
+    requireLoginThen(() => {
+      const product = button.closest(".product");
+      if (!product) return;
+      const id = product.dataset.id;
+      const name = product.dataset.name;
+      const price = parseInt(product.dataset.price);
+      const img = product.dataset.img;
+      if (!id || !name || !price || !img) return;
+
+      let cart = JSON.parse(localStorage.getItem("cart")) || {};
+      if (cart[id]) cart[id].quantity += 1;
+      else cart[id] = { id, name, price, img, quantity: 1 };
+
+      localStorage.setItem("cart", JSON.stringify(cart));
+      alert(`${name} 已加入購物車！`);
+    });
   };
 
-  // 初始化收藏圖示
+  // 點擊購物車圖示
+  const cartIcon = document.querySelector('a[title="購物車"]');
+  if (cartIcon) {
+    cartIcon.addEventListener("click", e => {
+      e.preventDefault();
+      requireLoginThen(() => {
+        window.location.href = "cart.html";
+      });
+    });
+  }
+
+  // ===== 初始化收藏圖示 =====
   document.querySelectorAll(".product").forEach(product => {
     const id = product.dataset.id;
     const icon = product.querySelector(".favorite-icon");
@@ -209,52 +235,4 @@ document.addEventListener("DOMContentLoaded", () => {
     renderUserArea();
     window.location.href = "index.html";
   };
-
-  // ===== profileForm 提交 =====
-  const profileForm = document.getElementById("profileForm");
-  if (profileForm) {
-    profileForm.addEventListener("submit", e => {
-      e.preventDefault();
-      const profileData = {
-        name: document.getElementById("name").value,
-        email: document.getElementById("email").value,
-        phone: document.getElementById("phone").value
-      };
-      localStorage.setItem("userProfile", JSON.stringify(profileData));
-      localStorage.setItem("isLogin", "true");
-      localStorage.setItem("user", profileData.name || "STANDARD DAY 會員");
-
-      alert("會員資料已更新，登入成功！");
-      renderUserArea();
-
-      // ===== 自動加入購物車 & 返回原頁 =====
-      const autoAdd = JSON.parse(localStorage.getItem("autoAddCart"));
-      if (autoAdd) {
-        let cart = JSON.parse(localStorage.getItem("cart")) || {};
-        const { id, name, price, img, quantity } = autoAdd;
-        if (cart[id]) cart[id].quantity += quantity;
-        else cart[id] = { id, name, price, img, quantity };
-        localStorage.setItem("cart", JSON.stringify(cart));
-        localStorage.removeItem("autoAddCart");
-        alert(`${name} 已自動加入購物車！`);
-      }
-
-      const redirectUrl = localStorage.getItem("redirectAfterLogin") || "index.html";
-      localStorage.removeItem("redirectAfterLogin");
-      window.location.href = redirectUrl;
-    });
-  }
-
-  // ===== Product 點擊跳轉 =====
-  document.querySelectorAll('.product-link').forEach(link => {
-    link.addEventListener('click', e => {
-      e.preventDefault();
-      e.stopPropagation();
-      const productDiv = link.closest('.product');
-      if (!productDiv) return;
-      const productId = productDiv.getAttribute('data-id');
-      if (productId) window.location.href = `product.html?id=${encodeURIComponent(productId)}`;
-    });
-  });
-
 });
