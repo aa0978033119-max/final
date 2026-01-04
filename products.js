@@ -50,7 +50,7 @@ const products = [
     desc: "衣櫃裡一定要有的一條牛仔褲，不挑身材的日常款式",
     detail: `
     <p><strong>材質</strong></p>
-    <p>Cotten 98% / Spandex 2%</p>
+    <p>Cotton 98% / Spandex 2%</p>
 
     <p><strong>尺寸表（cm）</strong></p>
     <table class="size-table">
@@ -164,7 +164,7 @@ const products = [
     desc: "牛仔元素永不過時，顯身材比例的最佳單品",
     detail:  `
     <p><strong>材質</strong></p>
-    <p>Cotten 100%</p>
+    <p>Cotton 100%</p>
 
     <p><strong>尺寸表（cm）</strong></p>
     <table class="size-table">
@@ -208,7 +208,7 @@ const products = [
     desc: "牛仔元素永不過時，顯身材比例的最佳單品",
     detail:  `
     <p><strong>材質</strong></p>
-    <p>Cotten 100%</p>
+    <p>Cotton 100%</p>
 
     <p><strong>尺寸表（cm）</strong></p>
     <table class="size-table">
@@ -303,7 +303,7 @@ const products = [
     desc: "絕不會出錯的T-shirt，本店最熱賣的上衣款式",
     detail:    `
     <p><strong>材質</strong></p>
-    <p>Cotten 100%</p>
+    <p>Cotton 100%</p>
 
     <p><strong>尺寸表（cm）</strong></p>
     <table class="size-table">
@@ -354,7 +354,7 @@ const products = [
     desc: "品牌打版T-shirt，簡單但不普通，值得一試的質感上衣",
     detail:   `
     <p><strong>材質</strong></p>
-    <p>Cotten 100%</p>
+    <p>Cotton 100%</p>
 
     <p><strong>尺寸表（cm）</strong></p>
     <table class="size-table">
@@ -405,7 +405,7 @@ const products = [
     desc: "垂墜感與挺度同時兼具的工裝褲，品牌隱藏的熱賣款",
     detail:  `
     <p><strong>材質</strong></p>
-    <p>Polyseter 65% / Cotten 35%</p>
+    <p>Polyseter 65% / Cotton 35%</p>
 
     <p><strong>尺寸表（cm）</strong></p>
     <table class="size-table">
@@ -451,7 +451,7 @@ const products = [
     desc: "低調百搭的褲型，穿起來舒適度極佳",
     detail:  `
     <p><strong>材質</strong></p>
-    <p>Tencel 60% / Cotten 35% / Spandex 5%</p>
+    <p>Tencel 60% / Cotton 35% / Spandex 5%</p>
 
     <p><strong>尺寸表（cm）</strong></p>
     <table class="size-table">
