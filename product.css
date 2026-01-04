@@ -62,7 +62,8 @@
 }
 
 .content {
-  display: none;  
+  display: none;
+  text-align:center;
 }
 
 .content.active {
