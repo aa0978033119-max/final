@@ -505,11 +505,6 @@ function showSection(id) {
   document.getElementById(id).classList.add('active');
 }
 
-/* ==================== 登出 ==================== */
-function logout() {
-  alert('已登出');
-}
-
 /* ==================== 收藏功能 ==================== */
 function loadFavorites() {
   const favoriteList = document.getElementById('favorite-list');
@@ -581,11 +576,38 @@ document.addEventListener('DOMContentLoaded', () => {
   document.addEventListener("click", () => {
     if (menuWrapper) menuWrapper.classList.remove("active");
   });
+
+  const profileForm = document.getElementById("profileForm");
+    if (profileForm) {
+      profileForm.addEventListener("submit", e => {
+        e.preventDefault();
+    
+        const name = document.getElementById("name").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const phone = document.getElementById("phone").value.trim();
+    
+        if (!name || !email || !phone) {
+          alert("請填寫完整會員資料");
+          return;
+        }
+    
+        localStorage.setItem("userProfile", JSON.stringify({ name, email, phone }));
+        localStorage.setItem("isLogin", "true");
+        localStorage.setItem("user", name);
+    
+        alert("登入成功！");
+    
+        const redirect = localStorage.getItem("redirectAfterLogin") || "index.html";
+        localStorage.removeItem("redirectAfterLogin");
+        window.location.href = redirect;
+      });
+    }
 });
 </script>
 
 </body>
 </html>
+
 
 
 
