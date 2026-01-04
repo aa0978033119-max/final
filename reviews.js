@@ -1,7 +1,7 @@
 // reviews.js
 const reviews = {
   1: [
-    { name: "小美", rating: 5, text: "這件粉色大衣超暖又好看！" },
+    { name: "婕", rating: 5, text: "這件粉色大衣超暖又好看！" },
     { name: "阿強", rating: 4, text: "質感不錯，但尺碼偏大。" },
     { name: "Lily", rating: 5, text: "穿出去被朋友狂問哪裡買！" }
   ],
@@ -23,7 +23,7 @@ const reviews = {
   ],
   6: [
     { name: "Miko", rating: 5, text: "黑色牛仔夾克百搭又酷。" },
-    { name: "David", rating: 4, text: "剪裁很棒，但價格稍高。" }
+    { name: "A for apple B for boy,C for cat and D for dog", rating: 4, text: "剪裁很棒，但價格稍高。" }
   ],
   7: [
     { name: "Sandy", rating: 5, text: "透膚襯衫穿起來很有氣質！" },
