@@ -175,26 +175,26 @@ const products = [
         <th>衣長</th>
         <th>袖長</th>
       </tr>
-      <tr>
+     <tr>
         <td>S</td>
-        <td>40</td>
-        <td>96</td>
-        <td>105</td>
-        <td>58</td>
+        <td>38</td>
+        <td>88</td>
+        <td>56</td>
+        <td>56</td>
       </tr>
       <tr>
         <td>M</td>
-        <td>42</td>
-        <td>100</td>
-        <td>110</td>
-        <td>59</td>
+        <td>40</td>
+        <td>92</td>
+        <td>58</td>
+        <td>57</td>
       </tr>
       <tr>
         <td>L</td>
-        <td>44</td>
-        <td>104</td>
-        <td>115</td>
+        <td>42</td>
+        <td>96</td>
         <td>60</td>
+        <td>58</td>
       </tr>
     </table>
   `,
@@ -221,24 +221,24 @@ const products = [
       </tr>
       <tr>
         <td>S</td>
-        <td>40</td>
-        <td>96</td>
-        <td>105</td>
-        <td>58</td>
+        <td>38</td>
+        <td>88</td>
+        <td>56</td>
+        <td>56</td>
       </tr>
       <tr>
         <td>M</td>
-        <td>42</td>
-        <td>100</td>
-        <td>110</td>
-        <td>59</td>
+        <td>40</td>
+        <td>92</td>
+        <td>58</td>
+        <td>57</td>
       </tr>
       <tr>
         <td>L</td>
-        <td>44</td>
-        <td>104</td>
-        <td>115</td>
+        <td>42</td>
+        <td>96</td>
         <td>60</td>
+        <td>58</td>
       </tr>
     </table>
   `,
@@ -301,7 +301,49 @@ const products = [
     name: "超前衛運動上衣",
     price: 590,
     desc: "絕不會出錯的T-shirt，本店最熱賣的上衣款式",
-    detail: "100% Cotton / Made in Taiwan",
+    detail:    `
+    <p><strong>材質</strong></p>
+    <p>Cotten 100%</p>
+
+    <p><strong>尺寸表（cm）</strong></p>
+    <table class="size-table">
+      <tr>
+        <th>Size</th>
+        <th>肩寬</th>
+        <th>胸圍</th>
+        <th>衣長</th>
+        <th>袖長</th>
+      </tr>
+      <tr>
+        <td>S</td>
+        <td>38</td>
+        <td>88</td>
+        <td>56</td>
+        <td>56</td>
+      </tr>
+      <tr>
+        <td>M</td>
+        <td>40</td>
+        <td>92</td>
+        <td>58</td>
+        <td>57</td>
+      </tr>
+      <tr>
+        <td>L</td>
+        <td>42</td>
+        <td>96</td>
+        <td>60</td>
+        <td>58</td>
+      </tr>
+       <tr>
+        <td>XL</td>
+        <td>44</td>
+        <td>100</td>
+        <td>62</td>
+        <td>59</td>
+      </tr>
+    </table>
+  `,
     sizes: ["S", "M", "L","XL"],      
     images: ["images/08.jpg"]
   },
@@ -310,7 +352,49 @@ const products = [
     name: "象牙白打底上衣",
     price: 690,
     desc: "品牌打版T-shirt，簡單但不普通，值得一試的質感上衣",
-    detail: "100% Cotton / Made in Taiwan",
+    detail:   `
+    <p><strong>材質</strong></p>
+    <p>Cotten 100%</p>
+
+    <p><strong>尺寸表（cm）</strong></p>
+    <table class="size-table">
+      <tr>
+        <th>Size</th>
+        <th>肩寬</th>
+        <th>胸圍</th>
+        <th>衣長</th>
+        <th>袖長</th>
+      </tr>
+      <tr>
+        <td>S</td>
+        <td>38</td>
+        <td>88</td>
+        <td>56</td>
+        <td>56</td>
+      </tr>
+      <tr>
+        <td>M</td>
+        <td>40</td>
+        <td>92</td>
+        <td>58</td>
+        <td>57</td>
+      </tr>
+      <tr>
+        <td>L</td>
+        <td>42</td>
+        <td>96</td>
+        <td>60</td>
+        <td>58</td>
+      </tr>
+       <tr>
+        <td>XL</td>
+        <td>44</td>
+        <td>100</td>
+        <td>62</td>
+        <td>59</td>
+      </tr>
+    </table>
+  `,
     sizes: ["S", "M", "L","XL"],
     images: ["images/09.jpg"]
   },
@@ -319,7 +403,44 @@ const products = [
     name: "復古垂感束腳工裝褲",
     price: 690,
     desc: "垂墜感與挺度同時兼具的工裝褲，品牌隱藏的熱賣款",
-    detail: "100% Cotton / Made in Taiwan",
+    detail:  `
+    <p><strong>材質</strong></p>
+    <p>Polyseter 65% / Cotten 35%</p>
+
+    <p><strong>尺寸表（cm）</strong></p>
+    <table class="size-table">
+      <tr>
+        <th>Size</th>
+        <th>腰圍</th>
+        <th>臀圍</th>
+        <th>褲長</th>
+      </tr>
+      <tr>
+        <td>S</td>
+        <td>64</td>
+        <td>90</td>
+        <td>98</td>
+      </tr>
+      <tr>
+        <td>M</td>
+        <td>68</td>
+        <td>94</td>
+        <td>100</td>
+      </tr>
+      <tr>
+        <td>L</td>
+        <td>72</td>
+        <td>98</td>
+        <td>102</td>
+      </tr>
+      <tr>
+        <td>XL</td>
+        <td>76</td>
+        <td>102</td>
+        <td>104</td>
+      </tr>
+    </table>
+  `,
     sizes: ["S", "M", "L","XL"],
     images: ["images/10.jpg"]
   },
@@ -328,7 +449,44 @@ const products = [
     name: "男裝天絲彈力直筒卡其褲",
     price: 730,
     desc: "低調百搭的褲型，穿起來舒適度極佳",
-    detail: "100% Cotton / Made in Taiwan",
+    detail:  `
+    <p><strong>材質</strong></p>
+    <p>Tencel 60% / Cotten 35% / Spandex 5%</p>
+
+    <p><strong>尺寸表（cm）</strong></p>
+    <table class="size-table">
+      <tr>
+        <th>Size</th>
+        <th>腰圍</th>
+        <th>臀圍</th>
+        <th>褲長</th>
+      </tr>
+      <tr>
+        <td>S</td>
+        <td>64</td>
+        <td>90</td>
+        <td>98</td>
+      </tr>
+      <tr>
+        <td>M</td>
+        <td>68</td>
+        <td>94</td>
+        <td>100</td>
+      </tr>
+      <tr>
+        <td>L</td>
+        <td>72</td>
+        <td>98</td>
+        <td>102</td>
+      </tr>
+      <tr>
+        <td>XL</td>
+        <td>76</td>
+        <td>102</td>
+        <td>104</td>
+      </tr>
+    </table>
+  `,
     sizes: ["S", "M", "L","XL"],
     images: ["images/11.jpg"]
     },
@@ -338,7 +496,26 @@ const products = [
     name: "亮鑽百褶網紗白色長裙",
     price: 730,
     desc: "充滿亮點的裙裝款式，為穿搭創造華麗的個性",
-    detail: "100% Cotton / Made in Taiwan",
+    detail: `
+    <p><strong>材質</strong></p>
+    <p>Polyester 100%</p>
+
+    <p><strong>尺寸表（cm）</strong></p>
+    <table class="size-table">
+      <tr>
+        <th>Size</th>
+        <th>腰圍</th>
+        <th>臀圍</th>
+        <th>裙長</th>
+      </tr>   
+       <tr>
+        <td>F</td>
+        <td>66</td>
+        <td>92</td>
+        <td>80</td>
+      </tr>
+      </table>
+  `,
     sizes: ["F"],
     images: ["images/12.jpg"]
   },
