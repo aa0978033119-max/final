@@ -20,82 +20,63 @@ document.addEventListener("DOMContentLoaded", () => {
       productId: 3
     }
   ];
-
-
-  let currentIndex = 0;
-  let timer = null;
-
-  const bannerImage = document.getElementById("bannerImage");
-  const bannerTitle = document.getElementById("bannerTitle");
-  const bannerDesc  = document.getElementById("bannerDesc");
-  const dotsContainer = document.getElementById("dotsContainer");
-
-  if (!bannerImage || !dotsContainer) {
-    console.error("Banner DOM not found");
-    return;
-  }
-
-  function showBanner(index) {
-    clearTimeout(timer);
-
-    currentIndex = index;
-    
-    if (index >= banners.length) currentIndex = 0;
-    if (index < 0) currentIndex = banners.length - 1;
-
-    bannerImage.src = banners[currentIndex].img;
-    bannerTitle.textContent = banners[currentIndex].title;
-    bannerDesc.textContent  = banners[currentIndex].desc;
-
-    updateDots();
-    timer = setTimeout(nextBanner, 4000);
-  }
-
-  function nextBanner() {
-    currentIndex++;
-    showBanner(currentIndex);
-  }
-
-  function prevBanner() {
-    currentIndex--;
-    showBanner(currentIndex);
-  }
-
-    //banner bottom
-  const bannerButton = document.querySelector(".banner-text button");
+   if (bannerImage && dotsContainer && bannerTitle && bannerDesc) {
+      const banners = [
+        { img: "images/banner1.jpg", title: "NEW ARRIVAL", desc: "秋冬新品 8 折起", productId: 4 },
+        { img: "images/banner2.jpg", title: "SALE", desc: "限時優惠 20% OFF", productId: 14 },
+        { img: "images/banner3.jpg", title: "HOT ITEMS", desc: "人氣熱銷商品", productId: 3 }
+      ];
   
-  bannerButton.addEventListener("click", () => {
-    const currentBanner = banners[currentIndex];
-    // 這裡跳轉到產品頁，使用 productId
-    window.location.href = `product.html?id=${currentBanner.productId}`;
-  });
-
-  // dots
-  banners.forEach((_, index) => {
-    const dot = document.createElement("span");
-    dot.className = "dot";
-    dot.onclick = () => {
-      currentIndex = index;
+      let currentIndex = 0;
+      let timer = null;
+  
+      function showBanner(index) {
+        clearTimeout(timer);
+        currentIndex = index;
+        if (index >= banners.length) currentIndex = 0;
+        if (index < 0) currentIndex = banners.length - 1;
+  
+        bannerImage.src = banners[currentIndex].img;
+        bannerTitle.textContent = banners[currentIndex].title;
+        bannerDesc.textContent = banners[currentIndex].desc;
+  
+        updateDots();
+        timer = setTimeout(nextBanner, 4000);
+      }
+  
+      function nextBanner() { currentIndex++; showBanner(currentIndex); }
+      function prevBanner() { currentIndex--; showBanner(currentIndex); }
+  
+      // banner button
+      const bannerButton = document.querySelector(".banner-text button");
+      if (bannerButton) {
+        bannerButton.addEventListener("click", () => {
+          window.location.href = `product.html?id=${banners[currentIndex].productId}`;
+        });
+      }
+  
+      // dots
+      banners.forEach((_, i) => {
+        const dot = document.createElement("span");
+        dot.className = "dot";
+        dot.onclick = () => showBanner(i);
+        dotsContainer.appendChild(dot);
+      });
+  
+      function updateDots() {
+        const dots = document.querySelectorAll(".dot");
+        dots.forEach((dot, i) => dot.classList.toggle("active", i === currentIndex));
+      }
+  
       showBanner(currentIndex);
-    };
-    dotsContainer.appendChild(dot);
-  });
-
-  function updateDots() {
-    const dots = document.querySelectorAll(".dot");
-    dots.forEach((dot, i) => {
-      dot.classList.toggle("active", i === currentIndex);
-    });
-  }
-
-  // 初始化
-  showBanner(currentIndex);
-
-  // 給 HTML onclick 用
-  window.nextBanner = nextBanner;
-  window.prevBanner = prevBanner;
-});
-
+  
+      // 讓 HTML onclick 可以使用
+      window.nextBanner = nextBanner;
+      window.prevBanner = prevBanner;
+    } else {
+      console.log("Banner DOM not found, skipping banner script.");
+    }
+  
   /* ========= 收藏初始化 ========= */
   let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
   document.querySelectorAll(".product").forEach(product => {
