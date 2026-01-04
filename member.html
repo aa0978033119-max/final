@@ -139,9 +139,16 @@
     }
 
     .menu-box {
-      display: none;
-      z-index: 2000;
+      position: absolute;
+      top: 100%;
+      left: 50%;
       transform: translateX(-50%);
+      background: white;
+      border: 1px solid #ddd;
+      padding: 10px;
+      display: none;
+      min-width: 160px;
+      z-index: 2000;
     }
 
     .menu-wrapper.active .menu-box {
@@ -180,7 +187,8 @@
     }
 
     .menu-box .menu-item img {
-      width: 100%;
+      width: 80px;
+      height: 80px;
       display: block;
     }
 
@@ -587,15 +595,23 @@ document.querySelectorAll('.faq-question').forEach(btn => {
 /* ==================== 頁面載入 ==================== */
 document.addEventListener('DOMContentLoaded', () => {
   loadFavorites();
+
   // 上下裝選單點擊控制
   const menuWrapper = document.querySelector('.menu-wrapper');
   const menuIcon = document.getElementById("menuIcon");
+  const menuBox = document.getElementById("menuBox"); // ← 加這行
 
   if (menuIcon && menuWrapper) {
+    // 點擊圖示切換選單
     menuIcon.addEventListener("click", e => {
       e.stopPropagation();
       menuWrapper.classList.toggle("active");
     });
+
+    // 點擊 menu-box 本身不要收起
+    if(menuBox){
+      menuBox.addEventListener("click", e => e.stopPropagation());
+    }
 
     // 點擊頁面其他地方收起
     document.addEventListener("click", () => {
@@ -607,6 +623,4 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 
 </body>
-
 </html>
-
