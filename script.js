@@ -27,21 +27,6 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }
-    
-    // 加入購物車時檢查登入
-    function addToCart(btn) {
-        const isLogin = localStorage.getItem("isLogin") === "true";
-        if (!isLogin) {
-            alert("請先註冊 / 登入");
-            localStorage.setItem("redirectAfterLogin", "cart.html");
-            window.location.href = "member.html";
-            return;
-        }
-    
-        // 原本加入購物車邏輯
-        alert("已加入購物車");
-    }
-
 
   // ===== 會員登入狀態 =====
   function renderUserArea() {
@@ -79,7 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // ===== 加入購物車 =====
   window.addToCart = function(button) {
-    if (!localStorage.getItem("isLogin")) {
+    if (localStorage.getItem("isLogin") !== "true") {
       alert("請先註冊/登入會員！");
       localStorage.setItem("redirectAfterLogin", window.location.href);
       window.location.href = "member.html";
@@ -109,7 +94,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (cartIcon) {
     cartIcon.addEventListener("click", e => {
       e.preventDefault();
-      if (!localStorage.getItem("isLogin")) {
+      if (localStorage.getItem("isLogin") !== "true") {
         alert("請先註冊/登入會員！");
         localStorage.setItem("redirectAfterLogin", "cart.html");
         window.location.href = "member.html";
