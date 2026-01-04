@@ -136,6 +136,23 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
+    searchInput.addEventListener("keydown", e => {
+      if (e.key === "Enter") {
+        const keyword = searchInput.value.trim().toLowerCase();
+        if (!keyword) return;
+    
+        const results = products.filter(p =>
+          p.name.toLowerCase().includes(keyword)
+        );
+    
+        if (results.length > 0) {
+          // 跳到第一個搜尋到的商品
+          window.location.href = `product.html?id=${results[0].id}`;
+        }
+      }
+    });
+
+
       results.forEach(p => {
         const a = document.createElement("a");
         a.className = "search-item";
