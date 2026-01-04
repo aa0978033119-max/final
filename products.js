@@ -11,7 +11,7 @@ const products = [
    {
     id: 2,
     name: "百搭基礎牛仔褲",
-    price: 1280,
+    price: 960,
     desc: "衣櫃裡一定要有的一條牛仔褲，不挑身材的日常款式",
     detail: "100% Cotton / Made in Taiwan",
     sizes: ["S", "M", "L","XL"],
@@ -20,7 +20,7 @@ const products = [
    {
     id: 3,
     name: "時尚週限定條紋長裙",
-    price: 1280,
+    price: 840,
     desc: "時髦剪裁搭配深色條紋，展現精緻氣息",
     detail: "100% Cotton / Made in Taiwan",
     sizes: ["F"],
@@ -29,7 +29,7 @@ const products = [
     {
     id: 4,
     name: "學院格紋顯身短裙",
-    price: 1280,
+    price: 590,
     desc: "經典格紋，甜美的復古學院感",
     detail: "100% Cotton / Made in Taiwan",
     sizes: ["S", "M", "L"],
@@ -74,7 +74,7 @@ const products = [
     {
     id: 9,
     name: "象牙白打底上衣",
-    price: 1280,
+    price: 690,
     desc: "品牌打版T-shirt，簡單但不普通，值得一試的質感上衣",
     detail: "100% Cotton / Made in Taiwan",
     sizes: ["S", "M", "L","XL"],
@@ -83,7 +83,7 @@ const products = [
     {
     id: 10,
     name: "復古垂感束腳工裝褲",
-    price: 1280,
+    price: 690,
     desc: "垂墜感與挺度同時兼具的工裝褲，品牌隱藏的熱賣款",
     detail: "100% Cotton / Made in Taiwan",
     sizes: ["S", "M", "L","XL"],
@@ -92,7 +92,7 @@ const products = [
     {
     id: 11,
     name: "男裝天絲彈力直筒卡其褲",
-    price: 1280,
+    price: 730,
     desc: "低調百搭的褲型，穿起來舒適度極佳",
     detail: "100% Cotton / Made in Taiwan",
     sizes: ["S", "M", "L","XL"],
@@ -102,7 +102,7 @@ const products = [
     {
     id: 12,
     name: "亮鑽百褶網紗白色長裙",
-    price: 1280,
+    price: 730,
     desc: "充滿亮點的裙裝款式，為穿搭創造華麗的個性",
     detail: "100% Cotton / Made in Taiwan",
     sizes: ["F"],
@@ -111,7 +111,7 @@ const products = [
     {
     id: 13,
     name: "歐美紫色西裝外套",
-    price: 1280,
+    price: 1190,
     desc: "穿上自帶氣場的西裝外套，非常時髦的剪裁設計",
     detail: "100% Cotton / Made in Taiwan",
     sizes: ["F"],
@@ -120,7 +120,7 @@ const products = [
     {
     id: 14,
     name: "斜肩氣質荷葉邊上衣",
-    price: 1280,
+    price: 350,
     desc: "除了斜肩也能拉成平口上衣來穿，依照心情自由變換穿法",
     detail: "100% Cotton / Made in Taiwan",
     sizes: ["F"],
@@ -129,7 +129,7 @@ const products = [
    {
     id: 15,
     name: "短板聯名渲染上衣",
-    price: 1280,
+    price: 440,
     desc: "穿上帶你回到千禧年，渲染設計獨具特色",
     detail: "100% Cotton / Made in Taiwan",
     sizes: ["F"],
