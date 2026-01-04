@@ -33,6 +33,13 @@ document.addEventListener("DOMContentLoaded", () => {
     function nextBanner() { currentIndex++; showBanner(currentIndex); }
     function prevBanner() { currentIndex--; showBanner(currentIndex); }
 
+    const bannerButton = document.querySelector(".banner-text button");
+    if (bannerButton) {
+      bannerButton.addEventListener("click", () => {
+        window.location.href = `product.html?id=${banners[currentIndex].productId}`;
+      });
+    }
+
     banners.forEach((_, i) => {
       const dot = document.createElement("span");
       dot.className = "dot";
@@ -45,26 +52,62 @@ document.addEventListener("DOMContentLoaded", () => {
       dots.forEach((dot, i) => dot.classList.toggle("active", i === currentIndex));
     }
 
-    const bannerButton = document.querySelector(".banner-text button");
-    if (bannerButton) {
-      bannerButton.addEventListener("click", () => {
-        window.location.href = `product.html?id=${banners[currentIndex].productId}`;
-      });
-    }
-
     showBanner(currentIndex);
     window.nextBanner = nextBanner;
     window.prevBanner = prevBanner;
   }
 
-  // ===== 收藏初始化 =====
+  // ===== 收藏 & 購物車 =====
   let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
-  document.querySelectorAll(".product").forEach(product => {
-    const name = product.querySelector(".product-name")?.textContent;
-    const icon = product.querySelector(".favorite-icon");
-    if (name && icon && favorites.includes(name)) {
-      icon.src = "images/love.png";
+
+  window.toggleFavorite = function(el) {
+    if (!el) return;
+    const product = el.closest(".product");
+    if (!product) return;
+
+    const id = product.dataset.id;
+    const name = product.dataset.name;
+    const price = product.dataset.price;
+    const img = product.dataset.img;
+    if (!id || !name || !price || !img) return;
+
+    const index = favorites.findIndex(item => item.id === id);
+    if (el.src.includes("heart.png")) {
+      el.src = "images/love.png";
+      if (index === -1) favorites.push({ id, name, price, img });
+    } else {
+      el.src = "images/heart.png";
+      if (index !== -1) favorites.splice(index, 1);
     }
+    localStorage.setItem("favorites", JSON.stringify(favorites));
+  };
+
+  window.addToCart = function(button) {
+    if (!button) return;
+    const product = button.closest(".product");
+    if (!product) return;
+
+    const id = product.dataset.id;
+    const name = product.dataset.name;
+    const price = parseInt(product.dataset.price);
+    const img = product.dataset.img;
+    if (!id || !name || !price || !img) return;
+
+    let cart = JSON.parse(localStorage.getItem("cart")) || {};
+    if (cart[id]) {
+      cart[id].quantity += 1;
+    } else {
+      cart[id] = { id, name, price, img, quantity: 1 };
+    }
+    localStorage.setItem("cart", JSON.stringify(cart));
+    alert(`${name} 已加入購物車！`);
+  };
+
+  // 初始化收藏圖示
+  document.querySelectorAll(".product").forEach(product => {
+    const id = product.dataset.id;
+    const icon = product.querySelector(".favorite-icon");
+    if (icon && favorites.some(item => item.id === id)) icon.src = "images/love.png";
   });
 
   // ===== Header 搜尋 & Menu =====
@@ -72,10 +115,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const searchBox    = document.getElementById("searchBox");
   const searchInput  = document.getElementById("searchInput");
   const searchResult = document.getElementById("searchResult");
-  const menuIcon = document.getElementById("menuIcon");
-  const menuBox  = document.getElementById("menuBox");
+  const menuIcon     = document.getElementById("menuIcon");
+  const menuBox      = document.getElementById("menuBox");
 
-  // 搜尋功能
   if (searchIcon && searchBox && searchInput && searchResult) {
     searchIcon.addEventListener("click", e => {
       e.stopPropagation();
@@ -88,23 +130,20 @@ document.addEventListener("DOMContentLoaded", () => {
       searchResult.innerHTML = "";
       if (!keyword) return;
 
-      const results = products.filter(p => p.name.toLowerCase().includes(keyword));
-      if (results.length === 0) {
-        searchResult.innerHTML = "<p>找不到商品</p>";
-        return;
-      }
+      const results = window.products?.filter(p => p.name.toLowerCase().includes(keyword)) || [];
 
-      results.forEach(p => {
-        const item = document.createElement("a");
-        item.className = "search-item";
-        item.href = `product.html?id=${p.id}`;
-        item.textContent = p.name;
-        item.addEventListener("click", () => {
+      if (results.length === 0) searchResult.innerHTML = "<p>找不到商品</p>";
+      else results.forEach(p => {
+        const a = document.createElement("a");
+        a.className = "search-item";
+        a.href = `product.html?id=${p.id}`;
+        a.textContent = p.name;
+        a.addEventListener("click", () => {
           searchBox.classList.remove("active");
           searchInput.value = "";
           searchResult.innerHTML = "";
         });
-        searchResult.appendChild(item);
+        searchResult.appendChild(a);
       });
     });
 
@@ -112,14 +151,9 @@ document.addEventListener("DOMContentLoaded", () => {
       if (e.key === "Enter") {
         e.preventDefault();
         const keyword = searchInput.value.trim().toLowerCase();
-        if (!keyword) return;
-
-        const results = products.filter(p => p.name.toLowerCase().includes(keyword));
-        if (results.length > 0) {
-          window.location.href = `product.html?id=${results[0].id}`;
-        } else {
-          alert("找不到商品");
-        }
+        const results = window.products?.filter(p => p.name.toLowerCase().includes(keyword)) || [];
+        if (results.length > 0) window.location.href = `product.html?id=${results[0].id}`;
+        else alert("找不到商品");
       }
     });
 
@@ -127,38 +161,18 @@ document.addEventListener("DOMContentLoaded", () => {
     document.addEventListener("click", () => searchBox.classList.remove("active"));
   }
 
-  // Menu 功能
   if (menuIcon && menuBox) {
-    menuIcon.addEventListener("click", e => {
-      e.stopPropagation();
-      menuBox.classList.toggle("active");
-    });
+    menuIcon.addEventListener("click", e => { e.stopPropagation(); menuBox.classList.toggle("active"); });
     menuBox.addEventListener("click", e => e.stopPropagation());
     document.addEventListener("click", () => menuBox.classList.remove("active"));
   }
 
-  // ===== 收藏切換 =====
-  window.toggleFavorite = function(el) {
-    const productName = el.closest(".product")?.querySelector(".product-name")?.textContent;
-    if (!productName) return;
-
-    if (el.src.includes("heart.png")) {
-      el.src = "images/love.png";
-      if (!favorites.includes(productName)) favorites.push(productName);
-    } else {
-      el.src = "images/heart.png";
-      favorites = favorites.filter(name => name !== productName);
-    }
-    localStorage.setItem("favorites", JSON.stringify(favorites));
-  };
-
-  // ===== 會員登入渲染 =====
+  // ===== 會員登入狀態 =====
   function renderUserArea() {
     const userArea = document.getElementById("user-area");
     if (!userArea) return;
 
     const user = localStorage.getItem("user");
-
     if (user) {
       userArea.innerHTML = `
         <div class="user-menu">
@@ -171,18 +185,12 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>
       `;
     } else {
-      userArea.innerHTML = `
-        <a href="member.html">
-          <img src="images/user.png" title="註冊 / 登入">
-        </a>
-      `;
+      userArea.innerHTML = `<a href="member.html"><img src="images/user.png" title="註冊 / 登入"></a>`;
     }
   }
-
   window.renderUserArea = renderUserArea;
   renderUserArea();
 
-  // ===== 登出 =====
   window.logout = function() {
     localStorage.removeItem("isLogin");
     localStorage.removeItem("user");
@@ -192,7 +200,7 @@ document.addEventListener("DOMContentLoaded", () => {
     window.location.href = "index.html";
   };
 
-  // ===== profileForm 提交 =====
+  // ===== profileForm =====
   const profileForm = document.getElementById("profileForm");
   if (profileForm) {
     profileForm.addEventListener("submit", e => {
@@ -220,28 +228,8 @@ document.addEventListener("DOMContentLoaded", () => {
       const productDiv = link.closest('.product');
       if (!productDiv) return;
       const productId = productDiv.getAttribute('data-id');
-      if (productId) {
-        window.location.href = `product.html?id=${encodeURIComponent(productId)}`;
-      } else {
-        console.warn('此商品缺少 data-id 屬性');
-      }
+      if (productId) window.location.href = `product.html?id=${encodeURIComponent(productId)}`;
     });
   });
-
-  // ===== 回到頂部按鈕 =====
-  const backToTopBtn = document.getElementById("backToTop");
-  if (backToTopBtn) {
-    backToTopBtn.style.display = "none";
-    window.addEventListener("scroll", () => {
-      if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
-        backToTopBtn.style.display = "block";
-      } else {
-        backToTopBtn.style.display = "none";
-      }
-    });
-    backToTopBtn.addEventListener("click", () => {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    });
-  }
 
 });
