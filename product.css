@@ -6,7 +6,6 @@
   justify-content:center;
   max-width:1000px;
   margin:0 auto;
-  text-align:left;
 }
 
 .product-images img {
@@ -46,13 +45,20 @@
 
 .tab.active {
   border-bottom: 2px solid black;
-  font-weight: bold; 
+  font-weight: bold;
 }
+
+/* 內容區 */
 .tab-content {
   padding: 20px;
+}
+
+.content {
   display: none;
+  text-align: center;
 }
 
 .content.active {
   display: block;
 }
+
