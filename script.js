@@ -1,3 +1,9 @@
+/* ========= Header Search / Menu ========= */
+const searchIcon = document.getElementById("searchIcon");
+const searchBox  = document.getElementById("searchBox");
+const menuIcon   = document.getElementById("menuIcon");
+const menuBox    = document.querySelector(".menu-box");
+
 document.addEventListener("DOMContentLoaded", () => {
 
   /* ========= 會員 / 購物車：未登入攔截 ========= */
@@ -151,6 +157,7 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
   }
+
   if (searchIcon) {
       searchIcon.addEventListener("click", (e) => {
       e.stopPropagation();
