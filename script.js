@@ -122,24 +122,22 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     /* ========= Toast ========= */
-    function showToast(message, type = "success") {
-      const toast = document.createElement("div");
-      toast.className = `toast ${type}`;
-      toast.textContent = message;
-    
+    function showToast(msg) {
+      const toast = document.createElement('div');
+      toast.className = 'toast';
+      toast.innerText = msg;
       document.body.appendChild(toast);
     
-      // 顯示
-      requestAnimationFrame(() => {
-        toast.classList.add("show");
-      });
-    
-      // 自動消失
       setTimeout(() => {
-        toast.classList.remove("show");
-        setTimeout(() => toast.remove(), 300);
+        toast.classList.add('show');
+      }, 10);
+    
+      setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => document.body.removeChild(toast), 300);
       }, 2000);
     }
+
 
     /* ========= 回到頂部按鈕 ========= */
 
