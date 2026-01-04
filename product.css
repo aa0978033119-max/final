@@ -56,5 +56,10 @@
 
 .content {
   display: none;
-  text-align:center;
+  text-align: center;
+}
+
+/* 顯示目前的 tab 內容 */
+.content.active {
+  display: block;
 }
