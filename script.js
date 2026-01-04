@@ -93,6 +93,16 @@ document.addEventListener("DOMContentLoaded", () => {
     const img = product.dataset.img;
     if (!id || !name || !price || !img) return;
 
+    const isLogin = localStorage.getItem("isLogin");
+    if (!isLogin) {
+      // 未登入 → 記錄返回頁面 & 自動加入的商品
+      localStorage.setItem("redirectAfterLogin", window.location.href);
+      localStorage.setItem("autoAddCart", JSON.stringify({ id, name, price, img, quantity: 1 }));
+      window.location.href = "member.html";
+      return;
+    }
+
+    // 已登入 → 加入購物車
     let cart = JSON.parse(localStorage.getItem("cart")) || {};
     if (cart[id]) {
       cart[id].quantity += 1;
@@ -200,7 +210,7 @@ document.addEventListener("DOMContentLoaded", () => {
     window.location.href = "index.html";
   };
 
-  // ===== profileForm =====
+  // ===== profileForm 提交 =====
   const profileForm = document.getElementById("profileForm");
   if (profileForm) {
     profileForm.addEventListener("submit", e => {
@@ -212,11 +222,26 @@ document.addEventListener("DOMContentLoaded", () => {
       };
       localStorage.setItem("userProfile", JSON.stringify(profileData));
       localStorage.setItem("isLogin", "true");
-      localStorage.setItem("user", "STANDARD DAY 會員");
+      localStorage.setItem("user", profileData.name || "STANDARD DAY 會員");
 
       alert("會員資料已更新，登入成功！");
       renderUserArea();
-      if (window.opener?.renderUserArea) window.opener.renderUserArea();
+
+      // ===== 自動加入購物車 & 返回原頁 =====
+      const autoAdd = JSON.parse(localStorage.getItem("autoAddCart"));
+      if (autoAdd) {
+        let cart = JSON.parse(localStorage.getItem("cart")) || {};
+        const { id, name, price, img, quantity } = autoAdd;
+        if (cart[id]) cart[id].quantity += quantity;
+        else cart[id] = { id, name, price, img, quantity };
+        localStorage.setItem("cart", JSON.stringify(cart));
+        localStorage.removeItem("autoAddCart");
+        alert(`${name} 已自動加入購物車！`);
+      }
+
+      const redirectUrl = localStorage.getItem("redirectAfterLogin") || "index.html";
+      localStorage.removeItem("redirectAfterLogin");
+      window.location.href = redirectUrl;
     });
   }
 
