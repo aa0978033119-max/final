@@ -11,23 +11,18 @@ function logout() {
     localStorage.removeItem("user");
     localStorage.removeItem("userProfile");
     alert("已登出");
-    window.location.href = "index.html"; // 登出後回首頁
+    window.location.href = "index.html";
 }
 
-// 登入（模擬）
-function loginAsGuest() {
-    localStorage.setItem("isLogin", "true");
-    localStorage.setItem("user", "STANDARD DAY 會員");
-
-    // 登入後跳轉回先前想去的頁面，若無則回首頁
-    const redirect = localStorage.getItem("redirectAfterLogin") || "index.html";
-    localStorage.removeItem("redirectAfterLogin");
-    location.href = redirect;
+// 判斷會員資料是否完整
+function profileComplete() {
+    const profile = JSON.parse(localStorage.getItem("userProfile")) || {};
+    return profile.name && profile.email && profile.phone;
 }
 
 // DOM 加載完畢
 document.addEventListener("DOMContentLoaded", () => {
-    const isLogin = localStorage.getItem("isLogin");
+    const isLogin = localStorage.getItem("isLogin") === "true";
     const loginBox = document.getElementById("loginBox");
     const memberContent = document.getElementById("memberContent");
 
@@ -35,22 +30,11 @@ document.addEventListener("DOMContentLoaded", () => {
         if (loginBox) loginBox.style.display = "none";
         if (memberContent) memberContent.style.display = "flex";
 
-        // 如果有儲存過會員資料，顯示在表單
+        // 載入會員資料
         const profile = JSON.parse(localStorage.getItem("userProfile")) || {};
         if (profile.name) document.getElementById("name").value = profile.name;
         if (profile.email) document.getElementById("email").value = profile.email;
         if (profile.phone) document.getElementById("phone").value = profile.phone;
-
-        // 顯示會員icon
-        const userArea = document.getElementById("user-area");
-        if (userArea) {
-            userArea.innerHTML = `
-                <a href="member.html" title="會員中心">
-                    <img src="images/user.png" alt="Member">
-                </a>
-            `;
-        }
-
     } else {
         if (loginBox) loginBox.style.display = "flex";
         if (memberContent) memberContent.style.display = "none";
@@ -63,18 +47,23 @@ document.addEventListener("DOMContentLoaded", () => {
             e.preventDefault();
 
             const profileData = {
-                name: document.getElementById('name').value,
-                email: document.getElementById('email').value,
-                phone: document.getElementById('phone').value
+                name: document.getElementById('name').value.trim(),
+                email: document.getElementById('email').value.trim(),
+                phone: document.getElementById('phone').value.trim()
             };
+
+            if (!profileData.name || !profileData.email || !profileData.phone) {
+                alert("請完整填寫姓名、Email、電話！");
+                return;
+            }
 
             localStorage.setItem('userProfile', JSON.stringify(profileData));
             localStorage.setItem("isLogin", "true");
-            localStorage.setItem("user", "STANDARD DAY 會員");
+            localStorage.setItem("user", profileData.name || "STANDARD DAY 會員");
 
-            alert('會員資料已更新，登入成功！');
+            alert('登入成功！');
 
-            // 同步更新首頁會員icon
+            // 更新 header 顯示會員icon
             const userArea = document.getElementById("user-area");
             if (userArea) {
                 userArea.innerHTML = `
@@ -82,6 +71,13 @@ document.addEventListener("DOMContentLoaded", () => {
                         <img src="images/user.png" alt="Member">
                     </a>
                 `;
+            }
+
+            // 自動返回先前頁面
+            const redirectUrl = localStorage.getItem("redirectAfterLogin");
+            if (redirectUrl) {
+                localStorage.removeItem("redirectAfterLogin");
+                window.location.href = redirectUrl;
             }
         });
     }
