@@ -107,24 +107,28 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   /* ========= Header 搜尋 & 商品分類 ========= */
-  document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", () => {
 
   /* ========= Header 搜尋 ========= */
-  const searchIcon = document.getElementById("searchIcon");
-  const searchBox = document.getElementById("searchBox");
-  const searchInput = document.getElementById("searchInput");
+  const searchIcon   = document.getElementById("searchIcon");
+  const searchBox    = document.getElementById("searchBox");
+  const searchInput  = document.getElementById("searchInput");
   const searchResult = document.getElementById("searchResult");
 
-  if (searchIcon && searchBox && searchInput) {
+  if (searchIcon && searchBox && searchInput && searchResult) {
+
+    /* 點擊搜尋 icon */
     searchIcon.addEventListener("click", e => {
       e.stopPropagation();
       searchBox.classList.toggle("active");
       searchInput.focus();
     });
 
+    /* 即時搜尋 */
     searchInput.addEventListener("input", () => {
       const keyword = searchInput.value.trim().toLowerCase();
       searchResult.innerHTML = "";
+
       if (!keyword) return;
 
       const results = products.filter(p =>
@@ -136,41 +140,69 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-    searchInput.addEventListener("keydown", e => {
-      if (e.key === "Enter") {
-        const keyword = searchInput.value.trim().toLowerCase();
-        if (!keyword) return;
-    
-        const results = products.filter(p =>
-          p.name.toLowerCase().includes(keyword)
-        );
-    
-        if (results.length > 0) {
-          // 跳到第一個搜尋到的商品
-          window.location.href = `product.html?id=${results[0].id}`;
-        }
-      }
-    });
-
-
       results.forEach(p => {
         const a = document.createElement("a");
         a.className = "search-item";
         a.href = `product.html?id=${p.id}`;
         a.textContent = p.name;
+
+        a.addEventListener("click", () => {
+          searchBox.classList.remove("active");
+          searchInput.value = "";
+          searchResult.innerHTML = "";
+        });
+
         searchResult.appendChild(a);
       });
+    });
+
+    /* Enter 鍵搜尋（跳第一個商品） */
+    searchInput.addEventListener("keydown", e => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+
+        const keyword = searchInput.value.trim().toLowerCase();
+        if (!keyword) return;
+
+        const results = products.filter(p =>
+          p.name.toLowerCase().includes(keyword)
+        );
+
+        if (results.length > 0) {
+          window.location.href = `product.html?id=${results[0].id}`;
+        } else {
+          alert("找不到商品");
+        }
+      }
+    });
+
+    /* 點搜尋欄本身不關閉 */
+    searchBox.addEventListener("click", e => {
+      e.stopPropagation();
+    });
+
+    /* 點空白處關閉搜尋 */
+    document.addEventListener("click", () => {
+      searchBox.classList.remove("active");
     });
   }
 
   /* ========= Menu ========= */
   const menuIcon = document.getElementById("menuIcon");
-  const menuBox = document.getElementById("menuBox");
+  const menuBox  = document.getElementById("menuBox");
 
   if (menuIcon && menuBox) {
     menuIcon.addEventListener("click", e => {
       e.stopPropagation();
       menuBox.classList.toggle("active");
+    });
+
+    menuBox.addEventListener("click", e => {
+      e.stopPropagation();
+    });
+
+    document.addEventListener("click", () => {
+      menuBox.classList.remove("active");
     });
   }
 
