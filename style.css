@@ -297,24 +297,6 @@ footer {
     margin-bottom: 15px;
   }
   
-  .product {
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    transition: box-shadow 0.2s;
-  }
-
-
-  }
-  
-  .product img {
-    width: 100%;
-    height: auto;
-  }
-  
   .product-info {
     padding: 10px;
     display: flex;
@@ -347,7 +329,9 @@ footer {
   }
 /* ===== Products ===== */
 .products {
-  padding: 40px 300px;  
+  padding: 40px;
+  max-width: 1400px;
+  margin: 0 auto;
   background-color: #f9f9f9;
 }
 
@@ -363,28 +347,20 @@ footer {
 }
 
 .product {
-  position: relative; /* 絕對定位基準 */
+  position: relative;
   background-color: #fff;
   border: 1px solid #ddd;
   border-radius: 10px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  transition: box-shadow 0.2s;
-}
-
- transition: 
-    transform 0.3s ease,
-    box-shadow 0.3s ease;
-  
   cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .product:hover {
   transform: translateY(-10px);
   box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-}
-
 }
 
 .product img {
