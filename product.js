@@ -72,7 +72,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     localStorage.setItem("cart", JSON.stringify(cart));
-    alert(`✅ ${name}（${size}）已加入購物車`);
+    alert(` ${name}（${size}）已加入購物車`);
   });
 
   // ===== Tab 切換 =====
