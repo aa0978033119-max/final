@@ -1,66 +1,65 @@
 document.getElementById('checkoutForm').addEventListener('submit', function(event) {
     event.preventDefault();
 
-    const name = document.getElementById('name').value;
-    if (name.length < 2) {
+    const formData = {
+        name: document.getElementById('name').value,
+        phone: document.getElementById('phone').value,
+        address: document.getElementById('address').value
+    };
+
+    if (formData.name.length < 2) {
         alert("請輸入有效的收件人姓名");
         return;
     }
+    console.log("訂單資料傳輸中...", formData);
 
     const submitBtn = document.getElementById('submitBtn');
     submitBtn.innerText = "處理中...";
     submitBtn.disabled = true;
 
     setTimeout(() => {
-
         document.getElementById('successMessage').classList.remove('hidden');
-
-        localStorage.removeItem('cart');
-        localStorage.removeItem('cartSubtotal');
-        localStorage.removeItem('shippingFee');
-
-    }, 1500);
+    }, 1000);
 });
-if (totalValue === 0) {
-        alert("您的購物車目前是空的喔！");
-    } else {
-        localStorage.setItem('subtotal-display', totalValue);
-        localStorage.setItem('shipping-fee-display', 60); 
 
-        window.location.href = "check.html";
-    }
+const nameInput = document.getElementById('name');
+const phoneInput = document.getElementById('phone');
+const form = document.getElementById('checkoutForm');
+
+nameInput.oninput = () => {
+    nameInput.value = nameInput.value.replace(/[^\u4e00-\u9fa5a-zA-Z]/g, '');
+};
+
+phoneInput.oninput = () => {
+    phoneInput.value = phoneInput.value.replace(/\D/g, '');
+};
+
+const subtotal = parseInt(localStorage.getItem('cartSubtotal')) || 0;
+const shipping = parseInt(localStorage.getItem('shippingFee')) || 0;
+const total = subtotal + shipping;
+
 
 function formatCurrency(num) {
     return '$' + num.toLocaleString();
 }
 
+
 window.addEventListener('DOMContentLoaded', () => {
-    const subtotalEl = document.getElementById('subtotal-display');
-    const shippingEl = document.getElementById('shipping-fee-display');
-    const totalEl = document.getElementById('total-Amount');
-
-    if (subtotalEl) subtotalEl.innerText = formatCurrency(subtotal);
-    if (shippingEl) shippingEl.innerText = formatCurrency(shipping);
-    if (totalEl) totalEl.innerText = formatCurrency(total);
+    document.getElementById('subtotal-display').innerText = formatCurrency(subtotal);
+    document.getElementById('shipping-fee-display').innerText = formatCurrency(shipping);
+    document.getElementById('total-Amount').innerText = formatCurrency(total);
 });
-function saveCart() {
-    let subtotal = 0;
-    const cart = {};
-    const shippingFee = 60;
 
-    document.querySelectorAll(".cart-item").forEach(item => {
-        const price = parseInt(item.dataset.price);
-        const qty = parseInt(item.querySelector(".quantity").value);
-        if (qty > 0) {
-            const name = item.querySelector("p").innerText;
-            const img = item.querySelector("img").src;
-            cart[name] = { name, price, img, quantity: qty };
-            subtotal += price * qty;
-        }
-    });
-    localStorage.setItem("cart", JSON.stringify(cart));
-    localStorage.setItem("cartSubtotal", subtotal); 
-    localStorage.setItem("shippingFee", subtotal > 0 ? shippingFee : 0); 
+document.getElementById('checkoutForm').addEventListener('submit', function(event) {
 
-    updateTotal();
-}
+});
+
+
+form.onsubmit = (e) => {
+    e.preventDefault();
+    if (form.checkValidity()) {
+        document.getElementById('successMessage').classList.remove('hidden');
+    } else {
+        alert("請輸入正確的資料格式");
+    }
+};
