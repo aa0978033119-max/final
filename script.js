@@ -139,5 +139,32 @@ document.addEventListener("DOMContentLoaded", () => {
     if (favorites.some(item => String(item.id) === id)) icon.src = "images/love.png";
     else icon.src = "images/heart.png";
   });
+  // 回到頂端按鈕
+  // -----------------------------
+  const backToTopBtn = document.getElementById("backToTop");
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 200) backToTopBtn.style.display = "block";
+    else backToTopBtn.style.display = "none";
+  });
+  backToTopBtn.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
 
+  // -----------------------------
+  // 搜尋框
+  // -----------------------------
+  const searchIcon = document.getElementById("searchIcon");
+  const searchBox = document.getElementById("searchBox");
+  searchIcon.addEventListener("click", () => {
+    searchBox.classList.toggle("active"); // CSS 控制 show/hide
+  });
+
+  // -----------------------------
+  // 上下裝選單
+  // -----------------------------
+  const menuIcon = document.getElementById("menuIcon");
+  const menuBox = document.getElementById("menuBox");
+  menuIcon.addEventListener("click", () => {
+    menuBox.classList.toggle("active"); // CSS 控制 show/hide
+  });
 });
