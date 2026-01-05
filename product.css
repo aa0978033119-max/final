@@ -1,28 +1,27 @@
 /* ===== Product ===== */
 .product-container {
-  display: flex;
-  gap: 40px;
-  padding: 40px 20px;
-  justify-content: center;
-  max-width: 1000px;
-  margin: 0 auto;
-  align-items: flex-start; /* 確保頂部對齊 */
-}
-
-.product-images {
-  flex: 0 0 400px; /* 不放大、不縮小、固定寬度 400px */
-}
-
-.product-images img {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
-.product-info {
-  flex: 1; /* 佔據剩餘空間 */
-  max-width: 400px;
-}
+    display: flex;
+    gap: 40px;
+    padding: 40px 20px;
+    justify-content:center;
+    max-width:1000px;
+    margin:0 auto;
+  }
+  
+  .product-images img {
+    width: 100%;
+    max-width: 400px; 
+    height: auto;
+    display: block;
+  }
+  
+  .product-info {
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    text-align: left;
+  }
 
 .price {
   font-size: 20px;
