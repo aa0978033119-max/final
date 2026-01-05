@@ -1,4 +1,88 @@
 document.addEventListener("DOMContentLoaded", () => {
+    // ===== banner =====
+    let currentBannerIndex = 0; // 用來追踪當前顯示的 Banner 圖片
+
+    const bannerImages = [
+      "images/banner1.jpg",
+      "images/banner2.jpg",
+      "images/banner3.jpg"
+    ]; // 所有 Banner 圖片的路徑
+    
+    const bannerTitles = [
+      "NEW ARRIVAL", 
+      "SUMMER SALE", 
+      "WINTER COLLECTION"
+    ]; // 各個 Banner 圖片對應的標題
+    
+    const bannerDescriptions = [
+      "秋冬新品 8 折起",
+      "夏季促銷，快來選購！",
+      "冬季系列，暖心上新！"
+    ]; // 各個 Banner 圖片的描述
+    
+    function updateBanner() {
+      const bannerImage = document.getElementById("bannerImage");
+      const bannerTitle = document.getElementById("bannerTitle");
+      const bannerDesc = document.getElementById("bannerDesc");
+      
+      // 更新 Banner 的內容
+      bannerImage.src = bannerImages[currentBannerIndex];
+      bannerTitle.innerText = bannerTitles[currentBannerIndex];
+      bannerDesc.innerText = bannerDescriptions[currentBannerIndex];
+    
+      // 更新圓點顯示
+      const dotsContainer = document.getElementById("dotsContainer");
+      dotsContainer.innerHTML = ""; // 清空現有圓點
+      bannerImages.forEach((_, index) => {
+        const dot = document.createElement("span");
+        dot.classList.add("dot");
+        if (index === currentBannerIndex) dot.classList.add("active");
+        dotsContainer.appendChild(dot);
+      });
+    }
+    
+    function prevBanner() {
+      // 顯示上一張圖片
+      currentBannerIndex = (currentBannerIndex - 1 + bannerImages.length) % bannerImages.length;
+      updateBanner();
+    }
+    
+    function nextBanner() {
+      // 顯示下一張圖片
+      currentBannerIndex = (currentBannerIndex + 1) % bannerImages.length;
+      updateBanner();
+    }
+    
+    // 自動輪播
+    let autoSlideInterval = setInterval(nextBanner, 5000); // 每5秒切換一次 Banner 圖片
+    
+    // 停止自動輪播（當手動點擊上一張或下一張按鈕時）
+    function stopAutoSlide() {
+      clearInterval(autoSlideInterval);
+      autoSlideInterval = setInterval(nextBanner, 5000); // 重新啟動自動輪播
+    }
+    
+    // 初次載入時更新 Banner 顯示
+    document.addEventListener("DOMContentLoaded", () => {
+      updateBanner();
+    
+      // 手動按鈕點擊事件
+      const prevBtn = document.querySelector(".prev");
+      const nextBtn = document.querySelector(".next");
+    
+      if (prevBtn && nextBtn) {
+        prevBtn.addEventListener("click", () => {
+          prevBanner();
+          stopAutoSlide(); // 停止自動輪播後重新啟動
+        });
+    
+        nextBtn.addEventListener("click", () => {
+          nextBanner();
+          stopAutoSlide(); // 停止自動輪播後重新啟動
+        });
+      }
+    });
+
     // ===== 搜尋功能 =====
   const searchInput = document.getElementById("searchInput");
   const searchResult = document.getElementById("searchResult");
