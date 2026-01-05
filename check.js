@@ -26,12 +26,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById('checkoutForm');
     const nameInput = document.getElementById('name');
     const phoneInput = document.getElementById('phone');
+    const addressInput = document.getElementById('address');
+
     if (nameInput) {
         nameInput.oninput = () => {
             nameInput.value = nameInput.value.replace(/[^\u4e00-\u9fa5a-zA-Z]/g, '');
         };
     }
-
+    
     if (phoneInput) {
         phoneInput.oninput = () => {
             phoneInput.value = phoneInput.value.replace(/\D/g, '');
@@ -42,15 +44,21 @@ document.addEventListener("DOMContentLoaded", () => {
         form.addEventListener('submit', function(event) {
             event.preventDefault();
 
+            // 表單驗證
             if (nameInput.value.length < 2) {
-                alert("請輸入有效的收件人姓名");
+                alert("請輸入完整的收件人姓名");
+                return;
+            }
+            if (phoneInput.value.length < 9) {
+                alert("請輸入有效的電話號碼");
                 return;
             }
 
             const formData = {
                 name: nameInput.value,
                 phone: phoneInput.value,
-                address: document.getElementById('address').value,
+                address: addressInput.value,
+                payment: document.querySelector('input[name="payment"]:checked').value,
                 total: document.getElementById('total-amount').innerText
             };
 
@@ -61,14 +69,16 @@ document.addEventListener("DOMContentLoaded", () => {
                 submitBtn.innerText = "處理中...";
                 submitBtn.disabled = true;
             }
-
+            
             setTimeout(() => {
                 const successMsg = document.getElementById('successMessage');
                 if (successMsg) {
-                    successMsg.classList.remove('hidden');
-                    localStorage.removeItem("cart");
+                    successMsg.style.display = 'block'; // 顯示成功訊息
+                    localStorage.removeItem("cart");    // 清空購物車
+                    form.reset();                       // 重置表單
+                    submitBtn.innerText = "訂單已送出";
                 }
-            }, 1000);
+            }, 1500);
         });
     }
 });
