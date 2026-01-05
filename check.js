@@ -1,25 +1,24 @@
-document.getElementById('checkoutForm').addEventListener('submit', function(event) {
-    event.preventDefault();
+const subtotal = parseInt(localStorage.getItem('cartSubtotal')) || 0;
+const shipping = parseInt(localStorage.getItem('shippingFee')) || 0;
+const total = subtotal + shipping;
 
-    const formData = {
-        name: document.getElementById('name').value,
-        phone: document.getElementById('phone').value,
-        address: document.getElementById('address').value
-    };
 
-    if (formData.name.length < 2) {
-        alert("請輸入有效的收件人姓名");
-        return;
+function formatCurrency(num) {
+    return '$' + num.toLocaleString();
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+    const subtotalDisplay = document.getElementById('subtotal-display');
+    const shippingDisplay = document.getElementById('shipping-fee-display');
+    const totalDisplay = document.getElementById('total-Amount');
+
+    if (subtotalDisplay) subtotalDisplay.innerText = formatCurrency(subtotal);
+    if (shippingDisplay) shippingDisplay.innerText = formatCurrency(shipping);
+    if (totalDisplay) totalDisplay.innerText = formatCurrency(total);
+
+    if (subtotal === 0) {
+        console.warn("注意：目前購物車小計為 0");
     }
-    console.log("訂單資料傳輸中...", formData);
-
-    const submitBtn = document.getElementById('submitBtn');
-    submitBtn.innerText = "處理中...";
-    submitBtn.disabled = true;
-
-    setTimeout(() => {
-        document.getElementById('successMessage').classList.remove('hidden');
-    }, 1000);
 });
 
 const nameInput = document.getElementById('name');
@@ -34,33 +33,39 @@ phoneInput.oninput = () => {
     phoneInput.value = phoneInput.value.replace(/\D/g, '');
 };
 
-const subtotal = parseInt(localStorage.getItem('cartSubtotal')) || 0;
-const shipping = parseInt(localStorage.getItem('shippingFee')) || 0;
-const total = subtotal + shipping;
+// --- 4. 表單提交處理 (整合原本的所有 submit 事件) ---
+form.addEventListener('submit', function(event) {
+    event.preventDefault(); // 阻止表單跳轉
 
+    // A. 收集資料
+    const formData = {
+        name: nameInput.value.trim(),
+        phone: phoneInput.value.trim(),
+        address: document.getElementById('address').value.trim(),
+        amount: total // 連動的總金額
+    };
 
-function formatCurrency(num) {
-    return '$' + num.toLocaleString();
-}
-
-
-window.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('subtotal-display').innerText = formatCurrency(subtotal);
-    document.getElementById('shipping-fee-display').innerText = formatCurrency(shipping);
-    document.getElementById('total-Amount').innerText = formatCurrency(total);
-});
-
-document.getElementById('checkoutForm').addEventListener('submit', function(event) {
-
-});
-
-
-form.onsubmit = (e) => {
-    e.preventDefault();
-    if (form.checkValidity()) {
-        document.getElementById('successMessage').classList.remove('hidden');
-    } else {
-        alert("請輸入正確的資料格式");
+    // B. 驗證邏輯
+    if (formData.name.length < 2) {
+        alert("請輸入有效的收件人姓名");
+        return;
     }
-};
 
+    if (!form.checkValidity()) {
+        alert("請輸入正確的資料格式");
+        return;
+    }
+
+    console.log("訂單資料傳輸中...", formData);
+
+    const submitBtn = document.getElementById('submitBtn');
+    submitBtn.innerText = "處理中...";
+    submitBtn.disabled = true;
+
+    setTimeout(() => {
+        document.getElementById('successMessage').classList.remove('hidden');
+        
+        
+        alert("訂單已成功送出！");
+    }, 1000);
+});
