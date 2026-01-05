@@ -50,6 +50,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const bannerTitle = document.getElementById("bannerTitle");
     const bannerDesc = document.getElementById("bannerDesc");
     const bannerBuyNowBtn = document.getElementById("bannerBuyNowBtn");
+
+    if (!bannerImage || !bannerTitle || !bannerDesc || !bannerBuyNowBtn) {
+    console.error("Banner elements are missing!");
+    return;
+  }
     
     // 更新 Banner 的內容
     bannerImage.src = bannerImages[currentBannerIndex];
