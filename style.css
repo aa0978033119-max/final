@@ -61,6 +61,16 @@ body {
     opacity: 0;
   }
 }
+.intro.fade-out {
+  animation: fadeOut 0.6s ease forwards;
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
 /* Logo + Navbar */
 
 header {
