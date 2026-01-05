@@ -1,4 +1,14 @@
 document.addEventListener("DOMContentLoaded", () => {
+  //menuIcon
+  const menuIcon = document.getElementById("menuIcon");
+  const menuBox = document.getElementById("menuBox");
+
+  if (menuIcon && menuBox) {
+    menuIcon.addEventListener("click", () => {
+      menuBox.classList.toggle("active"); // 切換 active 類名來顯示/隱藏菜單
+    });
+  }
+  
   // ===== banner =====
   let currentBannerIndex = 0; // 用來追踪當前顯示的 Banner 圖片
   
