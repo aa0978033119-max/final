@@ -21,9 +21,14 @@ document.getElementById('checkoutForm').addEventListener('submit', function(even
 
     }, 1500);
 });
-const subtotal = parseInt(localStorage.getItem('cartSubtotal')) || 0;
-const shipping = parseInt(localStorage.getItem('shippingFee')) || 0;
-const total = subtotal + shipping;
+if (totalValue === 0) {
+        alert("您的購物車目前是空的喔！");
+    } else {
+        localStorage.setItem('subtotal-display', totalValue);
+        localStorage.setItem('shipping-fee-display', 60); 
+
+        window.location.href = "check.html";
+    }
 
 function formatCurrency(num) {
     return '$' + num.toLocaleString();
