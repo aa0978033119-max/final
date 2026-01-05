@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
    document.addEventListener("click", (e) => {
     if (e.target.classList.contains("add-cart")) {
       const btn = e.target;
-      const product = btn.closest(".product");
+      const product = btn.closest(".product-container");
       if (!product) return;
 
       if (!requireLogin(window.location.href)) return;
