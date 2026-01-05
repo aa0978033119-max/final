@@ -1,4 +1,16 @@
 document.addEventListener("DOMContentLoaded", () => {
+  //searchIcon
+  const searchIcon = document.getElementById("searchIcon");
+  const searchBox = document.getElementById("searchBox");
+
+  // 檢查 searchIcon 和 searchBox 是否存在，並綁定點擊事件
+  if (searchIcon && searchBox) {
+    searchIcon.addEventListener("click", () => {
+      // 切換 searchBox 顯示與隱藏
+      searchBox.classList.toggle("active");
+    });
+  }
+
   //menuIcon
   const menuIcon = document.getElementById("menuIcon");
   const menuBox = document.getElementById("menuBox");
