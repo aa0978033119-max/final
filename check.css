@@ -125,4 +125,7 @@ input[type="text"], input[type="tel"] {
     transform: translateY(0);
     box-shadow: none;
 }
+.hidden {
+  display: none;
+}
 
