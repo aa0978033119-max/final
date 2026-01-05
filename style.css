@@ -338,8 +338,8 @@ nav a:hover {
   margin: 16px auto;
   padding: 12px 0;
 
-  background: #111;
-  color: #fff;
+  background: #565254;
+  color: #FFFFFF;
 
   border: none;
   border-radius: 999px;
@@ -357,7 +357,7 @@ nav a:hover {
 }
 
 .add-cart-btn:hover {
-  background: #000;
+  background: #7A7D7D;
   box-shadow: 0 10px 25px rgba(0,0,0,.2);
   transform: translateY(-2px);
 }
@@ -366,7 +366,6 @@ nav a:hover {
   transform: translateY(0);
   box-shadow: 0 4px 10px rgba(0,0,0,.2);
 }
-
 /* 收藏愛心圖示 */
 
 .favorite-icon {
