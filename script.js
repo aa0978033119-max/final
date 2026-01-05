@@ -276,3 +276,7 @@ document.addEventListener("DOMContentLoaded", () => {
     else icon.src = "images/heart.png";
   });
 });
+
+setTimeout(() => {
+  document.querySelector(".intro").style.display = "none";
+}, 1600);
