@@ -163,4 +163,36 @@
   margin-top: 5px;
 }
 
+.add-cart {
+  width: calc(100% - 32px);
+  margin: 16px auto;
+  padding: 12px 0;
 
+  background: #565254;
+  color: #FFFFFF;
+
+  border: none;
+  border-radius: 999px;
+
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 2px;
+
+  cursor: pointer;
+
+  transition: 
+    transform .2s ease,
+    box-shadow .2s ease,
+    background .2s ease;
+}
+
+.add-cart:hover {
+  background: #7A7D7D;
+  box-shadow: 0 10px 25px rgba(0,0,0,.2);
+  transform: translateY(-2px);
+}
+
+.add-cart:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 10px rgba(0,0,0,.2);
+}
