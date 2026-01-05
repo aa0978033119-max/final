@@ -45,26 +45,61 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // 顧客評價
-  const productReviews = reviews[productId] || [];
-  const reviewContainer = document.getElementById("review");
-  reviewContainer.innerHTML = "";
+  // 顧客回饋處理
+  const feedbackContainer = document.getElementById("feedback-list");
+  const noFeedbacksText = document.getElementById("no-feedbacks");
+  const feedbackForm = document.getElementById("feedback-form");
+  const submitFeedbackButton = document.getElementById("submit-feedback");
 
-  if (productReviews.length === 0) {
-    reviewContainer.innerText = "尚無評價";
-  } else {
-    productReviews.forEach(r => {
-      const div = document.createElement("div");
-      div.className = "review-item";
-      div.innerHTML = `
-        <strong>${r.name}</strong> - ${"★".repeat(r.rating)}<br>
-        <p>${r.text}</p>
-      `;
-      reviewContainer.appendChild(div);
-    });
+  // 回饋數據從 localStorage 或某個資料結構讀取
+  let productFeedbacks = JSON.parse(localStorage.getItem(`feedbacks_${productId}`)) || [];
+
+  // 顯示現有的回饋
+  function renderFeedbacks() {
+    feedbackContainer.innerHTML = "";
+    if (productFeedbacks.length === 0) {
+      noFeedbacksText.style.display = "block";
+    } else {
+      noFeedbacksText.style.display = "none";
+      productFeedbacks.forEach(feedback => {
+        const div = document.createElement("div");
+        div.className = "feedback-item";
+        div.innerHTML = `
+          <strong>${feedback.name}</strong> - ${"★".repeat(feedback.rating)}<br>
+          <p>${feedback.text}</p>
+        `;
+        feedbackContainer.appendChild(div);
+      });
+    }
   }
 
-  //送貨及付款方式
+  renderFeedbacks(); // 初始化顯示回饋
+
+  // 提交回饋
+  submitFeedbackButton.addEventListener("click", () => {
+    const name = document.getElementById("feedback-name").value;
+    const rating = parseInt(document.getElementById("feedback-rating").value);
+    const text = document.getElementById("feedback-text").value;
+
+    if (!name || !rating || !text) {
+      alert("請填寫所有欄位！");
+      return;
+    }
+
+    // 儲存回饋
+    const newFeedback = { name, rating, text };
+    productFeedbacks.push(newFeedback);
+
+    // 更新 localStorage
+    localStorage.setItem(`feedbacks_${productId}`, JSON.stringify(productFeedbacks));
+
+    // 清空表單並重新渲染回饋
+    document.getElementById("feedback-name").value = "";
+    document.getElementById("feedback-text").value = "";
+    renderFeedbacks();
+  });
+
+  // 送貨及付款方式
   const shippingContainer = document.getElementById("shipping");
   shippingContainer.innerHTML = `
     <h4>配送方式</h4>
