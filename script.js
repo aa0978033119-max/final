@@ -248,7 +248,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // ===== 收藏功能 =====
+  // ===================== 收藏功能 =====================
   let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
   favorites = favorites.filter(item => item && item.id);
 
@@ -287,14 +287,5 @@ document.addEventListener("DOMContentLoaded", () => {
     if (favorites.some(item => String(item.id) === id)) icon.src = "images/love.png";
     else icon.src = "images/heart.png";
   });
+
 });
-
-const intro = document.querySelector(".intro");
-
-setTimeout(() => {
-  intro.classList.add("fade-out");
-}, 1500);
-
-setTimeout(() => {
-  intro.remove();
-}, 2100);
