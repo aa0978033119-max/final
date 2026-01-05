@@ -18,9 +18,9 @@ document.getElementById('checkoutForm').addEventListener('submit', function(even
     submitBtn.disabled = true;
 
     setTimeout(() => {
-        document.getElementById('successMessage').classList.remove('hidden');
+      successMessage.classList.remove('hidden');
     }, 1000);
-});
+  });
 
 const nameInput = document.getElementById('name');
 const phoneInput = document.getElementById('phone');
@@ -34,11 +34,10 @@ phoneInput.oninput = () => {
     phoneInput.value = phoneInput.value.replace(/\D/g, '');
 };
 
-form.onsubmit = (e) => {
-    e.preventDefault();
-    if (form.checkValidity()) {
-        document.getElementById('successMessage').classList.remove('hidden');
-    } else {
-        alert("請輸入正確的資料格式");
-    }
-};
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+
+  if (!form.checkValidity()) {
+    alert("請輸入正確的資料格式");
+    return;
+  }
