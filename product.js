@@ -30,9 +30,32 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   //加入購物車
-  document.querySelector(".add-cart").addEventListener("click", () => {
-    const qty = document.querySelector("input[type='number']").value;
-    alert(`已加入購物車\n尺寸：${sizeSelect.value}\n數量：${qty}`);
+   document.addEventListener("click", (e) => {
+    if (e.target.classList.contains("add-cart-btn")) {
+      const btn = e.target;
+      const product = btn.closest(".product");
+      if (!product) return;
+
+      if (!requireLogin(window.location.href)) return;
+
+      const id = product.dataset.id;
+      const name = product.dataset.name;
+      const price = parseInt(product.dataset.price);
+      const img = product.dataset.img;
+      if (!id || !name || !price || !img) return;
+
+      let cart = JSON.parse(localStorage.getItem("cart")) || {};
+      const key = id;
+
+      if (cart[key]) {
+        cart[key].quantity += 1;
+      } else {
+        cart[key] = { id, name, price, img, quantity: 1 };
+      }
+
+      localStorage.setItem("cart", JSON.stringify(cart));
+      showToast(`${name} 已加入購物車！`);
+    }
   });
 
   //Tab 切換
