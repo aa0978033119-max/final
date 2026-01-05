@@ -30,45 +30,45 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 const productEl = document.querySelector(".product-container");
 
-// 設定 data-*
-productEl.dataset.id = productData.id;
-productEl.dataset.name = productData.name;
-productEl.dataset.price = productData.price;
-productEl.dataset.img = productData.img;
+document.addEventListener("click", (e) => {
+  const btn = e.target.closest(".add-cart");
+  if (!btn) return;
 
-document.getElementById("productName").textContent = productData.name;
-document.getElementById("productDesc").textContent = productData.desc;
-document.getElementById("productPrice").textContent = `$${productData.price}`;
-document.getElementById("mainImage").src = productData.img;
+  const product = btn.closest(".product-container");
+  if (!product) return;
 
-  //加入購物車
-   document.addEventListener("click", (e) => {
-    if (e.target.classList.contains("add-cart")) {
-      const btn = e.target;
-      const product = btn.closest(".product-container");
-      if (!product) return;
+  const { id, name, price, img } = product.dataset;
 
-      if (!requireLogin(window.location.href)) return;
+  if (!id || !name || !price || !img) {
+    alert("商品資料不完整");
+    return;
+  }
 
-      const id = product.dataset.id;
-      const name = product.dataset.name;
-      const price = parseInt(product.dataset.price);
-      const img = product.dataset.img;
-      if (!id || !name || !price || !img) return;
+  const size = document.getElementById("sizeSelect").value;
+  const qtyInput = product.querySelector('input[type="number"]');
+  const quantity = parseInt(qtyInput.value) || 1;
 
-      let cart = JSON.parse(localStorage.getItem("cart")) || {};
-      const key = id;
+  let cart = JSON.parse(localStorage.getItem("cart")) || {};
 
-      if (cart[key]) {
-        cart[key].quantity += 1;
-      } else {
-        cart[key] = { id, name, price, img, quantity: 1 };
-      }
+  const key = `${id}_${size}`;
 
-      localStorage.setItem("cart", JSON.stringify(cart));
-      showToast(`${name} 已加入購物車！`);
-    }
-  });
+  if (cart[key]) {
+    cart[key].quantity += quantity;
+  } else {
+    cart[key] = {
+      id: Number(id),
+      name,
+      price: Number(price),
+      img,
+      size,
+      quantity
+    };
+  }
+
+  localStorage.setItem("cart", JSON.stringify(cart));
+
+  alert(`✅ ${name}（${size}）已加入購物車`);
+});
 
   //Tab 切換
   document.querySelectorAll(".tab").forEach(tab => {
