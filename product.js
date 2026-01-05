@@ -139,9 +139,9 @@ document.addEventListener("DOMContentLoaded", () => {
   // ===== 送貨及付款方式 =====
   const shippingContainer = document.getElementById("shipping");
   shippingContainer.innerHTML = `
-    <h4>配送方式</h4>
+    <h3>配送方式</h3>
     <p>宅配 / 7-11 / 全家</p>
-    <h4>付款方式</h4>
+    <h3>付款方式</h3>
     <p>Apple Pay / LINE Pay / 銀行轉帳 / 信用卡 / 超商取貨付款</p>
   `;
 });
