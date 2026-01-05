@@ -28,6 +28,18 @@ document.addEventListener("DOMContentLoaded", () => {
     option.textContent = size;
     sizeSelect.appendChild(option);
   });
+const productEl = document.querySelector(".product-container");
+
+// 設定 data-*
+productEl.dataset.id = productData.id;
+productEl.dataset.name = productData.name;
+productEl.dataset.price = productData.price;
+productEl.dataset.img = productData.img;
+
+document.getElementById("productName").textContent = productData.name;
+document.getElementById("productDesc").textContent = productData.desc;
+document.getElementById("productPrice").textContent = `$${productData.price}`;
+document.getElementById("mainImage").src = productData.img;
 
   //加入購物車
    document.addEventListener("click", (e) => {
