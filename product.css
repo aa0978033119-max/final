@@ -8,10 +8,12 @@
     margin:0 auto;
   }
   
+  .product-images {
+    flex: 0 0 400px; /* 固定寬度，不讓 Flexbox 擠壓 */
+  }
   .product-images img {
-    width: 100%;
-    max-width: 400px; 
-    height: auto;
+    width: 100% !important;   /* 覆蓋任何寬度設定 */
+    height: auto !important;  /* 強制覆蓋 style.css 裡的 400px，恢復比例 */
     display: block;
   }
   
