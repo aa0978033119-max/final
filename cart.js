@@ -84,19 +84,13 @@ function renderCart() {
     updateTotal();
   }
   
-document.getElementById("checkoutBtn").addEventListener("click", () => {
-    const totalText = document.getElementById("totalAmount").textContent.replace(/,/g, '');
-    const totalValue = parseInt(totalText) || 0;
-
-    if (totalValue === 0) {
-        alert("您的購物車目前是空的喔！");
+  document.getElementById("checkoutBtn").addEventListener("click", () => {
+    const total = document.getElementById("totalAmount").textContent;
+    if (total === "0") {
+      alert("您的購物車目前是空的喔！");
     } else {
-        localStorage.setItem('cartSubtotal', totalValue);
-
-        const shippingFee = totalValue >= 1000 ? 0 : 60; 
-        localStorage.setItem('shippingFee', shippingFee);
-        window.location.href = "check.html";
+      window.location.href = "check.html";
     }
-});
+  });
   document.addEventListener("DOMContentLoaded", renderCart);
   
