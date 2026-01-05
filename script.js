@@ -1,121 +1,120 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // ===== banner =====
-    let currentBannerIndex = 0; // 用來追踪當前顯示的 Banner 圖片
+  // ===== banner =====
+  let currentBannerIndex = 0; // 用來追踪當前顯示的 Banner 圖片
 
-    const bannerImages = [
-      "images/banner1.jpg",
-      "images/banner2.jpg",
-      "images/banner3.jpg"
-    ]; // 所有 Banner 圖片的路徑
+  const bannerImages = [
+    "images/banner1.jpg",
+    "images/banner2.jpg",
+    "images/banner3.jpg"
+  ]; // 所有 Banner 圖片的路徑
+  
+  const bannerTitles = [
+    "NEW ARRIVAL", 
+    "SUMMER SALE", 
+    "WINTER COLLECTION"
+  ]; // 各個 Banner 圖片對應的標題
+  
+  const bannerDescriptions = [
+    "秋冬新品 8 折起",
+    "夏季促銷，快來選購！",
+    "冬季系列，暖心上新！"
+  ]; // 各個 Banner 圖片的描述
+  
+  // 更新 Banner 顯示的函數
+  function updateBanner() {
+    const bannerImage = document.getElementById("bannerImage");
+    const bannerTitle = document.getElementById("bannerTitle");
+    const bannerDesc = document.getElementById("bannerDesc");
     
-    const bannerTitles = [
-      "NEW ARRIVAL", 
-      "SUMMER SALE", 
-      "WINTER COLLECTION"
-    ]; // 各個 Banner 圖片對應的標題
-    
-    const bannerDescriptions = [
-      "秋冬新品 8 折起",
-      "夏季促銷，快來選購！",
-      "冬季系列，暖心上新！"
-    ]; // 各個 Banner 圖片的描述
-    
-    function updateBanner() {
-      const bannerImage = document.getElementById("bannerImage");
-      const bannerTitle = document.getElementById("bannerTitle");
-      const bannerDesc = document.getElementById("bannerDesc");
-      
-      // 更新 Banner 的內容
-      bannerImage.src = bannerImages[currentBannerIndex];
-      bannerTitle.innerText = bannerTitles[currentBannerIndex];
-      bannerDesc.innerText = bannerDescriptions[currentBannerIndex];
-    
-      // 更新圓點顯示
-      const dotsContainer = document.getElementById("dotsContainer");
-      dotsContainer.innerHTML = ""; // 清空現有圓點
-      bannerImages.forEach((_, index) => {
-        const dot = document.createElement("span");
-        dot.classList.add("dot");
-        dot.addEventListener("click", () => {
-          currentBannerIndex = index;
-          updateBanner();
-        });
-    
-        if (index === currentBannerIndex) dot.classList.add("active");
-        dotsContainer.appendChild(dot);
+    // 更新 Banner 的內容
+    bannerImage.src = bannerImages[currentBannerIndex];
+    bannerTitle.innerText = bannerTitles[currentBannerIndex];
+    bannerDesc.innerText = bannerDescriptions[currentBannerIndex];
+  
+    // 更新圓點顯示
+    const dotsContainer = document.getElementById("dotsContainer");
+    dotsContainer.innerHTML = ""; // 清空現有圓點
+    bannerImages.forEach((_, index) => {
+      const dot = document.createElement("span");
+      dot.classList.add("dot");
+      dot.addEventListener("click", () => {
+        currentBannerIndex = index;
+        updateBanner();
       });
-    }
-    
-    function prevBanner() {
-      // 顯示上一張圖片
-      currentBannerIndex = (currentBannerIndex - 1 + bannerImages.length) % bannerImages.length;
-      updateBanner();
-    }
-    
-    function nextBanner() {
-      // 顯示下一張圖片
-      currentBannerIndex = (currentBannerIndex + 1) % bannerImages.length;
-      updateBanner();
-    }
-    
-    // 自動輪播
-    let autoSlideInterval = setInterval(nextBanner, 5000); // 每5秒切換一次 Banner 圖片
-    
-    // 停止自動輪播（當手動點擊上一張或下一張按鈕時）
-    function stopAutoSlide() {
-      clearInterval(autoSlideInterval);
-      autoSlideInterval = setInterval(nextBanner, 5000); // 重新啟動自動輪播
-    }
-    
-    // 初次載入時更新 Banner 顯示
-    document.addEventListener("DOMContentLoaded", () => {
-      updateBanner();
-    
-      // 手動按鈕點擊事件
-      const prevBtn = document.querySelector(".prev");
-      const nextBtn = document.querySelector(".next");
-    
-      if (prevBtn && nextBtn) {
-        prevBtn.addEventListener("click", () => {
-          prevBanner();
-          stopAutoSlide(); // 停止自動輪播後重新啟動
-        });
-    
-        nextBtn.addEventListener("click", () => {
-          nextBanner();
-          stopAutoSlide(); // 停止自動輪播後重新啟動
-        });
-      }
-    
-      // 確保立即選購按鈕有事件處理
-      const buyNowBtn = document.querySelector(".banner-text button");
-      if (buyNowBtn) {
-        buyNowBtn.addEventListener("click", () => {
-          window.location.href = "shop.html"; // 例如導向到購物頁面
-        });
-      }
+  
+      if (index === currentBannerIndex) dot.classList.add("active");
+      dotsContainer.appendChild(dot);
+    });
+  }
+  
+  // 顯示上一張圖片
+  function prevBanner() {
+    currentBannerIndex = (currentBannerIndex - 1 + bannerImages.length) % bannerImages.length;
+    updateBanner();
+  }
+  
+  // 顯示下一張圖片
+  function nextBanner() {
+    currentBannerIndex = (currentBannerIndex + 1) % bannerImages.length;
+    updateBanner();
+  }
+  
+  // 自動輪播
+  let autoSlideInterval = setInterval(nextBanner, 5000); // 每5秒切換一次 Banner 圖片
+  
+  // 停止自動輪播，並在手動切換後重新啟動
+  function stopAutoSlide() {
+    clearInterval(autoSlideInterval);
+    autoSlideInterval = setInterval(nextBanner, 5000);
+  }
+  
+  // 初始化時更新 Banner 顯示
+  updateBanner();
+  
+  // 綁定手動切換按鈕
+  const prevBtn = document.querySelector(".prev");
+  const nextBtn = document.querySelector(".next");
+
+  if (prevBtn && nextBtn) {
+    prevBtn.addEventListener("click", () => {
+      prevBanner();
+      stopAutoSlide(); // 停止自動輪播並重新啟動
     });
 
-    // ===== 搜尋功能 =====
+    nextBtn.addEventListener("click", () => {
+      nextBanner();
+      stopAutoSlide(); // 停止自動輪播並重新啟動
+    });
+  }
+  
+  // 綁定立即選購按鈕
+  const buyNowBtn = document.querySelector(".banner-text button");
+  if (buyNowBtn) {
+    buyNowBtn.addEventListener("click", () => {
+      window.location.href = "shop.html"; // 導向購物頁面
+    });
+  }
+  
+  // ===== 搜尋功能 =====
   const searchInput = document.getElementById("searchInput");
   const searchResult = document.getElementById("searchResult");
-  
+
   if (searchInput && searchResult && typeof products !== "undefined") {
     searchInput.addEventListener("input", () => {
       const keyword = searchInput.value.trim().toLowerCase();
       searchResult.innerHTML = "";
-  
+
       if (keyword === "") return;
-  
+
       const results = products.filter(p =>
         p.name.toLowerCase().includes(keyword)
       );
-  
+
       if (results.length === 0) {
         searchResult.innerHTML = "<div class='search-item'>找不到商品</div>";
         return;
       }
-  
+
       results.forEach(p => {
         const a = document.createElement("a");
         a.href = `product.html?id=${p.id}`;
@@ -125,8 +124,8 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
   }
-  
-  // ===================== Toast =====================
+
+  // ===== Toast 彈出訊息 =====
   function showToast(msg) {
     const toast = document.createElement('div');
     toast.className = 'toast';
@@ -139,7 +138,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 2000);
   }
 
-  // ===================== 登入檢查 =====================
+  // ===== 登入檢查 =====
   function requireLogin(redirectTo) {
     if (localStorage.getItem("isLogin") !== "true") {
       localStorage.setItem("redirectAfterLogin", redirectTo);
@@ -150,7 +149,7 @@ document.addEventListener("DOMContentLoaded", () => {
     return true;
   }
 
-  // ===================== header 會員顯示 =====================
+  // ===== header 會員顯示 =====
   function renderUserArea() {
     const userArea = document.getElementById("user-area");
     if (!userArea) return;
@@ -186,7 +185,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   renderUserArea();
 
-  // ===================== 回到頂部 =====================
+  // ===== 回到頂部 =====
   const backToTopBtn = document.getElementById("backToTop");
   if (backToTopBtn) {
     window.addEventListener("scroll", () => {
@@ -197,7 +196,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // ===================== 加入購物車事件代理 =====================
+  // ===== 加入購物車 =====
   document.addEventListener("click", (e) => {
     if (e.target.classList.contains("add-cart-btn")) {
       const btn = e.target;
@@ -213,7 +212,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!id || !name || !price || !img) return;
 
       let cart = JSON.parse(localStorage.getItem("cart")) || {};
-      const key = id; // 如果要分尺寸可以改成 id + "-" + size
+      const key = id;
 
       if (cart[key]) {
         cart[key].quantity += 1;
@@ -226,7 +225,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // ===================== 收藏功能 =====================
+  // ===== 收藏功能 =====
   let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
   favorites = favorites.filter(item => item && item.id);
 
@@ -265,33 +264,4 @@ document.addEventListener("DOMContentLoaded", () => {
     if (favorites.some(item => String(item.id) === id)) icon.src = "images/love.png";
     else icon.src = "images/heart.png";
   });
-
 });
-// 回到頂端按鈕
-  // -----------------------------
-  const backToTopBtn = document.getElementById("backToTop");
-  window.addEventListener("scroll", () => {
-    if (window.scrollY > 200) backToTopBtn.style.display = "block";
-    else backToTopBtn.style.display = "none";
-  });
-  backToTopBtn.addEventListener("click", () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  });
-
-  // -----------------------------
-  // 搜尋框
-  // -----------------------------
-  const searchIcon = document.getElementById("searchIcon");
-  const searchBox = document.getElementById("searchBox");
-  searchIcon.addEventListener("click", () => {
-    searchBox.classList.toggle("active"); // CSS 控制 show/hide
-  });
-
-  // -----------------------------
-  // 上下裝選單
-  // -----------------------------
-  const menuIcon = document.getElementById("menuIcon");
-  const menuBox = document.getElementById("menuBox");
-  menuIcon.addEventListener("click", () => {
-    menuBox.classList.toggle("active"); // CSS 控制 show/hide
-  });
