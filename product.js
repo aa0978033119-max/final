@@ -37,9 +37,9 @@ document.addEventListener("click", (e) => {
   const product = btn.closest(".product-container");
   if (!product) return;
 
-  const { id, name, price, img } = product.dataset;
+  const { id, name, price, images } = product.dataset;
 
-  if (!id || !name || !price || !img) {
+  if (!id || !name || !price || !images) {
     alert("商品資料不完整");
     return;
   }
@@ -59,7 +59,7 @@ document.addEventListener("click", (e) => {
       id: Number(id),
       name,
       price: Number(price),
-      img,
+      images,
       size,
       quantity
     };
