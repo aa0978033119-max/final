@@ -29,9 +29,47 @@ document.addEventListener("DOMContentLoaded", () => {
     sizeSelect.appendChild(option);
   });
   
-document.querySelector(".add-cart").addEventListener("click", () => {
-    const qty = document.querySelector("input[type='number']").value;
-    alert(`已加入購物車\n尺寸：${sizeSelect.value}\n數量：${qty}`);
+const productEl = document.querySelector(".product-container");
+
+document.addEventListener("click", (e) => {
+  const btn = e.target.closest(".add-cart");
+  if (!btn) return;
+
+  const product = btn.closest(".product-container");
+  if (!product) return;
+
+  const { id, name, price, images } = product.dataset;
+
+  if (!id || !name || !price || !images) {
+    alert("商品資料不完整");
+    return;
+  }
+
+  const size = document.getElementById("sizeSelect").value;
+  const qtyInput = product.querySelector('input[type="number"]');
+  const quantity = parseInt(qtyInput.value) || 1;
+
+  let cart = JSON.parse(localStorage.getItem("cart")) || {};
+
+  const key = `${id}_${size}`;
+
+  if (cart[key]) {
+    cart[key].quantity += quantity;
+  } else {
+    cart[key] = {
+      id: Number(id),
+      name,
+      price: Number(price),
+      images,
+      size,
+      quantity
+    };
+  }
+
+  localStorage.setItem("cart", JSON.stringify(cart));
+
+  alert(`✅ ${name}（${size}）已加入購物車`);
+});
   
   //Tab 切換
   document.querySelectorAll(".tab").forEach(tab => {
