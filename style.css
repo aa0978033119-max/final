@@ -271,83 +271,6 @@ nav a:hover {
   from { opacity: 0.4; }
   to   { opacity: 1; }
 }
-
-/* product */
-.products {
-  padding: 40px 300px;  
-  background-color: #f9f9f9;
-}
-
-.products h2 {
-  margin-bottom: 15px;
-  font-size: 28px;
-}
-
-.product-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 30px;  
-}
-
-.product {
-  padding-bottom: 10px;
-  position: relative;
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  cursor: pointer;
-}
-
-.product:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-}
-
-.product img {
-  width: 100%;
-  height: 350px;
-  object-fit: cover;
-  display: block;
-}
-
-.product-info {
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.product-name {
-  font-weight: bold;
-  margin: 15px 15px 5px 15px;
-  margin-left: 16px;
-  font-size: 20px;
-}
-
-.product-price {
-  font-size: 25px;
-  margin-left: 16px;
-  font-weight: bold;
-  margin: 0 15px 10px 15px;
-}
-  
-  .add-cart-btn {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    padding: 8px;
-    cursor: pointer;
-    transition: background-color 0.2s;
-  }
-  
-  .add-cart-btn:hover {
-    background-color: #0056b3;
-  }
 /* ===== Products ===== */
 .products {
   padding: 40px;
@@ -412,18 +335,37 @@ nav a:hover {
 
 /* 加入購物車按鈕 */
 .add-cart-btn {
-  background-color: #000000;
+  width: calc(100% - 32px);
+  margin: 16px auto;
+  padding: 12px 0;
+
+  background: #111;
   color: #fff;
+
   border: none;
-  border-radius: 5px;
-  padding: 10px;
+  border-radius: 999px;
+
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 2px;
+
   cursor: pointer;
-  transition: background-color 0.2s;
-  margin: 0 15px 15px 15px;
+
+  transition: 
+    transform .2s ease,
+    box-shadow .2s ease,
+    background .2s ease;
 }
 
 .add-cart-btn:hover {
-  background-color: #3d3d3d;
+  background: #000;
+  box-shadow: 0 10px 25px rgba(0,0,0,.2);
+  transform: translateY(-2px);
+}
+
+.add-cart-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 10px rgba(0,0,0,.2);
 }
 
 /* 收藏愛心圖示 */
@@ -432,7 +374,7 @@ nav a:hover {
   width: 18px !important; /* 強制縮小 */ 
   height: 18px !important; 
   position: absolute;
-  bottom: 70px; /* 右下角 */
+  bottom: 80px; /* 右下角 */
   right: 15px; 
   cursor: pointer;
   transition: transform 0.2s;
