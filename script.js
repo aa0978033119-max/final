@@ -211,5 +211,55 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
   }
+    // ===================== 收藏功能 =====================
+    let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+
+    // 防止 localStorage 被污染
+    favorites = favorites.filter(item => item && item.id);
+  
+    // 切換收藏（給商品卡片用）
+    window.toggleFavorite = function (el) {
+      if (!el) return;
+      const product = el.closest(".product");
+      if (!product) return;
+  
+      const id = String(product.dataset.id);
+      const name = product.dataset.name;
+      const price = product.dataset.price;
+      const img = product.dataset.img;
+      if (!id || !name || !price || !img) return;
+  
+      const index = favorites.findIndex(item => String(item.id) === id);
+  
+      if (el.src.includes("heart.png")) {
+        el.src = "images/love.png";
+        if (index === -1) {
+          favorites.push({ id, name, price, img });
+        }
+        showToast("已加入收藏");
+      } else {
+        el.src = "images/heart.png";
+        if (index !== -1) {
+          favorites.splice(index, 1);
+        }
+        showToast("已移除收藏");
+      }
+  
+      localStorage.setItem("favorites", JSON.stringify(favorites));
+    };
+  
+    // 初始化收藏 icon（頁面一進來就判斷）
+    document.querySelectorAll(".product").forEach(product => {
+      const id = String(product.dataset.id);
+      const icon = product.querySelector(".favorite-icon");
+      if (!icon) return;
+  
+      if (favorites.some(item => String(item.id) === id)) {
+        icon.src = "images/love.png";
+      } else {
+        icon.src = "images/heart.png";
+      }
+    });
+  
 
 });
