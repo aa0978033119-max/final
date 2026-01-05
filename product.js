@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   //加入購物車
    document.addEventListener("click", (e) => {
-    if (e.target.classList.contains("add-cart-btn")) {
+    if (e.target.classList.contains("add-cart")) {
       const btn = e.target;
       const product = btn.closest(".product");
       if (!product) return;
