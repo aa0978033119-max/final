@@ -139,7 +139,9 @@ document.addEventListener("DOMContentLoaded", () => {
     if (favorites.some(item => String(item.id) === id)) icon.src = "images/love.png";
     else icon.src = "images/heart.png";
   });
-  // 回到頂端按鈕
+
+});
+// 回到頂端按鈕
   // -----------------------------
   const backToTopBtn = document.getElementById("backToTop");
   window.addEventListener("scroll", () => {
@@ -167,4 +169,3 @@ document.addEventListener("DOMContentLoaded", () => {
   menuIcon.addEventListener("click", () => {
     menuBox.classList.toggle("active"); // CSS 控制 show/hide
   });
-});
