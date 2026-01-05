@@ -52,7 +52,6 @@
 
 /* 內容區 */
 .tab-content {
-  display: flex;
   padding: 20px;
   max-width:800px;
   justify-content:center;
