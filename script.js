@@ -1,5 +1,34 @@
 document.addEventListener("DOMContentLoaded", () => {
-
+    // ===== 搜尋功能 =====
+  const searchInput = document.getElementById("searchInput");
+  const searchResult = document.getElementById("searchResult");
+  
+  if (searchInput && searchResult && typeof products !== "undefined") {
+    searchInput.addEventListener("input", () => {
+      const keyword = searchInput.value.trim().toLowerCase();
+      searchResult.innerHTML = "";
+  
+      if (keyword === "") return;
+  
+      const results = products.filter(p =>
+        p.name.toLowerCase().includes(keyword)
+      );
+  
+      if (results.length === 0) {
+        searchResult.innerHTML = "<div class='search-item'>找不到商品</div>";
+        return;
+      }
+  
+      results.forEach(p => {
+        const a = document.createElement("a");
+        a.href = `product.html?id=${p.id}`;
+        a.className = "search-item";
+        a.textContent = p.name;
+        searchResult.appendChild(a);
+      });
+    });
+  }
+  
   // ===================== Toast =====================
   function showToast(msg) {
     const toast = document.createElement('div');
