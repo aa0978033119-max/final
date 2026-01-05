@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   // ===== banner =====
   let currentBannerIndex = 0; // 用來追踪當前顯示的 Banner 圖片
-
+  
   const bannerImages = [
     "images/banner1.jpg",
     "images/banner2.jpg",
@@ -20,17 +20,26 @@ document.addEventListener("DOMContentLoaded", () => {
     "冬季系列，暖心上新！"
   ]; // 各個 Banner 圖片的描述
   
+  const bannerProductIds = [4, 14, 3]; // 每個 Banner 對應的商品 ID
+  
   // 更新 Banner 顯示的函數
   function updateBanner() {
     const bannerImage = document.getElementById("bannerImage");
     const bannerTitle = document.getElementById("bannerTitle");
     const bannerDesc = document.getElementById("bannerDesc");
+    const bannerBuyNowBtn = document.getElementById("bannerBuyNowBtn");
     
     // 更新 Banner 的內容
     bannerImage.src = bannerImages[currentBannerIndex];
     bannerTitle.innerText = bannerTitles[currentBannerIndex];
     bannerDesc.innerText = bannerDescriptions[currentBannerIndex];
-  
+    
+    // 更新立即選購按鈕的行為
+    bannerBuyNowBtn.onclick = () => {
+      const productId = bannerProductIds[currentBannerIndex];
+      window.location.href = `product.html?id=${productId}`; // 重定向到相應的商品頁面
+    };
+
     // 更新圓點顯示
     const dotsContainer = document.getElementById("dotsContainer");
     dotsContainer.innerHTML = ""; // 清空現有圓點
@@ -84,14 +93,6 @@ document.addEventListener("DOMContentLoaded", () => {
     nextBtn.addEventListener("click", () => {
       nextBanner();
       stopAutoSlide(); // 停止自動輪播並重新啟動
-    });
-  }
-  
-  // 綁定立即選購按鈕
-  const buyNowBtn = document.querySelector(".banner-text button");
-  if (buyNowBtn) {
-    buyNowBtn.addEventListener("click", () => {
-      window.location.href = "shop.html"; // 導向購物頁面
     });
   }
   
