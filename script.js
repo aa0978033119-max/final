@@ -289,6 +289,12 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+const intro = document.querySelector(".intro");
+
 setTimeout(() => {
-  document.querySelector(".intro").style.display = "none";
-}, 1600);
+  intro.classList.add("fade-out");
+}, 1500);
+
+setTimeout(() => {
+  intro.remove();
+}, 2100);
