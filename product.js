@@ -1,77 +1,81 @@
 document.addEventListener("DOMContentLoaded", () => {
-
-  //取得商品 ID
+  // 取得商品 ID
   const params = new URLSearchParams(window.location.search);
   const productId = Number(params.get("id")) || 1;
 
-  //找到對應商品
-  const product = products.find(p => p.id === productId);
-  if (!product) {
+  // 找到對應商品
+  const productData = products.find(p => p.id === productId);
+  if (!productData) {
     alert("找不到商品");
     return;
   }
 
-  //填充商品資料
-  document.getElementById("productName").innerText = product.name;
-  document.getElementById("productDesc").innerText = product.desc;
-  document.getElementById("productPrice").innerText = `NT$ ${product.price}`;
-  document.getElementById("detail").innerHTML = product.detail;
-  document.getElementById("mainImage").src = product.images[0];
-  document.getElementById("mainImage").alt = product.name;
+  const productEl = document.querySelector(".product-container");
 
-  // 尺寸
+  // ===== 設定 dataset =====
+  productEl.dataset.id = productData.id;
+  productEl.dataset.name = productData.name;
+  productEl.dataset.price = productData.price;
+  productEl.dataset.img = productData.images[0]; // dataset 只能存字串
+
+  // ===== 填充商品資訊 =====
+  document.getElementById("productName").innerText = productData.name;
+  document.getElementById("productDesc").innerText = productData.desc;
+  document.getElementById("productPrice").innerText = `NT$ ${productData.price}`;
+  document.getElementById("detail").innerHTML = productData.detail;
+  document.getElementById("mainImage").src = productData.images[0];
+  document.getElementById("mainImage").alt = productData.name;
+
+  // ===== 填充尺寸選單 =====
   const sizeSelect = document.getElementById("sizeSelect");
   sizeSelect.innerHTML = "";
-  product.sizes.forEach(size => {
+  productData.sizes.forEach(size => {
     const option = document.createElement("option");
     option.value = size;
     option.textContent = size;
     sizeSelect.appendChild(option);
   });
-  
-const productEl = document.querySelector(".product-container");
 
-document.addEventListener("click", (e) => {
-  const btn = e.target.closest(".add-cart");
-  if (!btn) return;
+  // ===== 加入購物車 =====
+  document.addEventListener("click", (e) => {
+    const btn = e.target.closest(".add-cart");
+    if (!btn) return;
 
-  const product = btn.closest(".product-container");
-  if (!product) return;
+    const productEl = btn.closest(".product-container");
+    if (!productEl) return;
 
-  const { id, name, price, images } = product.dataset;
+    const { id, name, price, img } = productEl.dataset;
 
-  if (!id || !name || !price || !images) {
-    alert("商品資料不完整");
-    return;
-  }
+    if (id === undefined || name === undefined || price === undefined || img === undefined) {
+      alert("商品資料不完整");
+      return;
+    }
 
-  const size = document.getElementById("sizeSelect").value;
-  const qtyInput = product.querySelector('input[type="number"]');
-  const quantity = parseInt(qtyInput.value) || 1;
+    const size = document.getElementById("sizeSelect").value;
+    const qtyInput = productEl.querySelector('input[type="number"]');
+    const quantity = parseInt(qtyInput.value) || 1;
 
-  let cart = JSON.parse(localStorage.getItem("cart")) || {};
+    let cart = JSON.parse(localStorage.getItem("cart")) || {};
+    const key = `${id}_${size}`;
 
-  const key = `${id}_${size}`;
+    if (cart[key]) {
+      cart[key].quantity += quantity;
+    } else {
+      cart[key] = {
+        id: Number(id),
+        name,
+        price: Number(price),
+        img,
+        size,
+        quantity
+      };
+    }
 
-  if (cart[key]) {
-    cart[key].quantity += quantity;
-  } else {
-    cart[key] = {
-      id: Number(id),
-      name,
-      price: Number(price),
-      images,
-      size,
-      quantity
-    };
-  }
+    localStorage.setItem("cart", JSON.stringify(cart));
+    alert(`✅ ${name}（${size}）已加入購物車`);
+  });
 
-  localStorage.setItem("cart", JSON.stringify(cart));
-
-  alert(`✅ ${name}（${size}）已加入購物車`);
-});
-  
-  //Tab 切換
+  // ===== Tab 切換 =====
   document.querySelectorAll(".tab").forEach(tab => {
     tab.addEventListener("click", () => {
       document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
@@ -81,48 +85,38 @@ document.addEventListener("click", (e) => {
     });
   });
 
-  // 顧客回饋處理
+  // ===== 顧客回饋 =====
   const feedbackContainer = document.getElementById("feedback-list");
   const noFeedbacksText = document.getElementById("no-feedbacks");
-  const feedbackForm = document.getElementById("feedback-form");
   const submitFeedbackButton = document.getElementById("submit-feedback");
 
-  // 回饋數據
-  let productFeedbacks = JSON.parse(
-    localStorage.getItem(`feedbacks_${productId}`)
-  );
-  
-  // 如果 localStorage 還沒有，使用 reviews.js 的預設評價
+  let productFeedbacks = JSON.parse(localStorage.getItem(`feedbacks_${productId}`));
+
   if (!productFeedbacks) {
     productFeedbacks = reviews[productId] || [];
-    localStorage.setItem(
-      `feedbacks_${productId}`,
-      JSON.stringify(productFeedbacks)
-    );
+    localStorage.setItem(`feedbacks_${productId}`, JSON.stringify(productFeedbacks));
   }
 
-  // 顯示現有的回饋
   function renderFeedbacks() {
     feedbackContainer.innerHTML = "";
     if (productFeedbacks.length === 0) {
       noFeedbacksText.style.display = "block";
     } else {
       noFeedbacksText.style.display = "none";
-      productFeedbacks.forEach(feedback => {
+      productFeedbacks.forEach(fb => {
         const div = document.createElement("div");
         div.className = "feedback-item";
         div.innerHTML = `
-          <strong>${feedback.name}</strong> - ${"★".repeat(feedback.rating)}<br>
-          <p>${feedback.text}</p>
+          <strong>${fb.name}</strong> - ${"★".repeat(fb.rating)}<br>
+          <p>${fb.text}</p>
         `;
         feedbackContainer.appendChild(div);
       });
     }
   }
 
-  renderFeedbacks(); // 初始化顯示回饋
+  renderFeedbacks();
 
-  // 提交回饋
   submitFeedbackButton.addEventListener("click", () => {
     const name = document.getElementById("feedback-name").value;
     const rating = parseInt(document.getElementById("feedback-rating").value);
@@ -133,20 +127,16 @@ document.addEventListener("click", (e) => {
       return;
     }
 
-    // 儲存回饋
     const newFeedback = { name, rating, text };
     productFeedbacks.push(newFeedback);
-
-    // 更新 localStorage
     localStorage.setItem(`feedbacks_${productId}`, JSON.stringify(productFeedbacks));
 
-    // 清空表單並重新渲染回饋
     document.getElementById("feedback-name").value = "";
     document.getElementById("feedback-text").value = "";
     renderFeedbacks();
   });
 
-  // 送貨及付款方式
+  // ===== 送貨及付款方式 =====
   const shippingContainer = document.getElementById("shipping");
   shippingContainer.innerHTML = `
     <h4>配送方式</h4>
@@ -155,3 +145,4 @@ document.addEventListener("click", (e) => {
     <p>Apple Pay / LINE Pay / 銀行轉帳 / 信用卡 / 超商取貨付款</p>
   `;
 });
+;
