@@ -93,6 +93,39 @@
   <div id="shipping" class="content"></div>
   <div id="review" class="content">尚無評價</div>
 </section>
+
+  <!-- 顧客回饋區 -->
+<section id="feedback-section" class="tab-content">
+  <div id="feedback">
+    <h3>顧客回饋</h3>
+    <p id="no-feedbacks">尚無回饋</p>
+
+    <!-- 顯示回饋 -->
+    <div id="feedback-list"></div>
+
+    <!-- 提交回饋表單 -->
+    <div id="feedback-form">
+      <h4>留下您的回饋</h4>
+      <label for="feedback-name">名稱：</label>
+      <input type="text" id="feedback-name" placeholder="您的名稱">
+
+      <label for="feedback-rating">評分：</label>
+      <select id="feedback-rating">
+        <option value="1">1 顆星</option>
+        <option value="2">2 顆星</option>
+        <option value="3">3 顆星</option>
+        <option value="4">4 顆星</option>
+        <option value="5">5 顆星</option>
+      </select>
+
+      <label for="feedback-text">回饋：</label>
+      <textarea id="feedback-text" placeholder="請輸入您的回饋..."></textarea>
+
+      <button id="submit-feedback">提交回饋</button>
+    </div>
+  </div>
+</section>
+
   
 <footer>
     <p>聯絡我們｜service@standardday.com</p>
