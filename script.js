@@ -295,62 +295,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 
-/* 滿版黑底 */
-.intro {
-  position: fixed;
-  inset: 0;
-  background: #000;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
-}
+window.addEventListener("load", () => {
+  const intro = document.getElementById("intro");
 
-/* 文字容器 */
-.title {
-  font-size: 64px;
-  font-weight: 700;
-  letter-spacing: 4px;
-  color: #fff;
-  display: flex;
-  overflow: hidden;
-}
+  if (!intro) return;
 
-/* 左右文字 */
-.title span {
-  display: inline-block;
-  animation-duration: 1.5s;
-  animation-fill-mode: forwards;
-}
-
-/* 往左 */
-.left {
-  animation-name: splitLeft;
-}
-
-/* 往右 */
-.right {
-  animation-name: splitRight;
-}
-
-@keyframes splitLeft {
-  from {
-    transform: translateX(0);
-    opacity: 1;
-  }
-  to {
-    transform: translateX(-120px);
-    opacity: 0;
-  }
-}
-
-@keyframes splitRight {
-  from {
-    transform: translateX(0);
-    opacity: 1;
-  }
-  to {
-    transform: translateX(120px);
-    opacity: 0;
-  }
-}
+  setTimeout(() => {
+    intro.remove(); 
+  }, 2000);
+});
