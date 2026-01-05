@@ -119,4 +119,42 @@
     transform: translateY(0);
   }
 }
+/*feedback-form*/
+#feedback-form {
+  margin-top: 20px;
+}
+
+#feedback-form input,
+#feedback-form select,
+#feedback-form textarea {
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0;
+  border: 1px solid #ddd;
+}
+
+#feedback-form button {
+  padding: 10px 20px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+#feedback-form button:hover {
+  background-color: #555;
+}
+
+.feedback-item {
+  margin-bottom: 20px;
+}
+
+.feedback-item strong {
+  font-weight: bold;
+}
+
+.feedback-item p {
+  margin-top: 5px;
+}
+
 
