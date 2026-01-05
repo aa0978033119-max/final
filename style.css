@@ -276,7 +276,7 @@ nav a:hover {
   padding: 40px;
   max-width: 1400px;
   margin: 0 auto;
-  background-color: #f9f9f9;
+  background-color:  #FFFFFF;
 }
 
 .products h2 {
@@ -292,8 +292,8 @@ nav a:hover {
 
 .product {
   position: relative;
-  background-color: #fff;
-  border: 1px solid #ddd;
+  background-color:  #FFFBFE;
+  border: 1px solid  #D0CFCF;
   border-radius: 10px;
   overflow: hidden;
   display: flex;
