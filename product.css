@@ -52,8 +52,12 @@
 
 /* 內容區 */
 .tab-content {
+  display: flex;
   padding: 20px;
   max-width:800px;
+  justify-content:center;
+  margin:0 auto;
+
 }
 
 .content {
@@ -204,4 +208,5 @@
   margin-left: 0; 
   font-size:24px;
   font-weight:bold;
+  color:#565254;
 }
