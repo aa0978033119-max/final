@@ -6,79 +6,14 @@ document.addEventListener("DOMContentLoaded", () => {
     toast.className = 'toast';
     toast.innerText = msg;
     document.body.appendChild(toast);
-
     setTimeout(() => toast.classList.add('show'), 10);
-
     setTimeout(() => {
       toast.classList.remove('show');
       setTimeout(() => document.body.removeChild(toast), 300);
     }, 2000);
   }
 
-  // ===================== Header 搜尋 / 漢堡選單 =====================
-  const searchIcon = document.getElementById("searchIcon");
-  const searchBox = document.getElementById("searchBox");
-  const searchInput = document.getElementById("searchInput");
-  const searchResult = document.getElementById("searchResult");
-  const menuIcon = document.getElementById("menuIcon");
-  const menuBox = document.getElementById("menuBox");
-
-  // 搜尋框切換
-  searchIcon?.addEventListener("click", e => {
-    e.stopPropagation();
-    searchBox.classList.toggle("active");
-    menuBox?.classList.remove("active");
-  });
-
-  // 漢堡選單切換
-  menuIcon?.addEventListener("click", e => {
-    e.stopPropagation();
-    menuBox.classList.toggle("active");
-    searchBox?.classList.remove("active");
-  });
-
-  // 點擊其他地方收起搜尋或選單
-  document.addEventListener("click", () => {
-    searchBox?.classList.remove("active");
-    menuBox?.classList.remove("active");
-    if (searchResult) searchResult.innerHTML = "";
-  });
-
-  searchBox?.addEventListener("click", e => e.stopPropagation());
-  menuBox?.addEventListener("click", e => e.stopPropagation());
-
-  // ===================== 搜尋商品 =====================
-  if (searchInput && searchResult && products) {
-    searchInput.addEventListener("input", () => {
-      const query = searchInput.value.trim().toLowerCase();
-      searchResult.innerHTML = "";
-
-      if (!query) return;
-
-      const matches = products.filter(p => p.name.toLowerCase().includes(query));
-
-      if (matches.length === 0) {
-        searchResult.innerHTML = "<p style='padding:10px;color:#777'>沒有找到商品</p>";
-        return;
-      }
-
-      matches.forEach(p => {
-        const div = document.createElement("div");
-        div.className = "search-item";
-        div.style = "display:flex; align-items:center; padding:5px; cursor:pointer; border-bottom:1px solid #eee";
-        div.innerHTML = `
-          <img src="${p.images[0]}" alt="${p.name}" style="width:40px;height:40px;object-fit:cover;margin-right:8px;">
-          <span>${p.name}</span>
-        `;
-        div.addEventListener("click", () => {
-          window.location.href = `product.html?id=${p.id}`;
-        });
-        searchResult.appendChild(div);
-      });
-    });
-  }
-
-  // ===================== 登入檢查 / 登出 =====================
+  // ===================== 登入檢查 =====================
   function requireLogin(redirectTo) {
     if (localStorage.getItem("isLogin") !== "true") {
       localStorage.setItem("redirectAfterLogin", redirectTo);
@@ -89,15 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
     return true;
   }
 
-  function logout() {
-    localStorage.removeItem("isLogin");
-    localStorage.removeItem("user");
-    localStorage.removeItem("userProfile");
-    showToast("已登出");
-    setTimeout(() => window.location.href = "index.html", 800);
-  }
-
-  // header 會員顯示
+  // ===================== header 會員顯示 =====================
   function renderUserArea() {
     const userArea = document.getElementById("user-area");
     if (!userArea) return;
@@ -118,7 +45,10 @@ document.addEventListener("DOMContentLoaded", () => {
       `;
       document.getElementById("logoutBtn").addEventListener("click", e => {
         e.preventDefault();
-        logout();
+        localStorage.removeItem("isLogin");
+        localStorage.removeItem("user");
+        showToast("已登出");
+        setTimeout(() => window.location.href = "index.html", 800);
       });
     } else {
       userArea.innerHTML = `
@@ -129,7 +59,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
   renderUserArea();
-  window.renderUserArea = renderUserArea;
 
   // ===================== 回到頂部 =====================
   const backToTopBtn = document.getElementById("backToTop");
@@ -142,124 +71,74 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // ===================== product.html 的商品 / 評價 / 加入購物車 =====================
-  const productContainer = document.querySelector(".product-container");
-  if (productContainer && products && reviews) {
-    const params = new URLSearchParams(window.location.search);
-    const id = Number(params.get("id")) || 1;
-    const product = products.find(p => p.id === id);
-    if (!product) return;
-
-    // 塞商品資訊
-    document.getElementById("productName").innerText = product.name;
-    document.getElementById("productDesc").innerText = product.desc;
-    document.getElementById("productPrice").innerText = `NT$ ${product.price}`;
-    document.getElementById("detail").innerText = product.detail;
-    const mainImg = document.getElementById("mainImage");
-    mainImg.src = product.images[0];
-    mainImg.alt = product.name;
-
-    // 尺寸
-    const sizeSelect = document.getElementById("sizeSelect");
-    sizeSelect.innerHTML = "";
-    product.sizes.forEach(size => {
-      const option = document.createElement("option");
-      option.value = size;
-      option.textContent = size;
-      sizeSelect.appendChild(option);
-    });
-
-    // 顧客評價
-    const reviewContainer = document.getElementById("review");
-    const productReviews = reviews[id] || [];
-    reviewContainer.innerHTML = "";
-    if (productReviews.length === 0) {
-      reviewContainer.innerText = "尚無評價";
-    } else {
-      productReviews.forEach(r => {
-        const div = document.createElement("div");
-        div.className = "review-item";
-        div.innerHTML = `<strong>${r.name}</strong> - ${"★".repeat(r.rating)}<br><p>${r.text}</p>`;
-        reviewContainer.appendChild(div);
-      });
-    }
-
-    // 加入購物車
-    const addCartBtn = document.querySelector(".add-cart");
-    if (addCartBtn) {
-      addCartBtn.addEventListener("click", () => {
-        const size = sizeSelect.value;
-        const qty = Number(document.querySelector("input[type='number']").value);
-        if (!requireLogin("product.html?id=" + id)) return;
-
-        let cart = JSON.parse(localStorage.getItem("cart")) || {};
-        cart[id] = cart[id]
-          ? { ...cart[id], quantity: cart[id].quantity + qty }
-          : { id, name: product.name, price: product.price, img: product.images[0], quantity: qty };
-        localStorage.setItem("cart", JSON.stringify(cart));
-        showToast(`${product.name} 已加入購物車！尺寸：${size} 數量：${qty}`);
-      });
-    }
-
-    // tabs 切換
-    document.querySelectorAll(".tab").forEach(tab => {
-      tab.addEventListener("click", () => {
-        document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
-        document.querySelectorAll(".content").forEach(c => c.classList.remove("active"));
-        tab.classList.add("active");
-        document.getElementById(tab.dataset.tab).classList.add("active");
-      });
-    });
-  }
-    // ===================== 收藏功能 =====================
-    let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
-
-    // 防止 localStorage 被污染
-    favorites = favorites.filter(item => item && item.id);
-  
-    // 切換收藏（給商品卡片用）
-    window.toggleFavorite = function (el) {
-      if (!el) return;
-      const product = el.closest(".product");
+  // ===================== 加入購物車事件代理 =====================
+  document.addEventListener("click", (e) => {
+    if (e.target.classList.contains("add-cart-btn")) {
+      const btn = e.target;
+      const product = btn.closest(".product");
       if (!product) return;
-  
-      const id = String(product.dataset.id);
+
+      if (!requireLogin(window.location.href)) return;
+
+      const id = product.dataset.id;
       const name = product.dataset.name;
-      const price = product.dataset.price;
+      const price = parseInt(product.dataset.price);
       const img = product.dataset.img;
       if (!id || !name || !price || !img) return;
-  
-      const index = favorites.findIndex(item => String(item.id) === id);
-  
-      if (el.src.includes("heart.png")) {
-        el.src = "images/love.png";
-        if (index === -1) {
-          favorites.push({ id, name, price, img });
-        }
-        showToast("已加入收藏");
+
+      let cart = JSON.parse(localStorage.getItem("cart")) || {};
+      const key = id; // 如果要分尺寸可以改成 id + "-" + size
+
+      if (cart[key]) {
+        cart[key].quantity += 1;
       } else {
-        el.src = "images/heart.png";
-        if (index !== -1) {
-          favorites.splice(index, 1);
-        }
-        showToast("已移除收藏");
+        cart[key] = { id, name, price, img, quantity: 1 };
       }
-  
-      localStorage.setItem("favorites", JSON.stringify(favorites));
-    };
-  
-    // 初始化收藏 icon（頁面一進來就判斷）
-    document.querySelectorAll(".product").forEach(product => {
-      const id = String(product.dataset.id);
-      const icon = product.querySelector(".favorite-icon");
-      if (!icon) return;
-  
-      if (favorites.some(item => String(item.id) === id)) {
-        icon.src = "images/love.png";
-      } else {
-        icon.src = "images/heart.png";
-      }
-    });
-  
+
+      localStorage.setItem("cart", JSON.stringify(cart));
+      showToast(`${name} 已加入購物車！`);
+    }
+  });
+
+  // ===================== 收藏功能 =====================
+  let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+  favorites = favorites.filter(item => item && item.id);
+
+  window.toggleFavorite = function(el) {
+    if (!el) return;
+    const product = el.closest(".product");
+    if (!product) return;
+
+    const id = String(product.dataset.id);
+    const name = product.dataset.name;
+    const price = product.dataset.price;
+    const img = product.dataset.img;
+    if (!id || !name || !price || !img) return;
+
+    const index = favorites.findIndex(item => String(item.id) === id);
+
+    if (el.src.includes("heart.png")) {
+      el.src = "images/love.png";
+      if (index === -1) favorites.push({ id, name, price, img });
+      showToast("已加入收藏");
+    } else {
+      el.src = "images/heart.png";
+      if (index !== -1) favorites.splice(index, 1);
+      showToast("已移除收藏");
+    }
+
+    localStorage.setItem("favorites", JSON.stringify(favorites));
+  };
+
+  // 初始化收藏 icon
+  document.querySelectorAll(".product").forEach(product => {
+    const id = String(product.dataset.id);
+    const icon = product.querySelector(".favorite-icon");
+    if (!icon) return;
+    icon.addEventListener("click", () => toggleFavorite(icon));
+    if (favorites.some(item => String(item.id) === id)) icon.src = "images/love.png";
+    else icon.src = "images/heart.png";
+  });
 
 });
+
