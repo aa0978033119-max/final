@@ -36,6 +36,11 @@ document.addEventListener("DOMContentLoaded", () => {
       bannerImages.forEach((_, index) => {
         const dot = document.createElement("span");
         dot.classList.add("dot");
+        dot.addEventListener("click", () => {
+          currentBannerIndex = index;
+          updateBanner();
+        });
+    
         if (index === currentBannerIndex) dot.classList.add("active");
         dotsContainer.appendChild(dot);
       });
@@ -79,6 +84,14 @@ document.addEventListener("DOMContentLoaded", () => {
         nextBtn.addEventListener("click", () => {
           nextBanner();
           stopAutoSlide(); // 停止自動輪播後重新啟動
+        });
+      }
+    
+      // 確保立即選購按鈕有事件處理
+      const buyNowBtn = document.querySelector(".banner-text button");
+      if (buyNowBtn) {
+        buyNowBtn.addEventListener("click", () => {
+          window.location.href = "shop.html"; // 例如導向到購物頁面
         });
       }
     });
