@@ -1,3 +1,26 @@
+document.getElementById('checkoutForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const name = document.getElementById('name').value;
+    if (name.length < 2) {
+        alert("請輸入有效的收件人姓名");
+        return;
+    }
+
+    const submitBtn = document.getElementById('submitBtn');
+    submitBtn.innerText = "處理中...";
+    submitBtn.disabled = true;
+
+    setTimeout(() => {
+
+        document.getElementById('successMessage').classList.remove('hidden');
+
+        localStorage.removeItem('cart');
+        localStorage.removeItem('cartSubtotal');
+        localStorage.removeItem('shippingFee');
+
+    }, 1500);
+});
 const subtotal = parseInt(localStorage.getItem('cartSubtotal')) || 0;
 const shipping = parseInt(localStorage.getItem('shippingFee')) || 0;
 const total = subtotal + shipping;
@@ -6,63 +29,33 @@ function formatCurrency(num) {
     return '$' + num.toLocaleString();
 }
 
-const form = document.getElementById('checkoutForm');
-const nameInput = document.getElementById('name');
-const phoneInput = document.getElementById('phone');
-const submitBtn = document.getElementById('submitBtn');
-const successMessage = document.getElementById('successMessage');
-
 window.addEventListener('DOMContentLoaded', () => {
-    const subtotalDisplay = document.getElementById('subtotal-display');
-    const shippingDisplay = document.getElementById('shipping-fee-display');
-    const totalDisplay = document.getElementById('total-Amount');
+    const subtotalEl = document.getElementById('subtotal-display');
+    const shippingEl = document.getElementById('shipping-fee-display');
+    const totalEl = document.getElementById('total-Amount');
 
-    if (subtotalDisplay) subtotalDisplay.innerText = formatCurrency(subtotal);
-    if (shippingDisplay) shippingDisplay.innerText = formatCurrency(shipping);
-    if (totalDisplay) totalDisplay.innerText = formatCurrency(total);
+    if (subtotalEl) subtotalEl.innerText = formatCurrency(subtotal);
+    if (shippingEl) shippingEl.innerText = formatCurrency(shipping);
+    if (totalEl) totalEl.innerText = formatCurrency(total);
 });
+function saveCart() {
+    let subtotal = 0;
+    const cart = {};
+    const shippingFee = 60;
 
-nameInput.oninput = () => {
-    nameInput.value = nameInput.value.replace(/[^\u4e00-\u9fa5a-zA-Z]/g, '');
-};
-
-phoneInput.oninput = () => {
-    phoneInput.value = phoneInput.value.replace(/\D/g, '');
-};
-
-form.addEventListener('submit', function(event) {
-    event.preventDefault(); 
-
-    const formData = {
-        name: nameInput.value.trim(),
-        phone: phoneInput.value.trim(),
-        address: document.getElementById('address').value.trim(),
-        amount: total
-    };
-
-
-    if (formData.name.length < 2) {
-        alert("請輸入有效的收件人姓名");
-        return;
-    }
-
-
-    if (!form.checkValidity()) {
-        alert("請輸入正確的資料格式");
-        return;
-    }
-
-    console.log("訂單資料傳輸中...", formData);
-    
-    submitBtn.innerText = "處理中...";
-    submitBtn.disabled = true;
-
-    setTimeout(() => {
-
-        if (successMessage) {
-            successMessage.classList.remove('hidden');
+    document.querySelectorAll(".cart-item").forEach(item => {
+        const price = parseInt(item.dataset.price);
+        const qty = parseInt(item.querySelector(".quantity").value);
+        if (qty > 0) {
+            const name = item.querySelector("p").innerText;
+            const img = item.querySelector("img").src;
+            cart[name] = { name, price, img, quantity: qty };
+            subtotal += price * qty;
         }
-        
-        alert("訂單已成功送出！");
-    }, 1000);
-});
+    });
+    localStorage.setItem("cart", JSON.stringify(cart));
+    localStorage.setItem("cartSubtotal", subtotal); 
+    localStorage.setItem("shippingFee", subtotal > 0 ? shippingFee : 0); 
+
+    updateTotal();
+}
