@@ -306,10 +306,7 @@ footer {
     flex-direction: column;
     transition: box-shadow 0.2s;
   }
-  
-  .product:hover {
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-}
+
 
   }
   
