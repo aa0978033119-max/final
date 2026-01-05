@@ -34,6 +34,27 @@ phoneInput.oninput = () => {
     phoneInput.value = phoneInput.value.replace(/\D/g, '');
 };
 
+const subtotal = parseInt(localStorage.getItem('cartSubtotal')) || 0;
+const shipping = parseInt(localStorage.getItem('shippingFee')) || 0;
+const total = subtotal + shipping;
+
+
+function formatCurrency(num) {
+    return '$' + num.toLocaleString();
+}
+
+
+window.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('subtotal-display').innerText = formatCurrency(subtotal);
+    document.getElementById('shipping-fee-display').innerText = formatCurrency(shipping);
+    document.getElementById('total-Amount').innerText = formatCurrency(total);
+});
+
+document.getElementById('checkoutForm').addEventListener('submit', function(event) {
+
+});
+
+
 form.onsubmit = (e) => {
     e.preventDefault();
     if (form.checkValidity()) {
