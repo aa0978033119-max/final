@@ -332,7 +332,6 @@ nav a:hover {
   font-weight: bold;
   margin: 0 15px 10px 15px;
 }
-
 /* 加入購物車按鈕 */
 .add-cart-btn {
   width: calc(100% - 32px);
