@@ -51,8 +51,19 @@ document.addEventListener("DOMContentLoaded", () => {
   const feedbackForm = document.getElementById("feedback-form");
   const submitFeedbackButton = document.getElementById("submit-feedback");
 
-  // 回饋數據從 localStorage 或某個資料結構讀取
-  let productFeedbacks = JSON.parse(localStorage.getItem(`feedbacks_${productId}`)) || [];
+  // 回饋數據
+  let productFeedbacks = JSON.parse(
+    localStorage.getItem(`feedbacks_${productId}`)
+  );
+  
+  // 如果 localStorage 還沒有，使用 reviews.js 的預設評價
+  if (!productFeedbacks) {
+    productFeedbacks = reviews[productId] || [];
+    localStorage.setItem(
+      `feedbacks_${productId}`,
+      JSON.stringify(productFeedbacks)
+    );
+  }
 
   // 顯示現有的回饋
   function renderFeedbacks() {
