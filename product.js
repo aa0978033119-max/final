@@ -37,21 +37,27 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
    // ===== 登入檢查 =====
-  function requireLogin(redirectTo) {
-    if (localStorage.getItem("isLogin") !== "true") {
-      localStorage.setItem("redirectAfterLogin", redirectTo);
-      showToast("請先登入會員");
-      setTimeout(() => window.location.href = "member.html", 800);
-      return false;
-    }
-    return true;
+function requireLogin(redirectTo) {
+  if (localStorage.getItem("isLogin") !== "true") {
+    localStorage.setItem("redirectAfterLogin", redirectTo);
+
+    alert("請先登入會員");
+
+    setTimeout(() => {
+      window.location.href = "member.html";
+    }, 500);
+
+    return false;
   }
+  return true;
+}
   
   // ===== 加入購物車 =====
   document.addEventListener("click", (e) => {
     const btn = e.target.closest(".add-cart");
     if (!btn) return;
 
+    if (!requireLogin(window.location.href)) return;
     const productEl = btn.closest(".product-container");
     if (!productEl) return;
 
