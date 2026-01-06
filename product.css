@@ -168,10 +168,10 @@
 }
 
 .add-cart {
-  width: calc(100% - 32px);
-  margin: 16px auto;
+  width: 320px;              
+  margin: 20px 0;    
   padding: 12px 0;
-
+ 
   background: #565254;
   color: #FFFFFF;
 
